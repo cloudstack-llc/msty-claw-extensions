@@ -1,0 +1,99 @@
+name: Publish Extension Catalog
+
+# Packages every extension, publishes the zips as GitHub release assets,
+# generates the catalog seed manifest, and pushes it to the sync worker(s).
+#
+# Required repository configuration:
+#   secrets.EXTENSION_CATALOG_ADMIN_TOKEN  — bearer token for the worker admin endpoint
+#   vars.CATALOG_API_BASE_URL_DEV          — e.g. https://claw-auth-dev.msty.ai
+#   vars.CATALOG_API_BASE_URL_PROD         — e.g. https://claw-auth.msty.ai (optional until prod ships catalog routes)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "extensions/**"
+      - "catalog-config.json"
+      - "scripts/**"
+      - "package.sh"
+      - ".github/workflows/publish-catalog.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-catalog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Package extensions
+        run: ./package.sh
+
+      - name: Compute release tag
+        id: tag
+        run: echo "tag=catalog-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate catalog seed
+        run: |
+          node scripts/generate-catalog-seed.mjs \
+            --repo "${{ github.repository }}" \
+            --tag "${{ steps.tag.outputs.tag }}" \
+            --out catalog-seed.json
+
+      - name: Publish release with extension packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # List zips via node so an empty extensions/ publishes cleanly.
+          assets=$(node -e '
+            const fs = require("fs");
+            for (const zip of fs.readdirSync("extension-zips")) {
+              if (zip.endsWith(".zip")) console.log(`extension-zips/${zip}`);
+            }
+          ')
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            $assets catalog-seed.json \
+            --title "Extension Catalog ${{ steps.tag.outputs.tag }}" \
+            --notes "Auto-generated extension packages and catalog manifest from ${{ github.sha }}."
+
+      - name: Seed dev catalog
+        if: vars.CATALOG_API_BASE_URL_DEV != ''
+        env:
+          CATALOG_ADMIN_TOKEN: ${{ secrets.EXTENSION_CATALOG_ADMIN_TOKEN }}
+        run: |
+          node scripts/seed-catalog.mjs \
+            --base-url "${{ vars.CATALOG_API_BASE_URL_DEV }}" \
+            --seed catalog-seed.json
+
+      - name: Seed prod catalog
+        if: vars.CATALOG_API_BASE_URL_PROD != ''
+        env:
+          CATALOG_ADMIN_TOKEN: ${{ secrets.EXTENSION_CATALOG_ADMIN_TOKEN }}
+        run: |
+          node scripts/seed-catalog.mjs \
+            --base-url "${{ vars.CATALOG_API_BASE_URL_PROD }}" \
+            --seed catalog-seed.json
+
+      - name: Summary
+        run: |
+          {
+            echo "### Extension Catalog"
+            echo
+            echo "- Release: ${{ steps.tag.outputs.tag }}"
+            echo "- Entries: $(node -e 'console.log(require("./catalog-seed.json").entries.length)')"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,1111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://msty.app/schemas/msty-claw-extension-manifest.schema.json",
+  "title": "Msty Claw extension manifest",
+  "description": "Authoring schema for manifest.json files in Msty Claw extension packages.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifestVersion",
+    "id",
+    "name",
+    "version",
+    "description",
+    "compatibility"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Editor-only schema reference. Msty Claw ignores this field when installing an extension."
+    },
+    "manifestVersion": {
+      "const": 1,
+      "description": "Manifest format version supported by this schema."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,126}[a-zA-Z0-9]$",
+      "description": "Stable reverse-DNS-style extension ID, such as ai.msty.examples.release-notes."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Extension package version."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "homepage": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "supportUrl": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Package asset path for the extension identity icon shown in Extensions, usually static/icon.svg."
+    },
+    "screenshots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "privacy": {
+      "type": "string"
+    },
+    "updateUrl": {
+      "type": "string"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extensionApi"
+      ],
+      "properties": {
+        "extensionApi": {
+          "type": "string",
+          "description": "API range the extension expects, normally ^1.0.0."
+        },
+        "mstyClaw": {
+          "type": "string",
+          "description": "Optional Msty Claw app version range."
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowedOrigins"
+      ],
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Origins the extension may request through msty.network.fetch."
+        }
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/permissionId"
+          },
+          {
+            "$ref": "#/$defs/permissionDescriptor"
+          }
+        ]
+      }
+    },
+    "entry": {
+      "type": "string",
+      "description": "JavaScript module loaded by the extension runtime."
+    },
+    "contributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleContribution"
+          }
+        },
+        "playbooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flexibleContribution"
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flexibleContribution"
+          }
+        },
+        "triggerProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/triggerProviderContribution"
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/commandContribution"
+          }
+        },
+        "preSendHooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/messageHookContribution"
+          }
+        },
+        "postMessageHooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/messageHookContribution"
+          }
+        },
+        "chatContextProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/chatContextProviderContribution"
+          }
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/themeContribution"
+          }
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settingsContribution"
+          }
+        },
+        "modelAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modelAssignmentContribution"
+          }
+        },
+        "virtualModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/virtualModelContribution"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/toolContribution"
+          }
+        },
+        "localModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/localModelContribution"
+          }
+        },
+        "agentHarnesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/agentHarnessContribution"
+          }
+        },
+        "fullViews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "dialogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "drawers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "popups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "workspaceItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "toolboxItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "titleBarItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "statusBarPills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "emptyPillItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "pulseItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "messageInlineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        },
+        "composerInlineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uiContribution"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "permissionId": {
+      "type": "string",
+      "enum": [
+        "context.read",
+        "context.provide",
+        "chats.read",
+        "chats.write",
+        "messages.read",
+        "messages.write",
+        "messages.hooks",
+        "messages.modify",
+        "composer.read",
+        "composer.write",
+        "models.infer",
+        "models.provide",
+        "models.local",
+        "agent.behavior",
+        "storage.local",
+        "storage.chat",
+        "storage.workspace",
+        "secrets.read",
+        "secrets.write",
+        "files.read",
+        "files.write",
+        "network.fetch",
+        "themes.provide",
+        "settings.provide",
+        "rules.provide",
+        "playbooks.provide",
+        "tasks.provide",
+        "triggers.provide",
+        "commands.provide",
+        "tools.provide",
+        "tools.override",
+        "ui.render",
+        "ui.fullView",
+        "ui.dialog",
+        "ui.drawer",
+        "ui.popup",
+        "ui.statusBar",
+        "ui.titleBar",
+        "ui.workspace",
+        "ui.toolbox",
+        "ui.emptyPill",
+        "ui.messageInline",
+        "ui.composerInline",
+        "ui.pulse",
+        "events.subscribe",
+        "clipboard.write",
+        "notifications.show"
+      ]
+    },
+    "permissionDescriptor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "required"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/permissionId"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "contributionId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$"
+    },
+    "baseContribution": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/contributionId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "when": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        }
+      }
+    },
+    "flexibleContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        }
+      ],
+      "additionalProperties": true
+    },
+    "commandContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label",
+            "command"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slashName": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "command": {
+              "type": "string"
+            },
+            "argumentHint": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "messageHookContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "command"
+          ],
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "observe",
+                "suggest",
+                "transform",
+                "block"
+              ]
+            },
+            "phases": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "message.sent",
+                  "assistant.started",
+                  "assistant.completed",
+                  "assistant.failed",
+                  "assistant.stopped"
+                ]
+              }
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "chatContextProviderContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label",
+            "command"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "command": {
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "manual",
+                "automatic"
+              ]
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "settingsContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "title",
+            "schema"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "schema": {
+              "$ref": "#/$defs/jsonSchemaObject"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "modelAssignmentContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "virtualModelContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label",
+            "command"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "command": {
+              "type": "string"
+            },
+            "group": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "toolContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "description",
+            "command"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "command": {
+              "type": "string"
+            },
+            "inputSchema": {
+              "type": "object"
+            },
+            "overrides": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "localModelContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label",
+            "runtime",
+            "model"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "runtime": {
+              "enum": [
+                "ollama",
+                "mlx"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "sizeBytes": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "agentHarnessContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "label",
+            "command"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "command": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "themeContribution": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "name",
+        "tokens"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/contributionId"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "previewImage": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "light": {
+                    "type": "string"
+                  },
+                  "dark": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "variables": {
+          "description": "Raw CSS custom-property overrides keyed by full variable name (e.g. \"--radius\", \"--my-glow\"). Sets any app CSS variable directly, beyond the curated token namespace, and wins over tokens targeting the same variable. Values are validated like tokens and cannot inject CSS rules, URLs, or imports.",
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^--[a-zA-Z][a-zA-Z0-9_-]*$"
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "light": {
+                    "type": "string"
+                  },
+                  "dark": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "assets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "schema"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "schema": {
+              "$ref": "#/$defs/jsonSchemaObject"
+            }
+          }
+        }
+      }
+    },
+    "ruleContribution": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "name",
+        "event",
+        "action"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/contributionId"
+        },
+        "name": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "event": {
+          "enum": [
+            "session_start",
+            "user_prompt_submit",
+            "pre_tool_use",
+            "post_tool_use"
+          ]
+        },
+        "matcher": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "action": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "type": {
+              "enum": [
+                "add_guidance",
+                "block_tool",
+                "append_tool_result",
+                "request_follow_up",
+                "run_command"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "triggerProviderContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "triggers"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "triggers": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/triggerDefinitionContribution"
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "triggerDefinitionContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "delivery",
+            "configSchema",
+            "eventSchema"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "delivery": {
+              "type": "array",
+              "items": {
+                "const": "polling"
+              }
+            },
+            "configSchema": {
+              "$ref": "#/$defs/jsonSchemaObject"
+            },
+            "eventSchema": {
+              "$ref": "#/$defs/jsonSchemaObject"
+            },
+            "defaultPolicy": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "uiContribution": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseContribution"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "entry": {
+              "type": "string"
+            },
+            "size": {
+              "enum": [
+                "small",
+                "medium",
+                "wide",
+                "full"
+              ]
+            },
+            "placement": {
+              "enum": [
+                "message.before",
+                "message.after",
+                "composer.before",
+                "composer.after"
+              ]
+            },
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            },
+            "actionLabel": {
+              "type": "string"
+            },
+            "updatedAt": {
+              "type": "string"
+            },
+            "staleAfterMinutes": {
+              "type": "number"
+            },
+            "badge": {
+              "type": "string"
+            },
+            "tone": {
+              "enum": [
+                "default",
+                "success",
+                "warning",
+                "danger",
+                "info"
+              ]
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "disabledReason": {
+              "type": "string"
+            },
+            "priority": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "settingsAction": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string"
+        },
+        "runningLabel": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "jsonSchemaObject": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "x-msty-control": {
+          "type": "string"
+        },
+        "x-msty-action": {
+          "$ref": "#/$defs/settingsAction"
+        },
+        "x-msty-command": {
+          "type": "string"
+        },
+        "x-msty-action-label": {
+          "type": "string"
+        },
+        "x-msty-action-running-label": {
+          "type": "string"
+        },
+        "x-msty-action-success-message": {
+          "type": "string"
+        },
+        "x-msty-action-payload": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "x-msty-visibleWhen": {
+          "description": "Shows this field only when the condition holds, based on the values of other fields in the same settings or theme section. Accepts a boolean, a short expression string (e.g. \"style == 'review'\"), or a rule object.",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": true
+            }
+          ]
+        },
+        "x-msty-theme": {
+          "description": "Theme settings only: binds this field's saved value to one or more app CSS variables while the theme is active. Use a single binding or an array of bindings.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/themeSettingBinding"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/themeSettingBinding"
+              }
+            }
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/jsonSchemaObject"
+          }
+        }
+      }
+    },
+    "themeSettingBinding": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "variable"
+      ],
+      "properties": {
+        "variable": {
+          "type": "string",
+          "pattern": "^--[a-zA-Z][a-zA-Z0-9_-]*$",
+          "description": "App CSS variable to write, including the leading --."
+        },
+        "value": {
+          "type": "string",
+          "description": "Template for the written value. Placeholders: {{value}}, {{percent}}, {{inversePercent}}, {{backgroundImage}}."
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Per-option templates keyed by the stringified saved value."
+        }
+      }
+    }
+  }
+}
