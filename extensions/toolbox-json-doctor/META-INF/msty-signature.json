@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T12:02:15.186Z",
+  "extensionId": "ai.msty.official.toolbox-json-doctor",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "RcNA40TviDXYHFgoe9JH7DvTnpCn4P/HrIScbvxcWv4="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "cs660El6WZRPFLW8pbBIIziEWiXT051zSmOxbrBQkwM="
+    },
+    {
+      "path": "README.md",
+      "sha256": "Gjt5p0016u+r/+xOV+4FLM3IZx6B4+AgNxi78/oOAqo="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "D5tu/VG+WqOMW+PvZhA9xCMuC51hH1visJlNT+OeeFE="
+    }
+  ],
+  "signature": "hiacvbP99a0qgOoF4WA9cLhkgej7qA3rn4Z59uNikEaCIlbJ/7iDw05OQVFK40yG2PKMTfvCqKC1M72Wa0eIAA=="
+}

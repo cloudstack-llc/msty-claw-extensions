@@ -1,0 +1,371 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-nord",
+  "name": "Nord",
+  "version": "1.0.0",
+  "description": "An arctic, north-bluish theme. Cool Polar Night in the dark and clean Snow Storm in the light.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "dark",
+    "light",
+    "arctic",
+    "nord"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Nord theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "nord",
+        "name": "Nord",
+        "description": "Polar Night dark and Snow Storm light palettes with a frost-blue accent.",
+        "previewImage": "static/nord.jpg",
+        "tokens": {
+          "background.app": {
+            "dark": "#2e3440",
+            "light": "#eceff4"
+          },
+          "surface.sidebar": {
+            "dark": "color-mix(in oklch, #272c36 62%, transparent)",
+            "light": "color-mix(in oklch, #e5e9f0 62%, transparent)"
+          },
+          "surface.sidebar.backdrop": "blur(16px) saturate(1.2)",
+          "surface.sidebar.foreground": {
+            "dark": "#d8dee9",
+            "light": "#3b4252"
+          },
+          "surface.sidebar.border": {
+            "dark": "#353b49",
+            "light": "#d8dee9"
+          },
+          "surface.sidebar.accent": {
+            "dark": "#434c5e",
+            "light": "#d8dee9"
+          },
+          "surface.sidebar.accent.foreground": {
+            "dark": "#eceff4",
+            "light": "#2e3440"
+          },
+          "surface.card": {
+            "dark": "#3b4252",
+            "light": "#e5e9f0"
+          },
+          "surface.popover": {
+            "dark": "#3b4252",
+            "light": "#ffffff"
+          },
+          "surface.secondary": {
+            "dark": "#3b4252",
+            "light": "#d8dee9"
+          },
+          "surface.secondary.foreground": {
+            "dark": "#eceff4",
+            "light": "#2e3440"
+          },
+          "surface.muted": {
+            "dark": "#353b49",
+            "light": "#e5e9f0"
+          },
+          "surface.accent": {
+            "dark": "#434c5e",
+            "light": "#d8dee9"
+          },
+          "surface.accent.foreground": {
+            "dark": "#eceff4",
+            "light": "#2e3440"
+          },
+          "surface.input": {
+            "dark": "#3b4252",
+            "light": "#e5e9f0"
+          },
+          "surface.border": {
+            "dark": "#434c5e",
+            "light": "#d8dee9"
+          },
+          "color.text": {
+            "dark": "#eceff4",
+            "light": "#2e3440"
+          },
+          "color.text.muted": {
+            "dark": "#8c93a3",
+            "light": "#4c566a"
+          },
+          "color.primary": {
+            "dark": "#88c0d0",
+            "light": "#5e81ac"
+          },
+          "color.primary.foreground": {
+            "dark": "#2e3440",
+            "light": "#eceff4"
+          },
+          "color.ring": {
+            "dark": "#88c0d0",
+            "light": "#5e81ac"
+          },
+          "color.destructive": {
+            "dark": "#bf616a",
+            "light": "#bf616a"
+          },
+          "color.destructive.foreground": {
+            "dark": "#2e3440",
+            "light": "#eceff4"
+          },
+          "color.success": {
+            "dark": "#a3be8c",
+            "light": "#4f6f43"
+          },
+          "color.success.foreground": {
+            "dark": "#2e3440",
+            "light": "#ffffff"
+          },
+          "color.warning": {
+            "dark": "#ebcb8b",
+            "light": "#8a6d2f"
+          },
+          "color.warning.foreground": {
+            "dark": "#2e3440",
+            "light": "#ffffff"
+          },
+          "color.info": {
+            "dark": "#81a1c1",
+            "light": "#5e81ac"
+          },
+          "color.info.foreground": {
+            "dark": "#2e3440",
+            "light": "#ffffff"
+          },
+          "font.ui": "'Inter', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, \"SF Mono\", monospace",
+          "font.google": "Inter:wght@400;500;600;700, Manrope:wght@400;500;600;700, Work Sans:wght@400;500;600;700, Spectral:wght@400;500;600;700, Space Grotesk:wght@400;500;600;700, JetBrains Mono:wght@400;500",
+          "radius.control": "8px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(10px)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(8px)"
+        },
+        "assets": {
+          "backgroundImageDark": "static/nord.jpg",
+          "backgroundImageLight": "static/nord-light.jpg"
+        },
+        "settings": {
+          "title": "Nord options",
+          "description": "Tune the arctic background, frost, corner shape, and accent light.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "imageStrength": {
+                "type": "number",
+                "title": "Aurora strength",
+                "description": "Blend the arctic image into the workspace color.",
+                "default": 10,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show aurora image",
+                "description": "Use the arctic image behind the app.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "frost": {
+                "type": "string",
+                "title": "Frost",
+                "description": "Choose the amount of frosted depth on the sidebar.",
+                "default": "light",
+                "enum": [
+                  "none",
+                  "light",
+                  "deep"
+                ],
+                "x-msty-enum-labels": [
+                  "None",
+                  "Light",
+                  "Deep"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": {
+                  "variable": "--sidebar-backdrop",
+                  "values": {
+                    "none": "none",
+                    "light": "blur(10px) saturate(1.08)",
+                    "deep": "blur(18px) saturate(1.18)"
+                  }
+                }
+              },
+              "corners": {
+                "type": "string",
+                "title": "Corner shape",
+                "description": "Carve corners like glacier ice or round them like worn river stone.",
+                "default": "soft",
+                "enum": [
+                  "sharp",
+                  "soft",
+                  "round"
+                ],
+                "x-msty-enum-labels": [
+                  "Sharp",
+                  "Soft",
+                  "Round"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "values": {
+                      "sharp": "3px",
+                      "soft": "8px",
+                      "round": "16px"
+                    }
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "values": {
+                      "sharp": "5px",
+                      "soft": "12px",
+                      "round": "22px"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "values": {
+                      "sharp": "4px",
+                      "soft": "10px",
+                      "round": "18px"
+                    }
+                  },
+                  {
+                    "variable": "--assistant-radius",
+                    "values": {
+                      "sharp": "4px",
+                      "soft": "10px",
+                      "round": "18px"
+                    }
+                  }
+                ]
+              },
+              "accentFrost": {
+                "type": "string",
+                "title": "Accent light",
+                "description": "The aurora hue that runs through buttons, focus rings, and selections.",
+                "default": "frost",
+                "enum": [
+                  "frost",
+                  "aurora-green",
+                  "aurora-purple"
+                ],
+                "x-msty-enum-labels": [
+                  "Frost",
+                  "Aurora green",
+                  "Aurora purple"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 5,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "frost": "#88c0d0",
+                      "aurora-green": "#a3be8c",
+                      "aurora-purple": "#b48ead"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "frost": "#88c0d0",
+                      "aurora-green": "#a3be8c",
+                      "aurora-purple": "#b48ead"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "frost": "rgba(136, 192, 208, 0.24)",
+                      "aurora-green": "rgba(163, 190, 140, 0.24)",
+                      "aurora-purple": "rgba(180, 142, 173, 0.24)"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "inter",
+                "enum": [
+                  "inter",
+                  "manrope",
+                  "workSans",
+                  "spectral",
+                  "spaceGrotesk"
+                ],
+                "x-msty-enum-labels": [
+                  "Inter",
+                  "Manrope",
+                  "Work Sans",
+                  "Spectral",
+                  "Space Grotesk"
+                ],
+                "x-msty-order": 6,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "inter": "'Inter', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "manrope": "'Manrope', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "workSans": "'Work Sans', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "spectral": "'Spectral', Georgia, \"Times New Roman\", serif",
+                    "spaceGrotesk": "'Space Grotesk', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T15:05:51.837Z",
+  "extensionId": "ai.msty.official.theme-tokyo-night",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "manifest.json",
+      "sha256": "I1NHH1PvDcB7zg039LbpgLHbYuo6D0Q+SewYdlFBZZw="
+    },
+    {
+      "path": "README.md",
+      "sha256": "WCz4Hx1M8lU8X4VDH+c8AG73fG3S7WrPAXoxlfIIrQ4="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "yrk+jg8BILbUdfVV6ruwRwAD5yCzAuZV7l2CfP8O454="
+    },
+    {
+      "path": "static/tokyo-night-light.jpg",
+      "sha256": "psjbbFKzsjG9/EDh3QzAbi0IR9hhDNWwZ8ksRMMp/ms="
+    },
+    {
+      "path": "static/tokyo-night.jpg",
+      "sha256": "9kLuPa3Hnfp8H9XgLfd1PuQXJlpCUAUza1rP+3YTyqI="
+    }
+  ],
+  "signature": "AH0HUhKOaNztzM3SgXSmtV/4TibAdZwFv/m+Bzqc+n1RmjdZQ3adooF5DOaZj+5MIvRiJncLEQK8FL5803n6AQ=="
+}

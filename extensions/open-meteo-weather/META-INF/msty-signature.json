@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-15T15:45:24.072Z",
+  "extensionId": "ai.msty.official.open-meteo-weather",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "j4v9Mzs8zG95HAyLYBNVzWKAcPe/ze/PVflTL3LDb1M="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "mQCvi6tZ1Ao4iQW6X5EWScflj8yk+bBo33ri4hSbdRM="
+    },
+    {
+      "path": "README.md",
+      "sha256": "Z8Np7/j7ryJrTu+K/aYfgBoJWBzH8ExSjMtcp0922xA="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "exXfdZqmWy7PmSUSj2egmjjRbL1uCM5qJhbuLs4oD48="
+    }
+  ],
+  "signature": "lz3ixtCG35yAQzj1WHsBemJ+voG+On83F09ns1QZitIX0fKtFCzbiK3N67spMKToL/Zejue7JDpH2thJxNwPBg=="
+}

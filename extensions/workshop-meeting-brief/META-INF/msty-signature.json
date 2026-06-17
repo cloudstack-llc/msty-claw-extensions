@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.workshop-meeting-brief",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "nAY31H8Dnb+I1hA6PkX0DtgyldT25bj8qVxcSjSV3Yo="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "5j3o6GM1VkY9FDZLCiUzFN7JEIYWauaWpTHiUFlB1k0="
+    },
+    {
+      "path": "README.md",
+      "sha256": "pRo8GaEd7l0kzr0QqKWb+eLKjLyG5VoQ8I1k0u27+M8="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "exkyejh7LxxMKFv1z+irXxtSH/BRJ6c0QoyD1kxNFZU="
+    },
+    {
+      "path": "view.css",
+      "sha256": "Fi0kgqWglgdhRQ4DN5kcvgqb2UDnEkUk7HyOs3+UeYA="
+    },
+    {
+      "path": "view.js",
+      "sha256": "46lTdrkbq2k3gqkZzyEjgmN/SpvBEF2Gkw0ytNJhOrc="
+    }
+  ],
+  "signature": "pn7q4WcMKktjo6JtFiPzfoFs1YwSjVvS0o5vC2h4nCHO3AV5HO/FXK6mAsMH7hRNktWDsx3aPTc2TcIRh+otCw=="
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T15:10:29.654Z",
+  "extensionId": "ai.msty.official.keep-nearby",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "OKIFw8g3Z21MqKwV82ftig+sn59JRhaeKjar+hYaFZI="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "FjDAJPDdW5SQ7TkbNSiRnUZr0ukN0Bp3BtzEQdYrv8Q="
+    },
+    {
+      "path": "README.md",
+      "sha256": "2SjFTyC8+ERDNi7+3EAdYOANFo4g1d6DFoIZ53njCC4="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "+25FYDTUWY0FCye8Lxr5N5MLOhOt/L20kVJpwWNK0H0="
+    },
+    {
+      "path": "view.css",
+      "sha256": "yqm24qucO7C/OK2WHQ7NK95LkcpXtomFn7H56r4QfrY="
+    },
+    {
+      "path": "view.js",
+      "sha256": "klzc86mjJ6sMIDt+eiPXJwn5MJkWS65j+TYEc8tqPYk="
+    }
+  ],
+  "signature": "5OVuho+0jbgQ4mscJ1rVD/xtpZUY9OBnf8gYfwEApGtUrRvOZnmC1iVcsgp8MMRZpYT1FUisrO8DBD82WCZkAQ=="
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.titlebar-focus-sprint",
+  "name": "Focus Sprint",
+  "version": "1.0.0",
+  "description": "Adds a title bar control and status pill for starting, checking, and ending a timed focus sprint.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "focus",
+    "timer",
+    "titlebar",
+    "status"
+  ],
+  "categories": [
+    "productivity"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "settings.provide",
+      "required": true,
+      "reason": "Reads the sprint length and label you configure."
+    },
+    {
+      "id": "storage.local",
+      "required": true,
+      "reason": "Stores the active sprint timer on this device."
+    },
+    {
+      "id": "ui.titleBar",
+      "required": true,
+      "reason": "Adds the Focus control to the title bar."
+    },
+    {
+      "id": "ui.statusBar",
+      "required": true,
+      "reason": "Adds the Focus status pill."
+    },
+    {
+      "id": "ui.popup",
+      "required": true,
+      "reason": "Shows the active timer in a popup."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "settings": [
+      {
+        "id": "focus_sprint_config",
+        "title": "Focus Sprint",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "title": "Sprint label",
+              "default": "Deep work"
+            },
+            "minutes": {
+              "type": "number",
+              "title": "Sprint length in minutes",
+              "default": 25
+            },
+            "breakMinutes": {
+              "type": "number",
+              "title": "Break length in minutes",
+              "default": 5
+            }
+          }
+        }
+      }
+    ],
+    "titleBarItems": [
+      {
+        "id": "focus_toggle",
+        "title": "Focus Sprint",
+        "label": "Focus",
+        "description": "Start or review a focus sprint.",
+        "badge": "Ready",
+        "tone": "default",
+        "entry": "extension.js",
+        "command": "focus-sprint.toggle",
+        "size": "small"
+      }
+    ],
+    "statusBarPills": [
+      {
+        "id": "focus_status",
+        "title": "Focus Sprint Status",
+        "label": "Focus",
+        "description": "Check the active sprint.",
+        "badge": "Ready",
+        "tone": "default",
+        "entry": "extension.js",
+        "command": "focus-sprint.status",
+        "size": "small"
+      }
+    ]
+  }
+}

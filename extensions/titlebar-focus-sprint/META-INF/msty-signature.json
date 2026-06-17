@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.titlebar-focus-sprint",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "Oe1cvCEsuzsEx3XXV2EO/RU0rOGSJZtuKc931N6i+Ac="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "n34wNA2bvG0Zz739ezCxALW262Sc79qyPDQ8AdUs2LY="
+    },
+    {
+      "path": "README.md",
+      "sha256": "zW0Ao/kfJZUdJ6xpZPXcyS84H2Q/UMLAIzQdoW4iwmI="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "0fBdyLJAbUmJlyEjdTVduSUB+bXmBgLbD9Js4sCOm8Y="
+    }
+  ],
+  "signature": "z863n1EeBvaeGKcaBUOdHk3gQmeBvo3I5Qz8sPh17exDPe9Ie3HbdvpDECH4WnHIB5+/obwK2m6UkpsNn7AyDA=="
+}

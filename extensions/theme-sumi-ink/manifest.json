@@ -1,0 +1,369 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-sumi-ink",
+  "name": "Sumi Ink",
+  "version": "1.0.0",
+  "description": "East-Asian ink wash painting in app form. Flowing grays on warm washi paper, a single vermillion seal stamp accent, and brushstroke-thin borders. Rice-paper light mode and a moonlit-ink dark mode. Pick the seal color and control the ink wash density.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "sumi",
+    "ink",
+    "japanese",
+    "minimal",
+    "elegant",
+    "dark",
+    "light"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Sumi Ink theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "sumi_ink",
+        "name": "Sumi Ink",
+        "description": "Flowing ink wash on washi paper with a vermillion seal-stamp accent.",
+        "previewImage": "static/sumi-ink-light.jpg",
+        "tokens": {
+          "background.app": {
+            "light": "#f4f0e8",
+            "dark": "#12110e"
+          },
+          "surface.sidebar": {
+            "light": "rgba(238, 232, 218, 0.5)",
+            "dark": "rgba(14, 13, 10, 0.42)"
+          },
+          "surface.sidebar.backdrop": "blur(12px) saturate(1.1)",
+          "surface.sidebar.foreground": {
+            "light": "#3a3630",
+            "dark": "#c8c0b0"
+          },
+          "surface.sidebar.border": {
+            "light": "#d8d0c0",
+            "dark": "#2a2620"
+          },
+          "surface.sidebar.accent": {
+            "light": "#e8e0d0",
+            "dark": "#201c16"
+          },
+          "surface.sidebar.accent.foreground": {
+            "light": "#2a2620",
+            "dark": "#d8d0c0"
+          },
+          "surface.card": {
+            "light": "#faf7f0",
+            "dark": "#1a1814"
+          },
+          "surface.popover": {
+            "light": "#faf7f0",
+            "dark": "#1a1814"
+          },
+          "surface.secondary": {
+            "light": "#ece4d4",
+            "dark": "#1e1c16"
+          },
+          "surface.secondary.foreground": {
+            "light": "#2a2620",
+            "dark": "#d8d0c0"
+          },
+          "surface.muted": {
+            "light": "#f0eade",
+            "dark": "#161410"
+          },
+          "surface.accent": {
+            "light": "#e4dcc8",
+            "dark": "#222018"
+          },
+          "surface.accent.foreground": {
+            "light": "#2a2620",
+            "dark": "#d8d0c0"
+          },
+          "surface.input": {
+            "light": "#faf7f0",
+            "dark": "#1c1a14"
+          },
+          "surface.border": {
+            "light": "#d0c8b4",
+            "dark": "#34302a"
+          },
+          "color.text": {
+            "light": "#2a2620",
+            "dark": "#d8d0c0"
+          },
+          "color.text.muted": {
+            "light": "#8a8274",
+            "dark": "#8a8274"
+          },
+          "color.primary": {
+            "light": "#c0382a",
+            "dark": "#e04a3a"
+          },
+          "color.primary.foreground": {
+            "light": "#faf7f0",
+            "dark": "#1a0806"
+          },
+          "color.ring": {
+            "light": "#c0382a",
+            "dark": "#e04a3a"
+          },
+          "color.destructive": {
+            "light": "#a82a1e",
+            "dark": "#e04a3a"
+          },
+          "color.destructive.foreground": {
+            "light": "#faf7f0",
+            "dark": "#1a0806"
+          },
+          "color.success": {
+            "light": "#4a7a40",
+            "dark": "#6aa858"
+          },
+          "color.success.foreground": {
+            "light": "#faf7f0",
+            "dark": "#081a06"
+          },
+          "color.warning": {
+            "light": "#9a7a20",
+            "dark": "#d0a830"
+          },
+          "color.warning.foreground": {
+            "light": "#faf7f0",
+            "dark": "#1a1404"
+          },
+          "color.info": {
+            "light": "#4a6a8a",
+            "dark": "#78a0c0"
+          },
+          "color.info.foreground": {
+            "light": "#faf7f0",
+            "dark": "#061420"
+          },
+          "font.ui": "'Spectral', Georgia, 'Times New Roman', serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, monospace",
+          "font.google": "Spectral:wght@400;500;600;700, Cormorant Garamond:wght@400;500;600;700, Frank Ruhl Libre:wght@400;500;700, Marcellus:wght@400, Mulish:wght@400;500;600;700, JetBrains Mono:wght@400;500",
+          "radius.control": "2px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(10px) saturate(1.1)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(12px) saturate(1.1)"
+        },
+        "variables": {
+          "--composer-radius": "3px",
+          "--bubble-radius": "2px",
+          "--popover-radius": "3px",
+          "--pill-radius": "2px",
+          "--composer-shadow": {
+            "light": "0 1px 4px rgba(60, 50, 30, 0.08)",
+            "dark": "0 2px 8px rgba(0, 0, 0, 0.4)"
+          },
+          "--selection": {
+            "light": "rgba(192, 56, 42, 0.18)",
+            "dark": "rgba(224, 74, 58, 0.24)"
+          },
+          "--button-shadow": "none",
+          "--bubble-shadow": "none",
+          "--pill-shadow": "none",
+          "--popover-shadow": {
+            "light": "0 1px 6px rgba(60, 50, 30, 0.10)",
+            "dark": "0 2px 10px rgba(0, 0, 0, 0.5)"
+          }
+        },
+        "assets": {
+          "backgroundImageLight": "static/sumi-ink-light.jpg",
+          "backgroundImageDark": "static/sumi-ink-dark.jpg"
+        },
+        "settings": {
+          "title": "Sumi Ink options",
+          "description": "Choose the seal color, control the ink density, and set the brush weight.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show brushwork",
+                "description": "Ink wash brushwork artwork behind the workspace.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "inkDensity": {
+                "type": "number",
+                "title": "Ink density",
+                "description": "How strongly the ink wash shows through.",
+                "default": 20,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "sealColor": {
+                "type": "string",
+                "title": "Seal stamp",
+                "description": "The hanko seal-stamp accent color.",
+                "default": "vermillion",
+                "enum": [
+                  "vermillion",
+                  "indigo",
+                  "gold"
+                ],
+                "x-msty-enum-labels": [
+                  "Vermillion",
+                  "Indigo",
+                  "Gold"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "vermillion": "#c0382a",
+                      "indigo": "#3a4a8a",
+                      "gold": "#a8862a"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "vermillion": "#c0382a",
+                      "indigo": "#3a4a8a",
+                      "gold": "#a8862a"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "vermillion": "rgba(192, 56, 42, 0.18)",
+                      "indigo": "rgba(58, 74, 138, 0.20)",
+                      "gold": "rgba(168, 134, 42, 0.22)"
+                    }
+                  }
+                ]
+              },
+              "brushWeight": {
+                "type": "string",
+                "title": "Brush weight",
+                "description": "How bold the borders and strokes appear.",
+                "default": "fine",
+                "enum": [
+                  "hairline",
+                  "fine",
+                  "bold"
+                ],
+                "x-msty-enum-labels": [
+                  "Hairline",
+                  "Fine",
+                  "Bold"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--border",
+                    "values": {
+                      "hairline": "color-mix(in srgb, var(--border) 85%, var(--foreground) 15%)",
+                      "fine": "color-mix(in srgb, var(--border) 65%, var(--foreground) 35%)",
+                      "bold": "color-mix(in srgb, var(--border) 40%, var(--foreground) 60%)"
+                    }
+                  },
+                  {
+                    "variable": "--composer-border",
+                    "values": {
+                      "hairline": "color-mix(in srgb, var(--border) 85%, var(--foreground) 15%)",
+                      "fine": "color-mix(in srgb, var(--border) 65%, var(--foreground) 35%)",
+                      "bold": "color-mix(in srgb, var(--border) 40%, var(--foreground) 60%)"
+                    }
+                  },
+                  {
+                    "variable": "--assistant-border",
+                    "values": {
+                      "hairline": "color-mix(in srgb, var(--border) 90%, var(--foreground) 10%)",
+                      "fine": "color-mix(in srgb, var(--border) 70%, var(--foreground) 30%)",
+                      "bold": "color-mix(in srgb, var(--border) 45%, var(--foreground) 55%)"
+                    }
+                  },
+                  {
+                    "variable": "--popover-shadow",
+                    "values": {
+                      "hairline": "0 1px 3px rgba(0,0,0,0.06)",
+                      "fine": "0 1px 6px rgba(0,0,0,0.10)",
+                      "bold": "0 2px 10px rgba(0,0,0,0.18)"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "spectral",
+                "enum": [
+                  "spectral",
+                  "cormorant",
+                  "frankRuhl",
+                  "marcellus",
+                  "mulish"
+                ],
+                "x-msty-enum-labels": [
+                  "Spectral",
+                  "Cormorant Garamond",
+                  "Frank Ruhl Libre",
+                  "Marcellus",
+                  "Mulish"
+                ],
+                "x-msty-order": 5,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "spectral": "'Spectral', Georgia, 'Times New Roman', serif",
+                    "cormorant": "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+                    "frankRuhl": "'Frank Ruhl Libre', Georgia, 'Times New Roman', serif",
+                    "marcellus": "'Marcellus', Georgia, 'Times New Roman', serif",
+                    "mulish": "'Mulish', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

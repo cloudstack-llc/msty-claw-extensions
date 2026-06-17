@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Prompt Library">
+  <rect width="64" height="64" rx="14" fill="#e05c45"/>
+  <path d="M18 18h28a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V22a4 4 0 0 1 4-4Z" fill="#fff6f4"/>
+  <path d="M22 27h20M22 34h16M22 41h10" stroke="#813426" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,372 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-manga-vibe",
+  "name": "Manga Vibe",
+  "version": "1.0.0",
+  "description": "High-contrast ink-and-paper theme straight out of a manga panel: bold borders, a red spot color, screentone halftones, and converging speed lines. Black-ink-on-paper light mode and a dramatic night-panel dark mode.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "manga",
+    "comic",
+    "ink",
+    "dark",
+    "light"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Manga Vibe theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "manga_vibe",
+        "name": "Manga Vibe",
+        "description": "Inked manga panels with a red spot color, halftone screentone, and speed-line backgrounds.",
+        "previewImage": "static/manga-light.jpg",
+        "tokens": {
+          "background.app": {
+            "light": "#f6f7f8",
+            "dark": "#0c0c0e"
+          },
+          "surface.sidebar": {
+            "light": "rgba(246, 247, 248, 0.5)",
+            "dark": "rgba(12, 12, 14, 0.42)"
+          },
+          "surface.sidebar.backdrop": "blur(16px) saturate(1.2)",
+          "surface.sidebar.foreground": {
+            "light": "#15161a",
+            "dark": "#e6e7ea"
+          },
+          "surface.sidebar.border": {
+            "light": "#15161a",
+            "dark": "#292a2f"
+          },
+          "surface.sidebar.accent": {
+            "light": "#e6e8ec",
+            "dark": "#23242a"
+          },
+          "surface.sidebar.accent.foreground": {
+            "light": "#15161a",
+            "dark": "#f3f4f6"
+          },
+          "surface.card": {
+            "light": "#ffffff",
+            "dark": "#141519"
+          },
+          "surface.popover": {
+            "light": "#ffffff",
+            "dark": "#141519"
+          },
+          "surface.secondary": {
+            "light": "#e7e9ec",
+            "dark": "#1d1e22"
+          },
+          "surface.secondary.foreground": {
+            "light": "#15161a",
+            "dark": "#f3f4f6"
+          },
+          "surface.muted": {
+            "light": "#eef0f2",
+            "dark": "#161619"
+          },
+          "surface.accent": {
+            "light": "#ebedf0",
+            "dark": "#23242a"
+          },
+          "surface.accent.foreground": {
+            "light": "#15161a",
+            "dark": "#f3f4f6"
+          },
+          "surface.input": {
+            "light": "#ffffff",
+            "dark": "#18181c"
+          },
+          "surface.border": {
+            "light": "#15161a",
+            "dark": "#34353b"
+          },
+          "color.text": {
+            "light": "#15161a",
+            "dark": "#f3f4f6"
+          },
+          "color.text.muted": {
+            "light": "#565a61",
+            "dark": "#9a9ea6"
+          },
+          "color.primary": {
+            "light": "#e23b2e",
+            "dark": "#f04438"
+          },
+          "color.primary.foreground": {
+            "light": "#ffffff",
+            "dark": "#0c0c0e"
+          },
+          "color.ring": {
+            "light": "#e23b2e",
+            "dark": "#f04438"
+          },
+          "color.destructive": {
+            "light": "#c81e1e",
+            "dark": "#f04438"
+          },
+          "color.destructive.foreground": {
+            "light": "#ffffff",
+            "dark": "#0c0c0e"
+          },
+          "color.success": {
+            "light": "#2f8f4e",
+            "dark": "#4ade80"
+          },
+          "color.success.foreground": {
+            "light": "#ffffff",
+            "dark": "#0c0c0e"
+          },
+          "color.warning": {
+            "light": "#b9740a",
+            "dark": "#fbbf24"
+          },
+          "color.warning.foreground": {
+            "light": "#ffffff",
+            "dark": "#0c0c0e"
+          },
+          "color.info": {
+            "light": "#1f6feb",
+            "dark": "#60a5fa"
+          },
+          "color.info.foreground": {
+            "light": "#ffffff",
+            "dark": "#0c0c0e"
+          },
+          "font.ui": "'Figtree', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, monospace",
+          "font.google": "Figtree:wght@400;500;600;700, Space Grotesk:wght@400;500;600;700, Anton:wght@400, Comic Neue:wght@400;700, Architects Daughter, JetBrains Mono:wght@400;500",
+          "radius.control": "5px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(10px)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(8px)"
+        },
+        "variables": {
+          "--button-shadow": {
+            "light": "3px 3px 0 0 rgba(21, 22, 26, 0.92)",
+            "dark": "3px 3px 0 0 rgba(240, 68, 56, 0.55)"
+          },
+          "--pill-shadow": {
+            "light": "2px 2px 0 0 rgba(21, 22, 26, 0.85)",
+            "dark": "2px 2px 0 0 rgba(240, 68, 56, 0.45)"
+          },
+          "--pill-radius": "6px",
+          "--composer-radius": "8px",
+          "--composer-shadow": {
+            "light": "4px 4px 0 0 rgba(21, 22, 26, 0.9)",
+            "dark": "4px 4px 0 0 rgba(240, 68, 56, 0.4)"
+          },
+          "--composer-shadow-focus": {
+            "light": "6px 6px 0 0 rgba(21, 22, 26, 0.95)",
+            "dark": "6px 6px 0 0 rgba(240, 68, 56, 0.55)"
+          },
+          "--bubble-radius": "12px",
+          "--bubble-shadow": {
+            "light": "2px 2px 0 0 rgba(21, 22, 26, 0.85)",
+            "dark": "2px 2px 0 0 rgba(240, 68, 56, 0.35)"
+          },
+          "--selection": {
+            "light": "rgba(226, 59, 46, 0.24)",
+            "dark": "rgba(240, 68, 56, 0.32)"
+          },
+          "--popover-radius": "6px",
+          "--popover-shadow": {
+            "light": "5px 5px 0 0 rgba(21, 22, 26, 0.9)",
+            "dark": "5px 5px 0 0 rgba(240, 68, 56, 0.35)"
+          }
+        },
+        "assets": {
+          "backgroundImageLight": "static/manga-light.jpg",
+          "backgroundImageDark": "static/manga-dark.jpg"
+        },
+        "settings": {
+          "title": "Manga Vibe options",
+          "description": "Control the panel art and how bold the inked surfaces feel.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "imageStrength": {
+                "type": "number",
+                "title": "Artwork strength",
+                "description": "Blend the panel artwork into the workspace.",
+                "default": 10,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show panel artwork",
+                "description": "Use the screentone and speed-line artwork behind the app.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "inkStyle": {
+                "type": "string",
+                "title": "Ink style",
+                "description": "Choose how forcefully controls and bubbles carry the manga ink treatment.",
+                "default": "bold",
+                "enum": [
+                  "clean",
+                  "bold",
+                  "dramatic"
+                ],
+                "x-msty-enum-labels": [
+                  "Clean",
+                  "Bold",
+                  "Dramatic"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--button-shadow",
+                    "values": {
+                      "clean": "none",
+                      "bold": "3px 3px 0 0 color-mix(in srgb, var(--primary) 48%, transparent)",
+                      "dramatic": "5px 5px 0 0 color-mix(in srgb, var(--primary) 62%, transparent)"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-shadow",
+                    "values": {
+                      "clean": "none",
+                      "bold": "2px 2px 0 0 color-mix(in srgb, var(--primary) 42%, transparent)",
+                      "dramatic": "4px 4px 0 0 color-mix(in srgb, var(--primary) 56%, transparent)"
+                    }
+                  },
+                  {
+                    "variable": "--pill-radius",
+                    "values": {
+                      "clean": "9999px",
+                      "bold": "6px",
+                      "dramatic": "3px"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "figtree",
+                "enum": [
+                  "figtree",
+                  "spaceGrotesk",
+                  "anton",
+                  "comicNeue",
+                  "architectsDaughter"
+                ],
+                "x-msty-enum-labels": [
+                  "Figtree",
+                  "Space Grotesk",
+                  "Anton",
+                  "Comic Neue",
+                  "Architects Daughter"
+                ],
+                "x-msty-order": 4,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "figtree": "'Figtree', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "spaceGrotesk": "'Space Grotesk', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "anton": "'Anton', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "comicNeue": "'Comic Neue', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "architectsDaughter": "'Architects Daughter', \"Segoe Print\", cursive"
+                  }
+                }
+              },
+              "panelCorners": {
+                "type": "string",
+                "title": "Panel corners",
+                "description": "Square off the panels for hard manga gutters, or soften them into rounded frames.",
+                "default": "framed",
+                "enum": [
+                  "sharp",
+                  "framed",
+                  "rounded"
+                ],
+                "x-msty-enum-labels": [
+                  "Sharp",
+                  "Framed",
+                  "Rounded"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 5,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "values": {
+                      "sharp": "0px",
+                      "framed": "5px",
+                      "rounded": "12px"
+                    }
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "values": {
+                      "sharp": "0px",
+                      "framed": "8px",
+                      "rounded": "16px"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "values": {
+                      "sharp": "0px",
+                      "framed": "12px",
+                      "rounded": "20px"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.keep-nearby",
+  "name": "Keep Nearby",
+  "version": "1.0.0",
+  "description": "Keeps important assistant replies and notes close to the current chat without turning them into global memory.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "pins",
+    "notes",
+    "drawer",
+    "chat",
+    "model"
+  ],
+  "categories": [
+    "productivity",
+    "chat"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "context.read",
+      "required": true,
+      "reason": "Reads the current chat and selected text so saved items stay tied to the right place."
+    },
+    {
+      "id": "chats.read",
+      "required": true,
+      "reason": "Shows the current chat name and source chat for saved items."
+    },
+    {
+      "id": "chats.write",
+      "required": true,
+      "reason": "Creates or switches chats only when you choose that result action."
+    },
+    {
+      "id": "messages.read",
+      "required": true,
+      "reason": "Reads the assistant message you keep and opens its source later."
+    },
+    {
+      "id": "messages.write",
+      "required": true,
+      "reason": "Sends a drawer result to the current chat only when you choose that action."
+    },
+    {
+      "id": "models.infer",
+      "required": true,
+      "reason": "Answers your Keep Nearby prompt using only the current chat, pins, and notes."
+    },
+    {
+      "id": "storage.chat",
+      "required": true,
+      "reason": "Saves pins, notes, and reviewed state for the current chat."
+    },
+    {
+      "id": "events.subscribe",
+      "required": true,
+      "reason": "Refreshes the drawer when the active chat or messages change."
+    },
+    {
+      "id": "ui.toolbox",
+      "required": true,
+      "reason": "Adds Keep Nearby to the chat tools."
+    },
+    {
+      "id": "ui.titleBar",
+      "required": true,
+      "reason": "Adds a Keep Nearby shortcut near the top of the app."
+    },
+    {
+      "id": "ui.messageInline",
+      "required": true,
+      "reason": "Adds Keep nearby to assistant messages."
+    },
+    {
+      "id": "ui.drawer",
+      "required": true,
+      "reason": "Shows Keep Nearby in a drawer."
+    },
+    {
+      "id": "commands.provide",
+      "required": false,
+      "reason": "Adds an optional Keep Nearby command."
+    },
+    {
+      "id": "clipboard.write",
+      "required": false,
+      "reason": "Copies drawer results when you choose Copy."
+    },
+    {
+      "id": "notifications.show",
+      "required": false,
+      "reason": "Confirms saved, reviewed, restored, and removed items."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "id": "keep_nearby_open",
+        "name": "keep-nearby",
+        "label": "Open Keep Nearby",
+        "description": "Open the Keep Nearby drawer for this chat.",
+        "command": "keep-nearby.open"
+      }
+    ],
+    "modelAssignments": [
+      {
+        "id": "keep_nearby_assistant",
+        "label": "Keep Nearby Assistant",
+        "description": "A focused model slot for working with pins and notes from the current chat."
+      }
+    ],
+    "toolboxItems": [
+      {
+        "id": "keep_nearby",
+        "title": "Keep Nearby",
+        "label": "Keep",
+        "description": "Open pins and notes for this chat.",
+        "icon": "static/icon.svg",
+        "entry": "extension.js",
+        "command": "keep-nearby.open",
+        "size": "small"
+      }
+    ],
+    "titleBarItems": [
+      {
+        "id": "keep_nearby_title_bar",
+        "title": "Keep Nearby",
+        "label": "Keep",
+        "description": "Open pins and notes for this chat.",
+        "icon": "static/icon.svg",
+        "entry": "extension.js",
+        "command": "keep-nearby.open",
+        "size": "small"
+      }
+    ],
+    "messageInlineItems": [
+      {
+        "id": "keep_nearby_pin",
+        "title": "Keep Nearby",
+        "label": "Keep nearby",
+        "description": "Save this assistant reply for the current chat.",
+        "icon": "static/icon.svg",
+        "placement": "message.after",
+        "when": "message.role == assistant",
+        "entry": "extension.js",
+        "command": "keep-nearby.pin-message",
+        "size": "small"
+      }
+    ],
+    "drawers": [
+      {
+        "id": "keep_nearby_drawer",
+        "title": "Keep Nearby",
+        "description": "Pins, notes, and scoped actions for the current chat.",
+        "entry": "view.js",
+        "command": "keep-nearby.open",
+        "size": "wide"
+      }
+    ]
+  }
+}

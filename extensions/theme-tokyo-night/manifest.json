@@ -1,0 +1,381 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-tokyo-night",
+  "name": "Tokyo Night",
+  "version": "1.0.0",
+  "description": "A clean dark theme inspired by Tokyo's neon-lit streets at night, with a full daytime color palette for bright rooms.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "dark",
+    "light",
+    "blue",
+    "tokyo"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Tokyo Night theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "tokyo_night",
+        "name": "Tokyo Night",
+        "description": "Deep indigo dark mode with soft blue accents and a clean daytime light palette.",
+        "previewImage": "static/tokyo-night.jpg",
+        "tokens": {
+          "background.app": {
+            "dark": "#1a1b26",
+            "light": "#e1e2e7"
+          },
+          "surface.sidebar": {
+            "dark": "color-mix(in oklch, #16161e 62%, transparent)",
+            "light": "color-mix(in oklch, #d6d8df 62%, transparent)"
+          },
+          "surface.sidebar.backdrop": "blur(12px) saturate(1.15)",
+          "surface.sidebar.foreground": {
+            "dark": "#a9b1d6",
+            "light": "#5a6193"
+          },
+          "surface.sidebar.border": {
+            "dark": "#1b1e2e",
+            "light": "#c8cbda"
+          },
+          "surface.sidebar.accent": {
+            "dark": "#283457",
+            "light": "#c4ccea"
+          },
+          "surface.sidebar.accent.foreground": {
+            "dark": "#c0caf5",
+            "light": "#2e54a8"
+          },
+          "surface.card": {
+            "dark": "#1f2335",
+            "light": "#e9eaee"
+          },
+          "surface.popover": {
+            "dark": "#1f2335",
+            "light": "#eceef2"
+          },
+          "surface.secondary": {
+            "dark": "#292e42",
+            "light": "#d3d6e0"
+          },
+          "surface.secondary.foreground": {
+            "dark": "#c0caf5",
+            "light": "#34548a"
+          },
+          "surface.muted": {
+            "dark": "#24283b",
+            "light": "#dcdee6"
+          },
+          "surface.accent": {
+            "dark": "#283457",
+            "light": "#cdd3e8"
+          },
+          "surface.accent.foreground": {
+            "dark": "#c0caf5",
+            "light": "#34548a"
+          },
+          "surface.input": {
+            "dark": "#1f2335",
+            "light": "#dcdee6"
+          },
+          "surface.border": {
+            "dark": "#2a2f44",
+            "light": "#c8cbda"
+          },
+          "color.text": {
+            "dark": "#c0caf5",
+            "light": "#343b58"
+          },
+          "color.text.muted": {
+            "dark": "#565f89",
+            "light": "#6c739e"
+          },
+          "color.primary": {
+            "dark": "#7aa2f7",
+            "light": "#2e7de9"
+          },
+          "color.primary.foreground": {
+            "dark": "#16161e",
+            "light": "#ffffff"
+          },
+          "color.ring": {
+            "dark": "#7aa2f7",
+            "light": "#2e7de9"
+          },
+          "color.destructive": {
+            "dark": "#f7768e",
+            "light": "#f52a65"
+          },
+          "color.destructive.foreground": {
+            "dark": "#16161e",
+            "light": "#ffffff"
+          },
+          "color.success": {
+            "dark": "#9ece6a",
+            "light": "#587539"
+          },
+          "color.success.foreground": {
+            "dark": "#16161e",
+            "light": "#ffffff"
+          },
+          "color.warning": {
+            "dark": "#e0af68",
+            "light": "#8c6c3e"
+          },
+          "color.warning.foreground": {
+            "dark": "#16161e",
+            "light": "#ffffff"
+          },
+          "color.info": {
+            "dark": "#7dcfff",
+            "light": "#007197"
+          },
+          "color.info.foreground": {
+            "dark": "#16161e",
+            "light": "#ffffff"
+          },
+          "font.ui": "'Inter', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, monospace",
+          "font.google": "Inter:wght@400;500;600;700, Space Grotesk:wght@400;500;600;700, Sora:wght@400;500;600;700, JetBrains Mono:wght@400;500;600;700, Orbitron:wght@400;500;600;700",
+          "radius.control": "10px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(10px)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(8px)"
+        },
+        "assets": {
+          "backgroundImageDark": "static/tokyo-night.jpg",
+          "backgroundImageLight": "static/tokyo-night-light.jpg"
+        },
+        "settings": {
+          "title": "Tokyo Night options",
+          "description": "Set the night skyline behind the app in dark mode and the glow around the sidebar and panels.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "imageStrength": {
+                "type": "number",
+                "title": "Skyline strength",
+                "description": "How strongly the dark mode skyline shows through the workspace color.",
+                "default": 10,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show skyline",
+                "description": "Show the Tokyo night skyline behind the app in dark mode. Light mode stays a clean color palette.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "cityGlow": {
+                "type": "string",
+                "title": "City glow",
+                "description": "Choose how much glassy depth the sidebar and pop-up panels use.",
+                "default": "soft",
+                "enum": [
+                  "off",
+                  "soft",
+                  "bright"
+                ],
+                "x-msty-enum-labels": [
+                  "Off",
+                  "Soft",
+                  "Bright"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--sidebar-backdrop",
+                    "values": {
+                      "off": "none",
+                      "soft": "blur(12px) saturate(1.15)",
+                      "bright": "blur(18px) saturate(1.35)"
+                    }
+                  },
+                  {
+                    "variable": "--popover-shadow",
+                    "values": {
+                      "off": "0 4px 10px rgb(0 0 0 / 0.14)",
+                      "soft": "0 10px 26px rgb(0 0 0 / 0.20)",
+                      "bright": "0 14px 36px rgb(0 0 0 / 0.28)"
+                    }
+                  }
+                ]
+              },
+              "neonAccent": {
+                "type": "string",
+                "title": "Neon accent",
+                "description": "Pick the streetlight that lights up buttons, focus, and selections.",
+                "default": "blue",
+                "enum": [
+                  "blue",
+                  "purple",
+                  "cyan"
+                ],
+                "x-msty-enum-labels": [
+                  "Blue",
+                  "Purple",
+                  "Cyan"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "blue": "#7aa2f7",
+                      "purple": "#bb9af7",
+                      "cyan": "#7dcfff"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "blue": "#7aa2f7",
+                      "purple": "#bb9af7",
+                      "cyan": "#7dcfff"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "blue": "rgba(122, 162, 247, 0.22)",
+                      "purple": "rgba(187, 154, 247, 0.22)",
+                      "cyan": "rgba(125, 207, 255, 0.22)"
+                    }
+                  }
+                ]
+              },
+              "cornerShape": {
+                "type": "string",
+                "title": "Corner shape",
+                "description": "How sharp or rounded the panels, bubbles, and composer feel.",
+                "default": "soft",
+                "enum": [
+                  "sharp",
+                  "soft",
+                  "round"
+                ],
+                "x-msty-enum-labels": [
+                  "Sharp",
+                  "Soft",
+                  "Round"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 5,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "values": {
+                      "sharp": "4px",
+                      "soft": "10px",
+                      "round": "18px"
+                    }
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "values": {
+                      "sharp": "6px",
+                      "soft": "16px",
+                      "round": "26px"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "values": {
+                      "sharp": "5px",
+                      "soft": "14px",
+                      "round": "22px"
+                    }
+                  },
+                  {
+                    "variable": "--assistant-radius",
+                    "values": {
+                      "sharp": "5px",
+                      "soft": "14px",
+                      "round": "22px"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "inter",
+                "enum": [
+                  "inter",
+                  "spaceGrotesk",
+                  "sora",
+                  "jetBrainsMono",
+                  "orbitron"
+                ],
+                "x-msty-enum-labels": [
+                  "Inter",
+                  "Space Grotesk",
+                  "Sora",
+                  "JetBrains Mono",
+                  "Orbitron"
+                ],
+                "x-msty-order": 6,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "inter": "'Inter', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "spaceGrotesk": "'Space Grotesk', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "sora": "'Sora', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "jetBrainsMono": "'JetBrains Mono', ui-monospace, \"SF Mono\", monospace",
+                    "orbitron": "'Orbitron', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

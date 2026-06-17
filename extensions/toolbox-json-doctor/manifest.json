@@ -1,0 +1,178 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.toolbox-json-doctor",
+  "name": "JSON Doctor",
+  "version": "1.0.0",
+  "description": "Checks pasted, fetched, or local JSON for parse errors, missing required keys, and top-level shape before opening a readable report.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "json",
+    "toolbox",
+    "validation"
+  ],
+  "categories": [
+    "developer",
+    "toolbox"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "network": {
+    "allowedOrigins": [
+      "https://*"
+    ]
+  },
+  "permissions": [
+    {
+      "id": "settings.provide",
+      "required": true,
+      "reason": "Reads the JSON text, optional URL, and required keys you configure."
+    },
+    {
+      "id": "secrets.read",
+      "required": false,
+      "reason": "Uses a saved bearer token when the configured JSON URL needs one."
+    },
+    {
+      "id": "network.fetch",
+      "required": false,
+      "reason": "Fetches JSON from the configured URL when you choose URL mode."
+    },
+    {
+      "id": "files.read",
+      "required": false,
+      "reason": "Lets you choose and read a local JSON file."
+    },
+    {
+      "id": "files.write",
+      "required": false,
+      "reason": "Saves a JSON Doctor report when you turn on report export."
+    },
+    {
+      "id": "storage.local",
+      "required": true,
+      "reason": "Remembers the last validation result on this device."
+    },
+    {
+      "id": "ui.toolbox",
+      "required": true,
+      "reason": "Adds JSON Doctor to the toolbox."
+    },
+    {
+      "id": "ui.drawer",
+      "required": true,
+      "reason": "Shows validation details in a drawer."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "settings": [
+      {
+        "id": "json_doctor_config",
+        "title": "JSON Doctor",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "sourceMode": {
+              "type": "string",
+              "title": "Source",
+              "description": "Choose where JSON Doctor should read JSON from.",
+              "oneOf": [
+                {
+                  "const": "pasted",
+                  "title": "Pasted"
+                },
+                {
+                  "const": "url",
+                  "title": "URL"
+                },
+                {
+                  "const": "file",
+                  "title": "File"
+                }
+              ],
+              "x-msty-control": "segmented",
+              "default": "pasted"
+            },
+            "jsonText": {
+              "type": "string",
+              "title": "JSON text",
+              "format": "textarea",
+              "x-msty-rows": 8,
+              "x-msty-visibleWhen": {
+                "field": "sourceMode",
+                "equals": "pasted"
+              },
+              "default": "{\"name\":\"Msty Claw\",\"version\":1,\"features\":[\"extensions\",\"themes\"]}"
+            },
+            "jsonUrl": {
+              "type": "string",
+              "title": "JSON URL",
+              "format": "uri",
+              "description": "Used when Source is URL.",
+              "x-msty-visibleWhen": {
+                "field": "sourceMode",
+                "equals": "url"
+              },
+              "default": ""
+            },
+            "apiToken": {
+              "type": "string",
+              "title": "Bearer token",
+              "description": "Optional token for the JSON URL. Stored securely on this device.",
+              "format": "password",
+              "x-msty-secret": true,
+              "x-msty-visibleWhen": {
+                "field": "sourceMode",
+                "equals": "url"
+              }
+            },
+            "requiredKeys": {
+              "type": "string",
+              "title": "Required top-level keys",
+              "description": "Comma-separated keys that should exist at the top level.",
+              "default": "name, version"
+            },
+            "maxBytesKb": {
+              "type": "integer",
+              "title": "Fetch limit",
+              "description": "Maximum response size when fetching JSON from a URL.",
+              "minimum": 50,
+              "maximum": 2000,
+              "default": 500,
+              "x-msty-control": "slider"
+            },
+            "expectObject": {
+              "type": "boolean",
+              "title": "Require a top-level object",
+              "default": true
+            },
+            "saveReport": {
+              "type": "boolean",
+              "title": "Save report after checking",
+              "description": "Ask where to save a JSON report each time JSON Doctor runs.",
+              "default": false
+            }
+          }
+        }
+      }
+    ],
+    "toolboxItems": [
+      {
+        "id": "json_doctor",
+        "title": "JSON Doctor",
+        "label": "JSON",
+        "description": "Validate configured JSON quickly.",
+        "icon": "static/icon.svg",
+        "entry": "extension.js",
+        "command": "json-doctor.inspect",
+        "size": "small"
+      }
+    ]
+  }
+}

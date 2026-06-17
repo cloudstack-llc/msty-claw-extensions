@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hacker News Tools">
+  <rect width="64" height="64" rx="14" fill="#f60"/>
+  <path d="M32 12a20 20 0 1 0 0 40 20 20 0 0 0 0-40Zm0 4a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z" fill="#ffffff" opacity="0.35"/>
+  <path d="M20 21l9 13v10h6V34l9-13h-5l-7 10-7-10h-5Z" fill="#ffffff"/>
+</svg>

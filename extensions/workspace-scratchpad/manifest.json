@@ -1,0 +1,111 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.workspace-scratchpad",
+  "name": "Workspace Scratchpad",
+  "version": "1.0.0",
+  "description": "Adds tools to save, list, read, and delete short notes kept with this workspace.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "tools",
+    "notes",
+    "scratchpad",
+    "storage"
+  ],
+  "categories": [
+    "productivity"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "tools.provide",
+      "required": true,
+      "reason": "Adds note-keeping tools the assistant can call."
+    },
+    {
+      "id": "storage.workspace",
+      "required": true,
+      "reason": "Stores the notes for this workspace."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "tools": [
+      {
+        "id": "save_note",
+        "name": "save_note",
+        "description": "Save a short note to this workspace's scratchpad. Returns the new note's id.",
+        "command": "scratchpad.save",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Short title for the note."
+            },
+            "body": {
+              "type": "string",
+              "description": "The note content."
+            }
+          },
+          "required": [
+            "title",
+            "body"
+          ]
+        }
+      },
+      {
+        "id": "list_notes",
+        "name": "list_notes",
+        "description": "List saved scratchpad notes for this workspace with their ids and titles.",
+        "command": "scratchpad.list",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "id": "get_note",
+        "name": "get_note",
+        "description": "Read the full body of a saved note by id.",
+        "command": "scratchpad.get",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The note id."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      },
+      {
+        "id": "delete_note",
+        "name": "delete_note",
+        "description": "Delete a saved note by id.",
+        "command": "scratchpad.delete",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The note id."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      }
+    ]
+  }
+}

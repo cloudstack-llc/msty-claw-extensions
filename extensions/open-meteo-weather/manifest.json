@@ -1,0 +1,73 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.open-meteo-weather",
+  "name": "Open-Meteo Weather",
+  "version": "1.0.0",
+  "description": "Adds a tool that reports current weather for a place name using the free Open-Meteo API.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "tools",
+    "weather",
+    "forecast"
+  ],
+  "categories": [
+    "productivity"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "tools.provide",
+      "required": true,
+      "reason": "Adds a weather lookup tool the assistant can call."
+    },
+    {
+      "id": "network.fetch",
+      "required": true,
+      "reason": "Looks up coordinates and current weather from the public Open-Meteo API."
+    }
+  ],
+  "network": {
+    "allowedOrigins": [
+      "https://geocoding-api.open-meteo.com",
+      "https://api.open-meteo.com"
+    ]
+  },
+  "entry": "extension.js",
+  "contributes": {
+    "tools": [
+      {
+        "id": "get_weather",
+        "name": "get_weather",
+        "description": "Get the current weather for a place name (city or region). Returns the conditions, temperature, relative humidity, and wind speed.",
+        "command": "weather.current",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "A place name, e.g. 'Kathmandu' or 'Austin, Texas'."
+            },
+            "units": {
+              "type": "string",
+              "enum": [
+                "metric",
+                "imperial"
+              ],
+              "description": "Measurement units. \"metric\" uses Celsius and km/h, \"imperial\" uses Fahrenheit and mph. Defaults to metric when omitted."
+            }
+          },
+          "required": [
+            "location"
+          ]
+        }
+      }
+    ]
+  }
+}

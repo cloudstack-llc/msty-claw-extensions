@@ -1,0 +1,318 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-catppuccin",
+  "name": "Catppuccin",
+  "version": "1.0.0",
+  "description": "A soothing pastel theme: the warm, cozy Mocha in the dark and the light, milky Latte in the day.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "dark",
+    "light",
+    "pastel",
+    "catppuccin"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Catppuccin theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "catppuccin",
+        "name": "Catppuccin",
+        "description": "Mocha dark and Latte light pastel palettes with a soft mauve accent.",
+        "previewImage": "static/catppuccin-dark.jpg",
+        "tokens": {
+          "background.app": {
+            "dark": "#1e1e2e",
+            "light": "#eff1f5"
+          },
+          "surface.sidebar": {
+            "dark": "color-mix(in oklch, #181825 62%, transparent)",
+            "light": "color-mix(in oklch, #e6e9ef 62%, transparent)"
+          },
+          "surface.sidebar.backdrop": "blur(16px) saturate(1.2)",
+          "surface.sidebar.foreground": {
+            "dark": "#bac2de",
+            "light": "#5c5f77"
+          },
+          "surface.sidebar.border": {
+            "dark": "#11111b",
+            "light": "#dce0e8"
+          },
+          "surface.sidebar.accent": {
+            "dark": "#313244",
+            "light": "#dce0e8"
+          },
+          "surface.sidebar.accent.foreground": {
+            "dark": "#cdd6f4",
+            "light": "#4c4f69"
+          },
+          "surface.card": {
+            "dark": "#181825",
+            "light": "#e6e9ef"
+          },
+          "surface.popover": {
+            "dark": "#11111b",
+            "light": "#dce0e8"
+          },
+          "surface.secondary": {
+            "dark": "#313244",
+            "light": "#ccd0da"
+          },
+          "surface.secondary.foreground": {
+            "dark": "#cdd6f4",
+            "light": "#4c4f69"
+          },
+          "surface.muted": {
+            "dark": "#292c3c",
+            "light": "#dce0e8"
+          },
+          "surface.accent": {
+            "dark": "#45475a",
+            "light": "#bcc0cc"
+          },
+          "surface.accent.foreground": {
+            "dark": "#cdd6f4",
+            "light": "#4c4f69"
+          },
+          "surface.input": {
+            "dark": "#313244",
+            "light": "#ccd0da"
+          },
+          "surface.border": {
+            "dark": "#313244",
+            "light": "#ccd0da"
+          },
+          "color.text": {
+            "dark": "#cdd6f4",
+            "light": "#4c4f69"
+          },
+          "color.text.muted": {
+            "dark": "#a6adc8",
+            "light": "#6c6f85"
+          },
+          "color.primary": {
+            "dark": "#cba6f7",
+            "light": "#8839ef"
+          },
+          "color.primary.foreground": {
+            "dark": "#1e1e2e",
+            "light": "#eff1f5"
+          },
+          "color.ring": {
+            "dark": "#cba6f7",
+            "light": "#8839ef"
+          },
+          "color.destructive": {
+            "dark": "#f38ba8",
+            "light": "#d20f39"
+          },
+          "color.destructive.foreground": {
+            "dark": "#1e1e2e",
+            "light": "#eff1f5"
+          },
+          "color.success": {
+            "dark": "#a6e3a1",
+            "light": "#40a02b"
+          },
+          "color.success.foreground": {
+            "dark": "#1e1e2e",
+            "light": "#ffffff"
+          },
+          "color.warning": {
+            "dark": "#f9e2af",
+            "light": "#df8e1d"
+          },
+          "color.warning.foreground": {
+            "dark": "#1e1e2e",
+            "light": "#ffffff"
+          },
+          "color.info": {
+            "dark": "#89b4fa",
+            "light": "#1e66f5"
+          },
+          "color.info.foreground": {
+            "dark": "#1e1e2e",
+            "light": "#ffffff"
+          },
+          "font.ui": "'Figtree', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, \"SF Mono\", monospace",
+          "font.google": "Figtree:wght@400;500;600;700, Quicksand:wght@400;500;600;700, Nunito Sans:wght@400;500;600;700, Newsreader:wght@400;500;600;700, Comfortaa:wght@400;500;600;700, JetBrains Mono:wght@400;500",
+          "radius.control": "12px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(10px)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(8px)"
+        },
+        "assets": {
+          "backgroundImageDark": "static/catppuccin-dark.jpg",
+          "backgroundImageLight": "static/catppuccin-light.jpg"
+        },
+        "settings": {
+          "title": "Catppuccin options",
+          "description": "Tune the pastel backdrop and the soft roundness of surfaces.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "imageStrength": {
+                "type": "number",
+                "title": "Image strength",
+                "description": "Blend the pastel background into the workspace color.",
+                "default": 10,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show background image",
+                "description": "Use the pastel image behind the app.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "surfaceRoundness": {
+                "type": "number",
+                "title": "Surface roundness",
+                "description": "Set how soft panels, buttons, and message bubbles feel.",
+                "default": 12,
+                "minimum": 4,
+                "maximum": 18,
+                "multipleOf": 1,
+                "x-msty-control": "slider",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "value": "{{value}}px"
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "value": "{{value}}px"
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "value": "{{value}}px"
+                  }
+                ]
+              },
+              "accentFlavor": {
+                "type": "string",
+                "title": "Accent flavor",
+                "description": "Pick the pastel that tints buttons, highlights, and selections.",
+                "default": "mauve",
+                "enum": [
+                  "mauve",
+                  "blue",
+                  "peach"
+                ],
+                "x-msty-enum-labels": [
+                  "Mauve",
+                  "Blue",
+                  "Peach"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "mauve": "#cba6f7",
+                      "blue": "#89b4fa",
+                      "peach": "#fab387"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "mauve": "#cba6f7",
+                      "blue": "#89b4fa",
+                      "peach": "#fab387"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "mauve": "rgba(203, 166, 247, 0.22)",
+                      "blue": "rgba(137, 180, 250, 0.22)",
+                      "peach": "rgba(250, 179, 135, 0.22)"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "figtree",
+                "enum": [
+                  "figtree",
+                  "quicksand",
+                  "nunitoSans",
+                  "newsreader",
+                  "comfortaa"
+                ],
+                "x-msty-enum-labels": [
+                  "Figtree",
+                  "Quicksand",
+                  "Nunito Sans",
+                  "Newsreader",
+                  "Comfortaa"
+                ],
+                "x-msty-order": 5,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "figtree": "'Figtree', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "quicksand": "'Quicksand', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "nunitoSans": "'Nunito Sans', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "newsreader": "'Newsreader', Georgia, \"Times New Roman\", serif",
+                    "comfortaa": "'Comfortaa', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

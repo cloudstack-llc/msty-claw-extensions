@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.team-clock",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "8jkwI3JVxHvD3TENPDgJiveYv+O7p/Sc7ezAyF9iEEA="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "YgUzEYKC87DoECT96qkdDjd2wS1cGJtevs5ANEnvJ7o="
+    },
+    {
+      "path": "README.md",
+      "sha256": "3zR626WDRlcZbyZZ50B0BIKtim0gvIJitUhZE9brEes="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "1TVO8fWXeN4hH8NDZ1B/G+3VnaHoPlJq2BhbpRlHb6U="
+    },
+    {
+      "path": "view.css",
+      "sha256": "97cYlaGzNE/gnbO19l5qFe7aFm6/QhgnxVLivmfmYpc="
+    },
+    {
+      "path": "view.js",
+      "sha256": "XgHZxlkQSy3PKSeuevWmVaoPlI2+FwqYsdWTquv8rrQ="
+    }
+  ],
+  "signature": "3sczPB95wSFUS+b+Yzv1DNFU6Vd2W9b30Y8wtV23spGIO50TfQl7PY1lWaLOf9o9pjNLc5dLKGFYczoaF0VqAg=="
+}

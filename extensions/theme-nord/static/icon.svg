@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nord">
+  <rect width="64" height="64" rx="14" fill="#5e81ac"/>
+  <path d="M6 40c8-6 14-6 22 0s14 6 30-3" fill="none" stroke="#eceff4" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M6 48c8-6 14-6 22 0s14 6 30-3" fill="none" stroke="#88c0d0" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="20" cy="24" r="4.2" fill="#a3be8c"/>
+  <circle cx="32" cy="17" r="4.8" fill="#ebcb8b"/>
+  <circle cx="44" cy="24" r="4.2" fill="#b48ead"/>
+  <path d="M32 17l-3.4 8.6h6.8L32 17Z" fill="#eceff4"/>
+</svg>

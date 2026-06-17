@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-15T15:45:24.072Z",
+  "extensionId": "ai.msty.official.assistant-research-synthesis",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "BwzjaUAx3oJjogLGs/NCU9BDf8qctRHIDCX2ZJUijwQ="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "+bJR8elH6cg2z40ISFscfbaFTH7PHCMGHOT8UNGWQ+s="
+    },
+    {
+      "path": "README.md",
+      "sha256": "8/G2aGTL8rE9znQ0FmCxaZkXk8Hssc2aWp3Vm6ZhAs8="
+    }
+  ],
+  "signature": "lRTf/Mip3fSKBnJ9RRz0OOt6XDo3z522dm6IEdyBUjUNt4O0XvOGBuUFwXOnzL6v03h4yqGIQlmcZXCKrsJRDg=="
+}

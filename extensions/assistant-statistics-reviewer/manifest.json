@@ -1,0 +1,45 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.assistant-statistics-reviewer",
+  "name": "Statistics Reviewer",
+  "version": "1.0.0",
+  "description": "Guides the assistant to review quantitative work for design, assumptions, uncertainty, effect size, and reproducibility.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "assistant",
+    "statistics",
+    "research",
+    "analysis"
+  ],
+  "categories": [
+    "statistics",
+    "research"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "agent.behavior",
+      "required": true,
+      "reason": "Lets Statistics Reviewer guide how the assistant responds."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "agentHarnesses": [
+      {
+        "id": "statistics_reviewer",
+        "label": "Statistics Reviewer",
+        "description": "Reviews quantitative claims without reducing evidence to a single threshold or metric.",
+        "command": "statistics-reviewer.render",
+        "priority": 45
+      }
+    ]
+  }
+}

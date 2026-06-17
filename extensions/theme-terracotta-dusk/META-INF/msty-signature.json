@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-15T15:45:24.072Z",
+  "extensionId": "ai.msty.official.theme-terracotta-dusk",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "manifest.json",
+      "sha256": "ZiD4qdw+TYVPB8vqfiZmMyDT7/H/QvE6A9ZGxQeu8L0="
+    },
+    {
+      "path": "README.md",
+      "sha256": "6nh3xyl8S7Drp1QRIrkSDuk68HD9Uttx4J4YYgLi65c="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "AwCcj/8/my7A6ID4E5lTQgUHmEvn7WH5u2LGd3+50rE="
+    },
+    {
+      "path": "static/terracotta-dusk-dark.jpg",
+      "sha256": "1GO1Bhq+Gr9Fktsi/ATRnMOUVRVyGsne52J6PdaGjdU="
+    },
+    {
+      "path": "static/terracotta-dusk-light.jpg",
+      "sha256": "pb9WSXLK9HRcWrhh9dJnOsgpfiX5dotxCgecCqMZH+M="
+    }
+  ],
+  "signature": "1zOJdlv1UwkKR5kcWtiiJk2U9QLq/t2DnmKGy4/ERGnWBjIqoi8xY5lLmOr99/OnFMbU1iH7XCTPG1bwlSCZDQ=="
+}

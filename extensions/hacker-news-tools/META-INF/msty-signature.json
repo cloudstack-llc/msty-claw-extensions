@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.hacker-news-tools",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "O9q8I6aeU7V14mppO/Y6UcMtVs5u4HQOmgIH8tOOPsU="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "X1RGzrvUBvtSPOTGb7A6ia9P7bQQiXm3szSmAF5503g="
+    },
+    {
+      "path": "README.md",
+      "sha256": "MLjNS+hJC2yILNQz9CTu9lySscb8kYHvX3ZpoaXhVC0="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "tAglLRoOPRNBNNinvR2iwyURCMMg53mP0WBWPeNAu60="
+    }
+  ],
+  "signature": "kW/1SRQDWJ4hsG1pJzW8iQC5tHE7431gCKINmlMRQe8ZCUSR5gllc5rgCRhh6BUU4IHUS5+o84LDz3KycEg/Ag=="
+}

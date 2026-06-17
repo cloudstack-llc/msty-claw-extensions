@@ -1,0 +1,113 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.playbook-bug-triage",
+  "name": "Bug Triage Playbook",
+  "version": "1.0.0",
+  "description": "A runnable workflow that turns a vague bug report into a reliable repro, severity, root-cause hypotheses, and the smallest safe fix.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "keywords": [
+    "playbook",
+    "bug",
+    "triage",
+    "quality"
+  ],
+  "categories": [
+    "developer",
+    "playbook"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "playbooks.provide",
+      "required": true,
+      "reason": "Adds a Bug Triage playbook to your Playbooks."
+    }
+  ],
+  "contributes": {
+    "playbooks": [
+      {
+        "id": "bug_triage",
+        "name": "Bug Triage",
+        "description": "Turn a bug report into reliable steps to reproduce it, a severity, the root cause, and the smallest safe fix with a way to verify it.",
+        "scope": "personal",
+        "manifest": {
+          "version": 1,
+          "intentSummary": "Triage a bug from report to a verified, minimal fix.",
+          "whenToUse": "Use when a bug comes in and you need a structured path from report to fix.",
+          "inputs": [
+            {
+              "key": "summary",
+              "label": "Bug summary",
+              "type": "string",
+              "required": true,
+              "description": "What's broken, in one or two sentences.",
+              "placeholder": "Sign-in button does nothing on Safari",
+              "defaultValue": null
+            },
+            {
+              "key": "repro",
+              "label": "Steps to reproduce",
+              "type": "string",
+              "required": false,
+              "description": "How to trigger it, if known.",
+              "placeholder": "1. Open /login  2. Click Sign in",
+              "defaultValue": null
+            },
+            {
+              "key": "environment",
+              "label": "Environment",
+              "type": "string",
+              "required": false,
+              "description": "Browser, OS, version, build.",
+              "placeholder": "Safari 17, macOS 14, build 1284",
+              "defaultValue": null
+            }
+          ],
+          "approvals": [
+            "Confirm the smallest fix before changing shared code."
+          ],
+          "guardrails": [
+            "Reproduce before theorizing.",
+            "Fix the root cause, not just the symptom, with the smallest possible change."
+          ],
+          "steps": [
+            {
+              "title": "Reproduce",
+              "detail": "Establish exact, reliable steps plus the expected versus actual result."
+            },
+            {
+              "title": "Isolate",
+              "detail": "Narrow to the smallest input, component, or commit range that still shows the bug."
+            },
+            {
+              "title": "Hypotheses",
+              "detail": "List the most likely root causes, ordered by probability and ease of checking."
+            },
+            {
+              "title": "Smallest fix",
+              "detail": "Propose the minimal change that addresses the root cause, naming the files involved."
+            },
+            {
+              "title": "Verify",
+              "detail": "Define the test or check that proves it is fixed and will not regress."
+            }
+          ],
+          "successCriteria": [
+            "A reliable repro exists.",
+            "The root cause is identified, not just the symptom.",
+            "A verification step is defined."
+          ],
+          "examples": [
+            "Triage \"checkout fails intermittently on mobile\"."
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.team-clock",
+  "name": "Team Clock",
+  "version": "1.0.0",
+  "description": "See the current time across your team's time zones and who is inside working hours right now.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "team",
+    "timezone",
+    "clock"
+  ],
+  "categories": [
+    "team"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "commands.provide",
+      "required": true,
+      "reason": "Adds a Team Clock slash command."
+    },
+    {
+      "id": "settings.provide",
+      "required": true,
+      "reason": "Reads the time zones and working hours you configure."
+    },
+    {
+      "id": "ui.statusBar",
+      "required": true,
+      "reason": "Adds a Team Clock indicator to the status bar."
+    },
+    {
+      "id": "ui.popup",
+      "required": true,
+      "reason": "Shows each time zone's current time in a panel."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "id": "open",
+        "name": "team-clock",
+        "label": "Open team clock",
+        "description": "See current team times and working hours.",
+        "command": "team-clock.open"
+      }
+    ],
+    "settings": [
+      {
+        "id": "config",
+        "title": "Team Clock",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "zones": {
+              "type": "string",
+              "title": "Time zones",
+              "description": "Comma-separated time zone names, e.g. America/New_York, Europe/London, Asia/Kolkata.",
+              "default": "America/Los_Angeles, America/New_York, Europe/London, Asia/Kolkata"
+            },
+            "workStart": {
+              "type": "number",
+              "title": "Work day starts (hour)",
+              "description": "Local hour working hours begin (0-23).",
+              "default": 9
+            },
+            "workEnd": {
+              "type": "number",
+              "title": "Work day ends (hour)",
+              "description": "Local hour working hours end (0-23).",
+              "default": 17
+            }
+          }
+        }
+      }
+    ],
+    "statusBarPills": [
+      {
+        "id": "pill",
+        "title": "Team Clock",
+        "label": "Clock",
+        "description": "See the team's local times.",
+        "entry": "extension.js",
+        "command": "team-clock.open",
+        "size": "small"
+      }
+    ],
+    "popups": [
+      {
+        "id": "clock",
+        "title": "Team Clock",
+        "entry": "view.js",
+        "command": "team-clock.open",
+        "size": "medium"
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.workshop-prompt-library",
+  "name": "Prompt Library",
+  "version": "1.0.0",
+  "description": "Browse your saved prompts by name and tag, then drop one into your message draft with a click.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "prompt",
+    "library",
+    "workspace",
+    "snippets"
+  ],
+  "categories": [
+    "productivity",
+    "workspace"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "settings.provide",
+      "required": true,
+      "reason": "Reads your saved prompts and preferred tag so the library shows the right prompts for you."
+    },
+    {
+      "id": "storage.local",
+      "required": true,
+      "reason": "Remembers your most recent prompt and how often you open the library on this device."
+    },
+    {
+      "id": "composer.read",
+      "required": true,
+      "reason": "Checks whether your message box already has text before adding a prompt."
+    },
+    {
+      "id": "composer.write",
+      "required": true,
+      "reason": "Adds the prompt you pick to your message box."
+    },
+    {
+      "id": "notifications.show",
+      "required": false,
+      "reason": "Confirms when a prompt has been added to your message box."
+    },
+    {
+      "id": "ui.workspace",
+      "required": true,
+      "reason": "Adds Prompt Library to the Extensions navigation."
+    },
+    {
+      "id": "ui.fullView",
+      "required": true,
+      "reason": "Opens the prompt library in a full page."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "settings": [
+      {
+        "id": "prompt_library_config",
+        "title": "Prompt Library",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "snippets": {
+              "type": "string",
+              "title": "Your prompts",
+              "description": "One prompt per line, written as: tag :: name :: prompt. The tag groups prompts, the name shows on the card, and the prompt is what gets added to your draft.",
+              "format": "textarea",
+              "x-msty-rows": 8,
+              "default": "writing :: Release note :: Write a concise release note for these changes.\nreview :: PR review :: Review this diff for bugs, regressions, and missing tests.\nplanning :: Next actions :: Turn these notes into a clear next-action list."
+            },
+            "activeTag": {
+              "type": "string",
+              "title": "Default tag",
+              "description": "The tag the library filters to when it opens. Leave blank to show all prompts.",
+              "default": "review"
+            }
+          }
+        }
+      }
+    ],
+    "workspaceItems": [
+      {
+        "id": "prompt_library",
+        "title": "Prompt Library",
+        "label": "Prompts",
+        "description": "Find and insert your saved prompts.",
+        "entry": "extension.js",
+        "command": "prompt-library.open",
+        "size": "wide",
+        "priority": 38
+      }
+    ],
+    "fullViews": [
+      {
+        "id": "prompt_library_view",
+        "title": "Prompt Library",
+        "entry": "ui.js",
+        "command": "prompt-library.open",
+        "size": "wide"
+      }
+    ]
+  }
+}

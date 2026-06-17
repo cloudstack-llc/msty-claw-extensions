@@ -1,0 +1,85 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.hacker-news-tools",
+  "name": "Hacker News Tools",
+  "version": "1.0.0",
+  "description": "Adds tools to search Hacker News and list the current front-page stories.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "tools",
+    "search",
+    "hacker news",
+    "news"
+  ],
+  "categories": [
+    "research",
+    "developer"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "tools.provide",
+      "required": true,
+      "reason": "Adds Hacker News search tools the assistant can call."
+    },
+    {
+      "id": "network.fetch",
+      "required": true,
+      "reason": "Queries the public Hacker News search API."
+    }
+  ],
+  "network": {
+    "allowedOrigins": [
+      "https://hn.algolia.com"
+    ]
+  },
+  "entry": "extension.js",
+  "contributes": {
+    "tools": [
+      {
+        "id": "hn_search",
+        "name": "hacker_news_search",
+        "description": "Search Hacker News stories and comments by keyword. Returns titles, points, authors, and links.",
+        "command": "hn.search",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search terms."
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum results to return (1-20)."
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      },
+      {
+        "id": "hn_top",
+        "name": "hacker_news_top_stories",
+        "description": "List the current Hacker News front-page stories with points and links.",
+        "command": "hn.top",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "number",
+              "description": "Maximum stories to return (1-20)."
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.assistant-research-synthesis",
+  "name": "Systematic Research Synthesizer",
+  "version": "1.0.0",
+  "description": "Guides the assistant to synthesize research with explicit questions, source selection, bias checks, and confidence.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "keywords": [
+    "assistant",
+    "research",
+    "synthesis",
+    "evidence"
+  ],
+  "categories": [
+    "research",
+    "analysis"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "agent.behavior",
+      "required": true,
+      "reason": "Lets Systematic Research Synthesizer guide how the assistant responds."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "agentHarnesses": [
+      {
+        "id": "research_synthesis",
+        "label": "Systematic Research Synthesizer",
+        "description": "Turns messy source material into transparent evidence synthesis with limits and next searches.",
+        "command": "research-synthesis.render",
+        "priority": 65
+      }
+    ]
+  }
+}

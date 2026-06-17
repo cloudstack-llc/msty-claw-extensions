@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.theme-catppuccin",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "manifest.json",
+      "sha256": "f/x6Th7+ODKGLlNzt5OY3/59KA61TnBFWnNfhhMEbZQ="
+    },
+    {
+      "path": "README.md",
+      "sha256": "JYzL/NPLLn6Vwz0mX8Fc/plTO9tU+RhznPv+UAAYiJ0="
+    },
+    {
+      "path": "static/catppuccin-dark.jpg",
+      "sha256": "+W+PPKUCP963KdhsCOOLbyX3PqcXDWOfyvS7CY4JoTw="
+    },
+    {
+      "path": "static/catppuccin-light.jpg",
+      "sha256": "B1KtezUOgqWZ2limxOhmAWr3VufpqKY1nuzI/ifpEYA="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "FtLRWRpXrK3FAXiN7YWXRmt5BDAGxNmiIcBatuO+9Ds="
+    }
+  ],
+  "signature": "8vnpqEZkZiwCBgJ6lmT4Xbg+PtizMOH8nFL2kvqb3n51q+7Jxi838BThafeP9Ijdqvlctqk538ioSYaylBITBw=="
+}

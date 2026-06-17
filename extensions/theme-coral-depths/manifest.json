@@ -1,0 +1,417 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-coral-depths",
+  "name": "Coral Depths",
+  "version": "1.0.0",
+  "description": "Bioluminescent reef at midnight. Living coral pink against deep ocean teal, bioluminescent accents, and organic flowing shapes. Deep-sea dark mode and a shallow-reef turquoise light mode. Choose your reef creature and dial the bioluminescence.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "coral",
+    "ocean",
+    "reef",
+    "bioluminescent",
+    "dark",
+    "light"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Coral Depths theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "coral_depths",
+        "name": "Coral Depths",
+        "description": "Bioluminescent reef — living coral pink over deep ocean teal.",
+        "previewImage": "static/coral-depths-dark.jpg",
+        "tokens": {
+          "background.app": {
+            "light": "#e8f6f3",
+            "dark": "#041a1a"
+          },
+          "surface.sidebar": {
+            "light": "rgba(200, 235, 228, 0.5)",
+            "dark": "rgba(4, 18, 22, 0.42)"
+          },
+          "surface.sidebar.backdrop": "blur(16px) saturate(1.3)",
+          "surface.sidebar.foreground": {
+            "light": "#1a4a44",
+            "dark": "#9ad4c8"
+          },
+          "surface.sidebar.border": {
+            "light": "#a8d8cc",
+            "dark": "#0f3636"
+          },
+          "surface.sidebar.accent": {
+            "light": "#c8ebe2",
+            "dark": "#0a2a2a"
+          },
+          "surface.sidebar.accent.foreground": {
+            "light": "#0a3a34",
+            "dark": "#b0e8da"
+          },
+          "surface.card": {
+            "light": "#f2faf8",
+            "dark": "#081e1e"
+          },
+          "surface.popover": {
+            "light": "#f2faf8",
+            "dark": "#081e1e"
+          },
+          "surface.secondary": {
+            "light": "#d4ede4",
+            "dark": "#0c2626"
+          },
+          "surface.secondary.foreground": {
+            "light": "#0a3a34",
+            "dark": "#b0e8da"
+          },
+          "surface.muted": {
+            "light": "#e2f2ec",
+            "dark": "#091c1c"
+          },
+          "surface.accent": {
+            "light": "#cce8e0",
+            "dark": "#0e2e2e"
+          },
+          "surface.accent.foreground": {
+            "light": "#0a3a34",
+            "dark": "#b0e8da"
+          },
+          "surface.input": {
+            "light": "#f2faf8",
+            "dark": "#0a2222"
+          },
+          "surface.border": {
+            "light": "#a8d8cc",
+            "dark": "#164040"
+          },
+          "color.text": {
+            "light": "#0a3a34",
+            "dark": "#c8f0e4"
+          },
+          "color.text.muted": {
+            "light": "#5a8a80",
+            "dark": "#6aaa98"
+          },
+          "color.primary": {
+            "light": "#e05a6a",
+            "dark": "#ff7a8a"
+          },
+          "color.primary.foreground": {
+            "light": "#ffffff",
+            "dark": "#1a080a"
+          },
+          "color.ring": {
+            "light": "#e05a6a",
+            "dark": "#ff7a8a"
+          },
+          "color.destructive": {
+            "light": "#c0384a",
+            "dark": "#ff5060"
+          },
+          "color.destructive.foreground": {
+            "light": "#ffffff",
+            "dark": "#1a0608"
+          },
+          "color.success": {
+            "light": "#2a8a6a",
+            "dark": "#4ae0a0"
+          },
+          "color.success.foreground": {
+            "light": "#ffffff",
+            "dark": "#041a10"
+          },
+          "color.warning": {
+            "light": "#b89020",
+            "dark": "#ffd060"
+          },
+          "color.warning.foreground": {
+            "light": "#ffffff",
+            "dark": "#1a1404"
+          },
+          "color.info": {
+            "light": "#3a7aaa",
+            "dark": "#60b8e0"
+          },
+          "color.info.foreground": {
+            "light": "#ffffff",
+            "dark": "#041420"
+          },
+          "font.ui": "'Quicksand', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, monospace",
+          "font.google": "Quicksand:wght@400;500;600;700, Nunito:wght@400;500;600;700, Varela Round:wght@400, Comfortaa:wght@400;500;600;700, Baloo 2:wght@400;500;600;700, JetBrains Mono:wght@400;500",
+          "radius.control": "16px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(14px) saturate(1.3)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(16px) saturate(1.3)"
+        },
+        "variables": {
+          "--composer-radius": "22px",
+          "--bubble-radius": "18px",
+          "--popover-radius": "16px",
+          "--pill-radius": "9999px",
+          "--composer-shadow": {
+            "light": "0 8px 30px rgba(40, 120, 100, 0.10)",
+            "dark": "0 10px 40px rgba(0, 0, 0, 0.5)"
+          },
+          "--selection": {
+            "light": "rgba(224, 90, 106, 0.22)",
+            "dark": "rgba(255, 122, 138, 0.26)"
+          },
+          "--button-shadow": {
+            "light": "0 3px 12px rgba(40, 120, 100, 0.12)",
+            "dark": "0 3px 14px rgba(255, 122, 138, 0.18)"
+          }
+        },
+        "assets": {
+          "backgroundImageLight": "static/coral-depths-light.jpg",
+          "backgroundImageDark": "static/coral-depths-dark.jpg"
+        },
+        "settings": {
+          "title": "Coral Depths options",
+          "description": "Choose your reef creature, dial the bioluminescence, and feel the current.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show reef",
+                "description": "Living reef artwork behind the workspace.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "reefDepth": {
+                "type": "number",
+                "title": "Reef depth",
+                "description": "How strongly the reef shows through the water.",
+                "default": 10,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "creature": {
+                "type": "string",
+                "title": "Reef accent",
+                "description": "The living color threading through the reef.",
+                "default": "coral",
+                "enum": [
+                  "coral",
+                  "anemone",
+                  "jellyfish"
+                ],
+                "x-msty-enum-labels": [
+                  "Coral",
+                  "Anemone",
+                  "Jellyfish"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "coral": "#ff7a8a",
+                      "anemone": "#80e0a0",
+                      "jellyfish": "#b080ff"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "coral": "#ff7a8a",
+                      "anemone": "#80e0a0",
+                      "jellyfish": "#b080ff"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "coral": "rgba(255, 122, 138, 0.26)",
+                      "anemone": "rgba(128, 224, 160, 0.24)",
+                      "jellyfish": "rgba(176, 128, 255, 0.26)"
+                    }
+                  }
+                ]
+              },
+              "bioluminescence": {
+                "type": "string",
+                "title": "Bioluminescence",
+                "description": "Living glow on buttons, pills, and the composer.",
+                "default": "subtle",
+                "enum": [
+                  "off",
+                  "subtle",
+                  "radiant"
+                ],
+                "x-msty-enum-labels": [
+                  "Off",
+                  "Subtle",
+                  "Radiant"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--button-shadow",
+                    "values": {
+                      "off": "none",
+                      "subtle": "0 0 14px color-mix(in srgb, var(--primary) 40%, transparent)",
+                      "radiant": "0 0 24px color-mix(in srgb, var(--primary) 65%, transparent), 0 0 6px var(--primary)"
+                    }
+                  },
+                  {
+                    "variable": "--pill-shadow",
+                    "values": {
+                      "off": "none",
+                      "subtle": "0 0 10px color-mix(in srgb, var(--primary) 35%, transparent)",
+                      "radiant": "0 0 18px color-mix(in srgb, var(--primary) 55%, transparent)"
+                    }
+                  },
+                  {
+                    "variable": "--composer-shadow",
+                    "values": {
+                      "off": "0 8px 30px rgba(0,0,0,0.4)",
+                      "subtle": "0 0 20px color-mix(in srgb, var(--primary) 30%, transparent)",
+                      "radiant": "0 0 36px color-mix(in srgb, var(--primary) 50%, transparent)"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-shadow",
+                    "values": {
+                      "off": "none",
+                      "subtle": "0 0 12px color-mix(in srgb, var(--primary) 28%, transparent)",
+                      "radiant": "0 0 18px color-mix(in srgb, var(--primary) 45%, transparent)"
+                    }
+                  }
+                ]
+              },
+              "currentShape": {
+                "type": "string",
+                "title": "Current",
+                "description": "How the tide rounds every edge, from coral-cut to wave-worn.",
+                "default": "soft",
+                "enum": [
+                  "reef",
+                  "soft",
+                  "tide"
+                ],
+                "x-msty-enum-labels": [
+                  "Reef",
+                  "Soft",
+                  "Tide"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 5,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "values": {
+                      "reef": "4px",
+                      "soft": "8px",
+                      "tide": "14px"
+                    }
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "values": {
+                      "reef": "10px",
+                      "soft": "22px",
+                      "tide": "30px"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "values": {
+                      "reef": "8px",
+                      "soft": "18px",
+                      "tide": "26px"
+                    }
+                  },
+                  {
+                    "variable": "--assistant-radius",
+                    "values": {
+                      "reef": "8px",
+                      "soft": "18px",
+                      "tide": "26px"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "quicksand",
+                "enum": [
+                  "quicksand",
+                  "nunito",
+                  "varelaRound",
+                  "comfortaa",
+                  "baloo2"
+                ],
+                "x-msty-enum-labels": [
+                  "Quicksand",
+                  "Nunito",
+                  "Varela Round",
+                  "Comfortaa",
+                  "Baloo 2"
+                ],
+                "x-msty-order": 6,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "quicksand": "'Quicksand', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "nunito": "'Nunito', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "varelaRound": "'Varela Round', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "comfortaa": "'Comfortaa', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "baloo2": "'Baloo 2', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Workspace Scratchpad">
+  <rect width="64" height="64" rx="14" fill="#f59e0b"/>
+  <path d="M16 10h22l12 12v28a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4Z" fill="#ffffff"/>
+  <path d="M38 10l12 12H42a4 4 0 0 1-4-4V10Z" fill="#fcd34d"/>
+  <path d="M20 30h24M20 37h24M20 44h16" stroke="#7c3aed" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="46" cy="46" r="7.5" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+  <path d="M43 46l2 2 4-4" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

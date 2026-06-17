@@ -1,0 +1,136 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.workshop-meeting-brief",
+  "name": "Meeting Brief Workshop",
+  "version": "1.0.0",
+  "description": "Creates a crisp meeting brief from configured notes, attendees, current workspace context, and an optional model pass.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "meeting",
+    "brief",
+    "workspace",
+    "model"
+  ],
+  "categories": [
+    "team",
+    "workspace"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "settings.provide",
+      "required": true,
+      "reason": "Reads the meeting goal, attendees, and notes you configure."
+    },
+    {
+      "id": "context.read",
+      "required": true,
+      "reason": "Adds the active workspace and view to the meeting brief."
+    },
+    {
+      "id": "models.infer",
+      "required": true,
+      "reason": "Turns rough notes into a concise brief."
+    },
+    {
+      "id": "storage.workspace",
+      "required": true,
+      "reason": "Saves the most recent brief for this workspace."
+    },
+    {
+      "id": "ui.workspace",
+      "required": true,
+      "reason": "Adds the Meeting Brief item to Extensions."
+    },
+    {
+      "id": "ui.fullView",
+      "required": true,
+      "reason": "Opens the generated brief in a full extension view."
+    },
+    {
+      "id": "composer.write",
+      "required": false,
+      "reason": "Can insert the final brief into your draft when you choose Insert."
+    },
+    {
+      "id": "clipboard.write",
+      "required": false,
+      "reason": "Can copy the final brief when you choose Copy."
+    },
+    {
+      "id": "notifications.show",
+      "required": false,
+      "reason": "Can confirm when the brief is inserted."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "settings": [
+      {
+        "id": "brief_config",
+        "title": "Meeting Brief",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "meetingName": {
+              "type": "string",
+              "title": "Meeting name",
+              "default": "Weekly product review"
+            },
+            "attendees": {
+              "type": "string",
+              "title": "Attendees",
+              "description": "Comma-separated names or roles.",
+              "default": "Product, Design, Engineering"
+            },
+            "goal": {
+              "type": "string",
+              "title": "Goal",
+              "default": "Decide what ships this week and what needs follow-up."
+            },
+            "notes": {
+              "type": "string",
+              "title": "Rough notes",
+              "description": "Paste the raw bullets you want turned into a brief.",
+              "default": "Launch checklist is mostly done. Pricing copy still needs review. QA found two mobile layout issues."
+            }
+          }
+        }
+      }
+    ],
+    "modelAssignments": [
+      {
+        "id": "meeting_brief_writer",
+        "label": "Meeting Brief Writer",
+        "description": "A concise model for turning messy notes into a meeting-ready brief."
+      }
+    ],
+    "workspaceItems": [
+      {
+        "id": "meeting_brief",
+        "title": "Meeting Brief",
+        "label": "Meeting Brief",
+        "description": "Generate a decision-ready meeting brief.",
+        "entry": "extension.js",
+        "command": "meeting-brief.open",
+        "size": "wide"
+      }
+    ],
+    "fullViews": [
+      {
+        "id": "meeting_brief_view",
+        "title": "Meeting Brief",
+        "entry": "view.js",
+        "command": "meeting-brief.open",
+        "size": "wide"
+      }
+    ]
+  }
+}

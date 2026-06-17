@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Keep Nearby">
+  <rect width="64" height="64" rx="14" fill="#0d9488"/>
+  <path d="M16 14h28a4 4 0 0 1 4 4v30a4 4 0 0 1-4 4H16a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2Z" fill="#ffffff"/>
+  <path d="M16 14h30a2 2 0 0 1 2 2v2H16v-4Z" fill="#ccfbf1"/>
+  <path d="M21 27h20M21 34h20M21 41h13" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+  <path d="M48 37v14l-5-3-5 3V37a5 5 0 0 1 10 0Z" fill="#f59e0b" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+</svg>

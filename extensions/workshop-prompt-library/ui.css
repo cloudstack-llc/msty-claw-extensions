@@ -1,0 +1,193 @@
+.prompt-library {
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, Canvas 96%, CanvasText 4%), Canvas 42%),
+    Canvas;
+  color: CanvasText;
+}
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.identity img {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.identity p {
+  margin: 0 0 5px;
+  color: color-mix(in oklab, CanvasText 54%, transparent);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.identity h1 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 680;
+}
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 12px;
+  color: color-mix(in oklab, CanvasText 65%, transparent);
+}
+
+.metrics span,
+.toolbar button {
+  border: 1px solid color-mix(in oklab, CanvasText 14%, transparent);
+  border-radius: 6px;
+  background: color-mix(in oklab, Canvas 88%, CanvasText 12%);
+}
+
+.metrics span {
+  padding: 5px 8px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.toolbar button {
+  min-height: 30px;
+  padding: 0 10px;
+  color: CanvasText;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.toolbar button.active {
+  border-color: color-mix(in oklab, oklch(0.64 0.17 32) 65%, CanvasText 20%);
+  background: color-mix(in oklab, oklch(0.64 0.17 32) 22%, Canvas);
+}
+
+.notice {
+  margin: 0 0 14px;
+  border: 1px solid color-mix(in oklab, oklch(0.64 0.17 32) 26%, CanvasText 10%);
+  border-radius: 8px;
+  padding: 9px 11px;
+  background: color-mix(in oklab, oklch(0.64 0.17 32) 14%, Canvas);
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+article,
+.empty,
+.history {
+  border: 1px solid color-mix(in oklab, CanvasText 12%, transparent);
+  border-radius: 8px;
+  background: Canvas;
+}
+
+article {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  padding: 14px;
+}
+
+article p {
+  margin: 10px 0 14px;
+  color: color-mix(in oklab, CanvasText 72%, transparent);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+h2 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+article button {
+  min-height: 32px;
+  margin-top: auto;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 11px;
+  background: oklch(0.64 0.17 32);
+  color: oklch(0.98 0.01 32);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid color-mix(in oklab, oklch(0.64 0.17 32) 70%, CanvasText 30%);
+  outline-offset: 2px;
+}
+
+.tag {
+  margin-bottom: 8px;
+  color: color-mix(in oklab, CanvasText 55%, transparent);
+  font-size: 11px;
+}
+
+.empty {
+  padding: 18px;
+  color: color-mix(in oklab, CanvasText 68%, transparent);
+  font-size: 13px;
+}
+
+.history {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.history span,
+.history small {
+  color: color-mix(in oklab, CanvasText 56%, transparent);
+}
+
+.history strong {
+  font-weight: 650;
+}
+
+@media (max-width: 640px) {
+  .prompt-library {
+    padding: 18px;
+  }
+
+  .hero {
+    display: block;
+  }
+
+  .metrics {
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+}

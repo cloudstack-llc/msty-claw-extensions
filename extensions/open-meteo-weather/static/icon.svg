@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Open-Meteo Weather">
+  <rect width="64" height="64" rx="14" fill="#17202a"/>
+  <circle cx="26" cy="25" r="9" fill="#f5b942"/>
+  <g stroke="#f5b942" stroke-width="3" stroke-linecap="round">
+    <path d="M26 9v4M26 37v4M10 25h4M38 25h4M14.6 13.6l2.8 2.8M34.6 33.6l2.8 2.8M37.4 13.6l-2.8 2.8M17.4 33.6l-2.8 2.8"/>
+  </g>
+  <path d="M24 46a8 8 0 0 1 15.4-3A7 7 0 1 1 41 57H24a5.5 5.5 0 0 1 0-11Z" fill="#cfe3f0"/>
+</svg>

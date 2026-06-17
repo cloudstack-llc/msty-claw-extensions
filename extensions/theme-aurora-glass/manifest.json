@@ -1,0 +1,410 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-aurora-glass",
+  "name": "Aurora Glass",
+  "version": "1.0.0",
+  "description": "Frosted glass over a slow aurora. Translucent chrome, deep-blue depth, and a live frost slider that controls the backdrop blur. Northern-night dark mode and an icy frosted-day light mode.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "glass",
+    "aurora",
+    "frosted",
+    "dark",
+    "light"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Aurora Glass theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "aurora_glass",
+        "name": "Aurora Glass",
+        "description": "Frosted translucent chrome over a slow aurora gradient.",
+        "previewImage": "static/aurora-dark.jpg",
+        "tokens": {
+          "background.app": {
+            "dark": "#0a0f1f",
+            "light": "#eef3fb"
+          },
+          "surface.sidebar": {
+            "dark": "rgba(16, 22, 44, 0.42)",
+            "light": "rgba(255, 255, 255, 0.5)"
+          },
+          "surface.sidebar.backdrop": "blur(22px) saturate(1.3)",
+          "surface.sidebar.foreground": {
+            "dark": "#c7d4f0",
+            "light": "#3a4668"
+          },
+          "surface.sidebar.border": {
+            "dark": "#1e2a4d",
+            "light": "#cdd9f0"
+          },
+          "surface.sidebar.accent": {
+            "dark": "#1b2747",
+            "light": "#dde8fb"
+          },
+          "surface.sidebar.accent.foreground": {
+            "dark": "#e8eefc",
+            "light": "#1b2440"
+          },
+          "surface.card": {
+            "dark": "rgba(20, 28, 54, 0.82)",
+            "light": "rgba(255, 255, 255, 0.86)"
+          },
+          "surface.popover": {
+            "dark": "#141c33",
+            "light": "#ffffff"
+          },
+          "surface.secondary": {
+            "dark": "#16203c",
+            "light": "#e6edf9"
+          },
+          "surface.secondary.foreground": {
+            "dark": "#e8eefc",
+            "light": "#1b2440"
+          },
+          "surface.muted": {
+            "dark": "#121a30",
+            "light": "#eef3fb"
+          },
+          "surface.accent": {
+            "dark": "#1b2747",
+            "light": "#dfe8fb"
+          },
+          "surface.accent.foreground": {
+            "dark": "#e8eefc",
+            "light": "#1b2440"
+          },
+          "surface.input": {
+            "dark": "rgba(22, 32, 60, 0.72)",
+            "light": "#ffffff"
+          },
+          "surface.border": {
+            "dark": "#25325a",
+            "light": "#cdd9f0"
+          },
+          "color.text": {
+            "dark": "#e8eefc",
+            "light": "#1b2440"
+          },
+          "color.text.muted": {
+            "dark": "#93a3c9",
+            "light": "#5c688a"
+          },
+          "color.primary": {
+            "dark": "#7aa2ff",
+            "light": "#4f7cf0"
+          },
+          "color.primary.foreground": {
+            "dark": "#07101f",
+            "light": "#ffffff"
+          },
+          "color.ring": {
+            "dark": "#7aa2ff",
+            "light": "#4f7cf0"
+          },
+          "color.destructive": {
+            "dark": "#ff6b8a",
+            "light": "#e0436a"
+          },
+          "color.destructive.foreground": {
+            "dark": "#1a0710",
+            "light": "#ffffff"
+          },
+          "color.success": {
+            "dark": "#5fe3c0",
+            "light": "#1aa98a"
+          },
+          "color.success.foreground": {
+            "dark": "#04201a",
+            "light": "#ffffff"
+          },
+          "color.warning": {
+            "dark": "#ffd27a",
+            "light": "#a9760a"
+          },
+          "color.warning.foreground": {
+            "dark": "#231a06",
+            "light": "#ffffff"
+          },
+          "color.info": {
+            "dark": "#8fb8ff",
+            "light": "#3f7be0"
+          },
+          "color.info.foreground": {
+            "dark": "#06122a",
+            "light": "#ffffff"
+          },
+          "font.ui": "'Outfit', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'JetBrains Mono', ui-monospace, monospace",
+          "font.google": "Outfit:wght@400;500;600;700, Spectral:wght@400;500;600;700, Cormorant Garamond:wght@400;500;600;700, Marcellus:wght@400, Sora:wght@400;500;600;700, JetBrains Mono:wght@400;500",
+          "radius.control": "14px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 55%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 30%, transparent)",
+          "surface.assistant.backdrop": "blur(14px) saturate(1.2)",
+          "surface.composer": "color-mix(in oklch, var(--card) 60%, transparent)",
+          "surface.composer.backdrop": "blur(20px) saturate(1.3)"
+        },
+        "variables": {
+          "--composer-radius": "18px",
+          "--bubble-radius": "16px",
+          "--popover-radius": "14px",
+          "--pill-radius": "9999px",
+          "--composer-shadow": {
+            "dark": "0 10px 40px rgba(0,0,0,0.45)",
+            "light": "0 10px 36px rgba(40, 70, 140, 0.12)"
+          },
+          "--selection": {
+            "dark": "rgba(122, 162, 255, 0.30)",
+            "light": "rgba(79, 124, 240, 0.22)"
+          }
+        },
+        "assets": {
+          "backgroundImageDark": "static/aurora-dark.jpg",
+          "backgroundImageLight": "static/aurora-light.jpg"
+        },
+        "settings": {
+          "title": "Aurora Glass options",
+          "description": "Set the frost, tint the glass, and toggle the aurora.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "showBackground": {
+                "type": "boolean",
+                "title": "Show the aurora",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "auroraStrength": {
+                "type": "number",
+                "title": "Aurora strength",
+                "default": 20,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 10,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "frost": {
+                "type": "integer",
+                "title": "Frost",
+                "description": "Backdrop blur on the sidebar and title bar.",
+                "default": 22,
+                "minimum": 0,
+                "maximum": 36,
+                "multipleOf": 2,
+                "x-msty-control": "slider",
+                "x-msty-order": 3,
+                "x-msty-theme": {
+                  "variable": "--sidebar-backdrop",
+                  "value": "blur({{value}}px) saturate(1.3)"
+                }
+              },
+              "tint": {
+                "type": "string",
+                "title": "Glass tint",
+                "description": "Accent and selection hue.",
+                "default": "aurora",
+                "enum": [
+                  "aurora",
+                  "ice",
+                  "rose"
+                ],
+                "x-msty-enum-labels": [
+                  "Aurora",
+                  "Ice",
+                  "Rose"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "aurora": "#7aa2ff",
+                      "ice": "#58c7d8",
+                      "rose": "#ff8ab0"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "aurora": "#7aa2ff",
+                      "ice": "#58c7d8",
+                      "rose": "#ff8ab0"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "aurora": "rgba(122, 162, 255, 0.30)",
+                      "ice": "rgba(88, 199, 216, 0.28)",
+                      "rose": "rgba(255, 138, 176, 0.28)"
+                    }
+                  }
+                ]
+              },
+              "glow": {
+                "type": "integer",
+                "title": "Accent glow",
+                "description": "How brightly the glass catches the accent light.",
+                "default": 4,
+                "minimum": 0,
+                "maximum": 10,
+                "multipleOf": 1,
+                "x-msty-control": "slider",
+                "x-msty-order": 5,
+                "x-msty-theme": [
+                  {
+                    "variable": "--composer-shadow",
+                    "value": "0 10px 40px rgba(0,0,0,0.40), 0 0 28px color-mix(in srgb, var(--primary) calc({{value}} * 3%), transparent)"
+                  },
+                  {
+                    "variable": "--composer-shadow-focus",
+                    "value": "0 12px 46px rgba(0,0,0,0.45), 0 0 34px color-mix(in srgb, var(--primary) calc({{value}} * 4%), transparent)"
+                  },
+                  {
+                    "variable": "--button-shadow",
+                    "value": "0 2px 10px color-mix(in srgb, var(--primary) calc({{value}} * 2.5%), transparent)"
+                  },
+                  {
+                    "variable": "--bubble-shadow",
+                    "value": "0 3px 16px color-mix(in srgb, var(--primary) calc({{value}} * 2%), transparent)"
+                  },
+                  {
+                    "variable": "--assistant-shadow",
+                    "value": "0 6px 24px color-mix(in srgb, var(--primary) calc({{value}} * 2%), transparent)"
+                  },
+                  {
+                    "variable": "--popover-shadow",
+                    "value": "0 12px 38px rgba(0,0,0,0.42), 0 0 22px color-mix(in srgb, var(--primary) calc({{value}} * 2.5%), transparent)"
+                  }
+                ]
+              },
+              "corners": {
+                "type": "string",
+                "title": "Corner shape",
+                "description": "Rounding of panels, bubbles, and the composer.",
+                "default": "soft",
+                "enum": [
+                  "sharp",
+                  "soft",
+                  "round"
+                ],
+                "x-msty-enum-labels": [
+                  "Sharp",
+                  "Soft",
+                  "Round"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 6,
+                "x-msty-theme": [
+                  {
+                    "variable": "--radius",
+                    "values": {
+                      "sharp": "4px",
+                      "soft": "14px",
+                      "round": "22px"
+                    }
+                  },
+                  {
+                    "variable": "--composer-radius",
+                    "values": {
+                      "sharp": "6px",
+                      "soft": "18px",
+                      "round": "28px"
+                    }
+                  },
+                  {
+                    "variable": "--bubble-radius",
+                    "values": {
+                      "sharp": "5px",
+                      "soft": "16px",
+                      "round": "24px"
+                    }
+                  },
+                  {
+                    "variable": "--assistant-radius",
+                    "values": {
+                      "sharp": "5px",
+                      "soft": "16px",
+                      "round": "24px"
+                    }
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Font",
+                "description": "Typeface for the whole interface. All options load automatically.",
+                "default": "outfit",
+                "enum": [
+                  "outfit",
+                  "spectral",
+                  "cormorant",
+                  "marcellus",
+                  "sora"
+                ],
+                "x-msty-enum-labels": [
+                  "Outfit",
+                  "Spectral",
+                  "Cormorant Garamond",
+                  "Marcellus",
+                  "Sora"
+                ],
+                "x-msty-order": 7,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "outfit": "'Outfit', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "spectral": "'Spectral', Georgia, \"Times New Roman\", serif",
+                    "cormorant": "'Cormorant Garamond', Georgia, \"Times New Roman\", serif",
+                    "marcellus": "'Marcellus', Georgia, \"Times New Roman\", serif",
+                    "sora": "'Sora', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

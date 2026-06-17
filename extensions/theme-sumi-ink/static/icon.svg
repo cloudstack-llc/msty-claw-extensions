@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sumi Ink">
+  <rect width="64" height="64" rx="14" fill="#f4f0e8"/>
+  <path d="M9 46c11-2 18-8 23-16 3-6 10-9 18-9 3 0 6 1 8 3" fill="none" stroke="#1f1c18" stroke-width="7" stroke-linecap="round"/>
+  <path d="M12 54c8-1 17-5 24-10" fill="none" stroke="#1f1c18" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <path d="M40 18c2-3 6-4 11-3" fill="none" stroke="#1f1c18" stroke-width="2.6" stroke-linecap="round" opacity="0.3"/>
+  <rect x="39" y="37" width="14" height="14" rx="2" fill="#c0382a" transform="rotate(6 46 44)"/>
+  <path d="M42 43l3 3 4-5" stroke="#f4f0e8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="rotate(6 46 44)"/>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-17T14:21:34.436Z",
+  "extensionId": "ai.msty.official.workspace-scratchpad",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "extension.js",
+      "sha256": "Ti4NCNcfIyjdzH9csHVh1wwVrOcu7CsqfzRQVR0N804="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "Fw+yCPdENQelZGZpWuBEbFhIR6B9JJhOud0SG/5SHP4="
+    },
+    {
+      "path": "README.md",
+      "sha256": "gtP422OiByW5rb7EXNOEwheO8C7JPYmiL0CtELhFVVA="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "LOYY83+VY57qX1oAV7tTBGmSTIgAiaPjuNpXL5H4yIQ="
+    }
+  ],
+  "signature": "SgFex5R4kv4r4+AWNZ4wxtwj2V2d+vsyJRoJQNwhTz2wOPEecgipbH57HQtJIO9U0hbdrEmbGsJZhBD3OhKjDw=="
+}

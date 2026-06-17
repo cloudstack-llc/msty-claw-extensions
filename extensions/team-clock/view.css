@@ -1,0 +1,265 @@
+/* Team Clock — live analog clocks in a popup.
+   Colors map onto the app theme tokens the host injects on :root, so the
+   clocks track the selected theme + light/dark. color-scheme is set by host. */
+
+:root {
+  color-scheme: light dark;
+
+  --tc-font: var(--font-sans, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --tc-mono: var(--font-mono, "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace);
+
+  --tc-bg: var(--background, light-dark(oklch(0.98 0.005 60), oklch(0.18 0.03 25)));
+  --tc-fg: var(--foreground, light-dark(oklch(0.24 0.02 30), oklch(0.94 0.01 30)));
+  --tc-surface: var(--card, light-dark(oklch(1 0 0), oklch(0.21 0.035 25)));
+  --tc-muted: var(--muted, light-dark(oklch(0.95 0.008 50), oklch(0.25 0.03 25)));
+  --tc-muted-fg: var(--muted-foreground, light-dark(oklch(0.50 0.02 30), oklch(0.65 0.03 25)));
+  --tc-border: var(--border, light-dark(oklch(0.90 0.01 40), oklch(0.30 0.04 25)));
+  --tc-primary: var(--primary, oklch(0.62 0.22 25));
+
+  --tc-success: var(--extension-success, light-dark(oklch(0.58 0.16 150), oklch(0.68 0.16 150)));
+  --tc-success-fg: var(--extension-success-foreground, light-dark(oklch(0.38 0.13 150), oklch(0.88 0.08 150)));
+
+  /* Night dial: nudge the surface toward deep indigo in either theme. */
+  --tc-dial-night: color-mix(in oklab, var(--tc-surface), oklch(0.30 0.08 265) 42%);
+  --tc-ink-night: color-mix(in oklab, var(--tc-fg), oklch(0.95 0.03 265) 55%);
+
+  --tc-radius: var(--radius, 9px);
+  --tc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--tc-bg);
+  color: var(--tc-fg);
+  font-family: var(--tc-font);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tc {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 16px 16px;
+}
+
+.tc-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tc-summary {
+  color: var(--tc-fg);
+  font-size: 13px;
+  font-weight: 560;
+}
+
+.tc-local {
+  color: var(--tc-muted-fg);
+  font-size: 12px;
+}
+
+.tc-local b {
+  color: var(--tc-fg);
+  font-variant-numeric: tabular-nums;
+  margin-left: 4px;
+}
+
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 14px;
+}
+
+.tc-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border: 1px solid var(--tc-border);
+  border-radius: var(--tc-radius);
+  background: var(--tc-surface);
+}
+
+/* ---- Clock face -------------------------------------------------------- */
+
+.tc-face {
+  position: relative;
+  width: 100%;
+  max-width: 124px;
+  aspect-ratio: 1;
+}
+
+.tc-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.tc-dial {
+  fill: color-mix(in oklab, var(--tc-surface), var(--tc-bg) 30%);
+  stroke: var(--tc-border);
+  stroke-width: 1.5;
+  transition: fill 600ms var(--tc-ease);
+}
+
+.tc-tick {
+  stroke: var(--tc-fg);
+  stroke-width: 1.1;
+  transition: stroke 600ms var(--tc-ease);
+}
+
+.tc-tick--hour {
+  stroke-width: 3.2;
+}
+
+.tc-hand--hour rect,
+.tc-hand--min rect {
+  fill: var(--tc-fg);
+  transition: fill 600ms var(--tc-ease);
+}
+
+.tc-hand--sec line {
+  stroke: var(--tc-primary);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.tc-hand--sec circle {
+  fill: var(--tc-primary);
+}
+
+.tc-cap {
+  fill: var(--tc-fg);
+}
+
+/* Night: deep dial, lightened ink so the bold hands stay legible. */
+.tc-face.is-night .tc-dial {
+  fill: var(--tc-dial-night);
+  stroke: color-mix(in oklab, var(--tc-dial-night), var(--tc-ink-night) 28%);
+}
+
+.tc-face.is-night .tc-tick {
+  stroke: var(--tc-ink-night);
+}
+
+.tc-face.is-night .tc-hand--hour rect,
+.tc-face.is-night .tc-hand--min rect,
+.tc-face.is-night .tc-cap {
+  fill: var(--tc-ink-night);
+}
+
+.tc-phase {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--tc-muted-fg);
+  opacity: 0.7;
+}
+
+.tc-face.is-night .tc-phase {
+  color: var(--tc-ink-night);
+  opacity: 0.85;
+}
+
+/* ---- Meta -------------------------------------------------------------- */
+
+.tc-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.tc-city {
+  font-size: 13px;
+  font-weight: 600;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tc-digital {
+  font-family: var(--tc-mono);
+  font-size: 12.5px;
+  color: var(--tc-muted-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.tc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tc-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.tc-badge--on {
+  background: color-mix(in oklab, var(--tc-success), transparent 86%);
+  color: var(--tc-success-fg);
+}
+
+.tc-badge--off {
+  background: var(--tc-muted);
+  color: var(--tc-muted-fg);
+}
+
+/* ---- Notes ------------------------------------------------------------- */
+
+.tc-empty,
+.tc-note {
+  margin: 0;
+  color: var(--tc-muted-fg);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.tc-empty {
+  padding: 20px 4px;
+  text-align: center;
+}
+
+.tc-note {
+  padding-top: 2px;
+}
+
+.tc-empty code,
+.tc-note code {
+  font-family: var(--tc-mono);
+  font-size: 11.5px;
+  color: var(--tc-fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-dial,
+  .tc-tick,
+  .tc-hand {
+    transition: none;
+  }
+}
