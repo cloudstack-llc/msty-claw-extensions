@@ -272,8 +272,10 @@ declare namespace Msty {
     permissions?: Array<PermissionId | PermissionDescriptor>;
     /** JavaScript runtime entry file relative to the extension root. */
     entry?: string;
-    /** Declarative items the host should contribute on the extension's behalf. */
+    /** Declarative items the host should contribute on the extension's behalf. Use `contributes`, not `contributions`. */
     contributes?: Partial<Contributions>;
+    /** Unsupported manifest key. Use `contributes` instead. */
+    contributions?: never;
     /** SVG or PNG package asset used as the extension's identity icon in Extensions. */
     icon?: string;
     /** Optional license string, for example `MIT`. */
@@ -337,7 +339,7 @@ declare namespace Msty {
     tasks: TaskContribution[];
     /** Trigger providers that can wake tasks from external or polled events. */
     triggerProviders: TriggerProviderContribution[];
-    /** Slash commands and command palette entries handled by `run()`. */
+    /** Slash commands and command palette entries handled by `run()`. Requires `commands.provide`. */
     commands: CommandContribution[];
     /** Hooks that inspect or modify drafts before sending. */
     preSendHooks: PreSendHookContribution[];
@@ -435,13 +437,13 @@ declare namespace Msty {
 
   /** Slash command or command palette contribution. */
   interface CommandContribution extends BaseContribution {
-    /** Required menu label. */
+    /** Required visible menu label. */
     label: string;
     /** Command ID delivered to `run(command, payload)`. */
     command: string;
-    /** Optional slash-command name without the leading slash. */
+    /** Optional slash-command name without the leading slash. Omit to derive it from `id`. */
     name?: string;
-    /** Alias for slash-command name. */
+    /** Alias for slash-command name. Omit to derive it from `id`. */
     slashName?: string;
     /** Hint text shown after the command name. */
     argumentHint?: string;
@@ -1789,6 +1791,8 @@ declare namespace Msty {
     list(request?: { limit?: number }): Promise<Conversation[]>;
     /** Creates a chat, optionally inserts a draft, and optionally switches to it. */
     create(request?: ChatCreateRequest): Promise<ChatCreateResult>;
+    /** Creates a chat and starts a prompt in it. Defaults to staying in the current chat. Requires `chats.write` and `messages.write`. */
+    startRun(request: ChatStartRunRequest): Promise<ChatStartRunResult>;
     /** Opens a chat by ID after an explicit user action. */
     open(request: { chatId: string } | string): Promise<{ opened: boolean; chatId: string; chat?: Conversation | null }>;
   }
@@ -1927,6 +1931,34 @@ declare namespace Msty {
     opened: boolean;
     /** Whether a draft was inserted. */
     draftInserted?: boolean;
+  }
+
+  /** Request for creating a chat and starting a prompt in it. */
+  interface ChatStartRunRequest {
+    /** Optional chat title. */
+    title?: string;
+    /** Prompt to send into the new chat. */
+    prompt: string;
+    /** Whether to switch the app to the new chat. Defaults to false. */
+    switchTo?: boolean;
+    /** Workspace path for the chat. */
+    workspacePath?: string | null;
+    /** Provider ID to use, when allowed. */
+    providerId?: string | null;
+    /** Model ID/name to use, when allowed. */
+    model?: string | null;
+    /** Optional folder ID. */
+    folderId?: string | null;
+  }
+
+  /** Result from creating a chat and starting a prompt. */
+  interface ChatStartRunResult {
+    /** Created chat metadata. */
+    chat: Conversation;
+    /** Whether the app opened/switched to the chat. */
+    opened: boolean;
+    /** Whether the prompt was accepted for sending. */
+    started: boolean;
   }
 
   /** API for reading and editing the current composer draft. */

@@ -26,6 +26,16 @@ cd my-extension
 zip -r my-extension.zip manifest.json extension.js static
 ```
 
+Packaging checklist:
+
+- `manifest.json` is at the ZIP root, not inside a parent folder.
+- The `entry` file exists when the manifest declares `entry`.
+- The top-level `icon` path points to a packaged SVG or PNG file.
+- Static assets referenced by contribution `icon` fields exist when they use asset paths such as
+  `static/action.svg`.
+- Slash commands use top-level `contributes.commands`.
+- The manifest does not use the unsupported top-level `contributions` key.
+
 Install the ZIP from `Extensions > Install ZIP`, then review the requested permissions.
 Extensions do not run until required permissions are allowed.
 
@@ -423,6 +433,19 @@ Command contributions appear in the slash menu after the extension is installed,
 allowed. Use a command when the user should be able to run an extension without hunting for a
 specific button.
 
+For slash commands:
+
+- Declare them under top-level `contributes.commands`.
+- The key is `contributes`, not `contributions`.
+- Request `commands.provide`; without it, command contributions are rejected.
+- Implement the runtime `run(command, payload)` handler in the file named by `entry`.
+- Listening to `composer.changed` does not register a slash command and will not make `/foo`
+  appear in the slash menu. Composer events are for reacting to draft/editor state.
+
+Msty Claw turns the command contribution `id` into the slash name by replacing underscores with
+hyphens. For example, `workspace_snapshot` becomes `/workspace-snapshot`. If you set `name` or
+`slashName`, use the value users should type without the leading slash.
+
 ```json
 {
   "permissions": [{ "id": "commands.provide", "required": true, "reason": "Adds a slash command." }],
@@ -440,13 +463,86 @@ specific button.
 }
 ```
 
-Msty Claw turns the contribution ID into a slash name, for example
-`workspace_snapshot` becomes `/workspace-snapshot`. If two extensions ask for the same slash name,
-the later one receives an extension suffix.
-
 Command contributions must include a stable `id`, a visible `label`/`title`/`name`, and the
 runtime `command` string handled by `extension.js`. Invalid command entries are rejected during
 install instead of appearing as broken slash menu items.
+
+### Minimal Slash Command Extension
+
+This extension adds `/lorem`. Selecting it replaces the current draft with two paragraphs of lorem
+ipsum text. The contribution `id` is `lorem`, so the slash name is `/lorem`.
+
+`manifest.json`:
+
+```json
+{
+  "$schema": "./manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "com.example.lorem-buddy",
+  "name": "Lorem Buddy",
+  "version": "1.0.0",
+  "description": "Inserts two paragraphs of lorem ipsum text.",
+  "icon": "static/icon.svg",
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "commands.provide",
+      "required": true,
+      "reason": "Adds a slash command."
+    },
+    {
+      "id": "composer.write",
+      "required": true,
+      "reason": "Replaces the draft when you choose the command."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "id": "lorem",
+        "label": "Insert lorem ipsum",
+        "description": "Replace the draft with two paragraphs of placeholder text.",
+        "command": "lorem.insert"
+      }
+    ]
+  }
+}
+```
+
+`extension.js`:
+
+```js
+// @ts-check
+/// <reference path="./msty-extension-api.d.ts" />
+
+const LOREM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque feugiat consequat. Suspendisse potenti. Donec a sem vel augue gravida facilisis.\n\n" +
+  "Praesent non arcu sed mi luctus luctus. Curabitur sit amet lectus vitae mauris faucibus cursus. Aenean commodo, nibh at tempor luctus, erat orci blandit risus, in porta mi justo id nibh.";
+
+/** @param {Msty.ExtensionApi} msty */
+export async function activate(msty) {
+  return {
+    async run(command) {
+      if (command !== "lorem.insert") return;
+      return {
+        actions: [{ type: "setComposerText", text: LOREM, select: true }]
+      };
+    }
+  };
+}
+```
+
+`static/icon.svg`:
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#111827"/>
+  <path d="M18 18h28v6H18zm0 12h22v6H18zm0 12h28v6H18z" fill="#f9fafb"/>
+</svg>
+```
 
 Runtime extensions can also register commands while active. Use this when the command label,
 argument hint, or availability depends on settings or current state.
@@ -460,6 +556,20 @@ const dispose = msty.commands.register({
   command: "team-clock.open"
 });
 ```
+
+### Slash Command Troubleshooting
+
+If a slash command does not appear:
+
+- Confirm the extension is installed and enabled.
+- Review permissions in Extensions and allow required access.
+- Use top-level `contributes.commands`; `contributions.commands` is unsupported.
+- Include the `commands.provide` permission.
+- Check that each command has `id`, a visible label such as `label`, and `command`.
+- Check the slash name derived from the command `id`: `workspace_snapshot` appears as
+  `/workspace-snapshot`. Set `name` or `slashName` only when you need a different typed name.
+- Inspect the ZIP structure. `manifest.json` must be at the ZIP root beside `extension.js`, not
+  inside a wrapper folder.
 
 ### Command Results And Declarative Actions
 
@@ -1460,6 +1570,18 @@ await msty.chats.create({
 await msty.chats.open("chat_123");
 ```
 
+Use `msty.chats.startRun(...)` when a user action should create a new chat and start
+work there without moving the user away from the current chat. This requires both
+`chats.write` and `messages.write`.
+
+```js
+await msty.chats.startRun({
+  title: "Follow-up",
+  prompt: "Investigate the failing test and suggest the smallest fix.",
+  switchTo: false
+});
+```
+
 Use `messages.write` sparingly. It sends a user-visible prompt into the current chat.
 
 ```js
@@ -2273,6 +2395,10 @@ length are still user activity, so it is only delivered while `composer.read` is
 gate applies to `events.getRecent`. Pair the event with `msty.composer.get` when an action needs
 the actual draft, for example a live word counter or draft linter that refreshes on each
 `composer.changed` event.
+
+Use composer events when the extension needs to react to draft or editor state. Use command
+contributions when the extension should appear in the slash menu. A `composer.changed` subscription
+does not create a slash command.
 
 Commands may also return a `CommandResult` instead of opening UI or editing the draft themselves,
 so the host performs those effects consistently. See [Command Results And Declarative

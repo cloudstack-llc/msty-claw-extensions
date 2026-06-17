@@ -70,6 +70,7 @@
     },
     "icon": {
       "type": "string",
+      "minLength": 1,
       "description": "Package asset path for the extension identity icon shown in Extensions, usually static/icon.svg."
     },
     "screenshots": {
@@ -151,6 +152,7 @@
     },
     "contributes": {
       "type": "object",
+      "description": "Declarative contribution block. Use top-level contributes, not contributions.",
       "additionalProperties": false,
       "properties": {
         "rules": {
@@ -179,6 +181,7 @@
         },
         "commands": {
           "type": "array",
+          "description": "Slash commands and command palette entries. Requires commands.provide and must live under top-level contributes.commands.",
           "items": {
             "$ref": "#/$defs/commandContribution"
           }
@@ -316,7 +319,8 @@
           }
         }
       }
-    }
+    },
+    "contributions": false
   },
   "$defs": {
     "permissionId": {
@@ -442,8 +446,24 @@
         {
           "type": "object",
           "required": [
-            "label",
             "command"
+          ],
+          "anyOf": [
+            {
+              "required": [
+                "label"
+              ]
+            },
+            {
+              "required": [
+                "title"
+              ]
+            },
+            {
+              "required": [
+                "name"
+              ]
+            }
           ],
           "properties": {
             "name": {
