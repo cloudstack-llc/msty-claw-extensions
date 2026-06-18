@@ -9,6 +9,7 @@
     "name": "Msty Team"
   },
   "license": "MIT",
+  "icon": "static/icon.svg",
   "keywords": [
     "playbook",
     "bug",

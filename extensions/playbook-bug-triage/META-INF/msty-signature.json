@@ -3,7 +3,7 @@
   "signatureType": "msty-extension-package",
   "algorithm": "Ed25519",
   "hashAlgorithm": "SHA-256",
-  "signedAt": "2026-06-15T15:45:24.072Z",
+  "signedAt": "2026-06-17T14:21:34.436Z",
   "extensionId": "ai.msty.official.playbook-bug-triage",
   "extensionVersion": "1.0.0",
   "authorName": "Msty Team",
@@ -11,12 +11,16 @@
   "files": [
     {
       "path": "manifest.json",
-      "sha256": "yiueS6WrG6Ju4AnZhMD7pJ2CdUUytja1Gb4FlxcHNDg="
+      "sha256": "6MzD0mpgKK+WwPbmgGW/kfSxp/S0H+NVtqqM+sqL/TU="
     },
     {
       "path": "README.md",
       "sha256": "c4S1o1b4IJfp2fD8T/KRAlwPAaOXek6d1/MDp3WR+/Q="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "Z9KLd1UCDbiqopJLaGcSiapbt9uBU9nCB7VaJ8lxGRI="
     }
   ],
-  "signature": "bOudDyRwX7PgPdI0TlEcK/NwoYHD8OrZL3Th8mfLAbBEMSe8mxcMef/yqUN3yxipap2PebP8yl2qlXsIMFCPDQ=="
+  "signature": "uAfWeJE96G2O4bgg5mLnbhDpZx9IMf53h2zS08iQ0pdtQnVuvO1q8+o4PIdGSd6qkEEg0ApvupT9c58HK+goBA=="
 }
