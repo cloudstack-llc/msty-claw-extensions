@@ -3,8 +3,8 @@
   "manifestVersion": 1,
   "id": "ai.msty.official.workshop-prompt-library",
   "name": "Prompt Library",
-  "version": "1.0.0",
-  "description": "Browse your saved prompts by name and tag, then drop one into your message draft with a click.",
+  "version": "1.1.0",
+  "description": "Save reusable prompts, manage them in a focused library, and insert them from the toolbox without leaving your chat.",
   "author": {
     "name": "Msty Team"
   },
@@ -13,8 +13,8 @@
   "keywords": [
     "prompt",
     "library",
-    "workspace",
-    "snippets"
+    "toolbox",
+    "reuse"
   ],
   "categories": [
     "productivity",
@@ -23,21 +23,31 @@
   "compatibility": {
     "extensionApi": "^1.0.0"
   },
+  "network": {
+    "allowedOrigins": [
+      "https://next-assets.msty.studio"
+    ]
+  },
   "permissions": [
     {
       "id": "settings.provide",
       "required": true,
-      "reason": "Reads your saved prompts and preferred tag so the library shows the right prompts for you."
+      "reason": "Shows the starter prompt refresh action and imports prompts saved in earlier versions."
     },
     {
       "id": "storage.local",
       "required": true,
-      "reason": "Remembers your most recent prompt and how often you open the library on this device."
+      "reason": "Saves your prompts and starter prompts on this device."
+    },
+    {
+      "id": "network.fetch",
+      "required": false,
+      "reason": "Refreshes starter prompts when you choose to update them."
     },
     {
       "id": "composer.read",
       "required": true,
-      "reason": "Checks whether your message box already has text before adding a prompt."
+      "reason": "Checks whether your message box is ready before adding a prompt."
     },
     {
       "id": "composer.write",
@@ -45,9 +55,19 @@
       "reason": "Adds the prompt you pick to your message box."
     },
     {
+      "id": "clipboard.write",
+      "required": false,
+      "reason": "Copies a prompt when you choose Copy."
+    },
+    {
       "id": "notifications.show",
       "required": false,
       "reason": "Confirms when a prompt has been added to your message box."
+    },
+    {
+      "id": "commands.provide",
+      "required": true,
+      "reason": "Adds Prompt Library commands and the starter prompt refresh action."
     },
     {
       "id": "ui.workspace",
@@ -55,48 +75,105 @@
       "reason": "Adds Prompt Library to the Extensions navigation."
     },
     {
+      "id": "ui.toolbox",
+      "required": true,
+      "reason": "Adds a Prompts button near the message box."
+    },
+    {
       "id": "ui.fullView",
       "required": true,
-      "reason": "Opens the prompt library in a full page."
+      "reason": "Opens the prompt management library."
+    },
+    {
+      "id": "ui.popup",
+      "required": true,
+      "reason": "Shows the compact prompt picker from the toolbox."
+    },
+    {
+      "id": "ui.drawer",
+      "required": true,
+      "reason": "Opens the prompt editor in a side panel."
+    },
+    {
+      "id": "ui.dialog",
+      "required": true,
+      "reason": "Asks for confirmation before deleting a prompt."
     }
   ],
   "entry": "extension.js",
   "contributes": {
     "settings": [
       {
-        "id": "prompt_library_config",
+        "id": "prompt_library_settings",
         "title": "Prompt Library",
         "schema": {
           "type": "object",
           "properties": {
+            "refreshStarterPrompts": {
+              "type": "null",
+              "title": "Starter prompts",
+              "description": "Update the ready-made prompts saved on this device.",
+              "x-msty-control": "action",
+              "x-msty-action": {
+                "command": "prompt-library.refreshStarters",
+                "label": "Refresh starter prompts",
+                "runningLabel": "Refreshing"
+              }
+            },
             "snippets": {
               "type": "string",
-              "title": "Your prompts",
-              "description": "One prompt per line, written as: tag :: name :: prompt. The tag groups prompts, the name shows on the card, and the prompt is what gets added to your draft.",
-              "format": "textarea",
-              "x-msty-rows": 8,
-              "default": "writing :: Release note :: Write a concise release note for these changes.\nreview :: PR review :: Review this diff for bugs, regressions, and missing tests.\nplanning :: Next actions :: Turn these notes into a clear next-action list."
+              "title": "Prompts saved in earlier versions",
+              "default": "",
+              "x-msty-visibleWhen": false
             },
             "activeTag": {
               "type": "string",
-              "title": "Default tag",
-              "description": "The tag the library filters to when it opens. Leave blank to show all prompts.",
-              "default": "review"
+              "title": "Default tag saved in earlier versions",
+              "default": "",
+              "x-msty-visibleWhen": false
             }
           }
         }
+      }
+    ],
+    "commands": [
+      {
+        "id": "prompt_library_open",
+        "name": "prompts",
+        "label": "Open Prompt Library",
+        "description": "Open your saved prompts.",
+        "command": "prompt-library.open"
+      },
+      {
+        "id": "prompt_library_refresh_starters",
+        "name": "refresh-prompt-starters",
+        "label": "Refresh starter prompts",
+        "description": "Update the ready-made prompts saved on this device.",
+        "command": "prompt-library.refreshStarters"
       }
     ],
     "workspaceItems": [
       {
         "id": "prompt_library",
         "title": "Prompt Library",
-        "label": "Prompts",
-        "description": "Find and insert your saved prompts.",
+        "label": "Prompt Library",
+        "description": "Manage saved prompts.",
         "entry": "extension.js",
         "command": "prompt-library.open",
         "size": "wide",
         "priority": 38
+      }
+    ],
+    "toolboxItems": [
+      {
+        "id": "prompt_library_toolbox",
+        "title": "Prompts",
+        "label": "Prompts",
+        "description": "Insert a saved prompt.",
+        "icon": "static/icon.svg",
+        "command": "prompt-library.pick",
+        "priority": 38,
+        "when": "composer.canEdit"
       }
     ],
     "fullViews": [
@@ -106,6 +183,15 @@
         "entry": "ui.js",
         "command": "prompt-library.open",
         "size": "wide"
+      }
+    ],
+    "popups": [
+      {
+        "id": "prompt_library_picker",
+        "title": "Prompts",
+        "entry": "picker.js",
+        "command": "prompt-library.pick",
+        "size": "small"
       }
     ]
   }

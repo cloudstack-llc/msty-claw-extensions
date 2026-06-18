@@ -3,27 +3,39 @@
   "signatureType": "msty-extension-package",
   "algorithm": "Ed25519",
   "hashAlgorithm": "SHA-256",
-  "signedAt": "2026-06-15T15:45:24.072Z",
+  "signedAt": "2026-06-18T17:03:27.925Z",
   "extensionId": "ai.msty.official.workshop-prompt-library",
-  "extensionVersion": "1.0.0",
+  "extensionVersion": "1.1.0",
   "authorName": "Msty Team",
   "certificateId": "msty-official-packages-v1",
   "files": [
     {
       "path": "extension.js",
-      "sha256": "6yapLaRytr4NP71ZMjxfwr36TUsFkiee570hBV30ogU="
+      "sha256": "ob8xVjwVtA1bd9AeNpxAUmaVWMWB8FoOVpvabyUvNf4="
     },
     {
       "path": "manifest.json",
-      "sha256": "SEtyImRnLc31NiQ6l29mwTu5w69FIXlgpSYdLNn/3qU="
+      "sha256": "XuXRz6sfpHuNHjcAwk0+F/KqIb5HfqVrU1GQ1yUjIZo="
+    },
+    {
+      "path": "picker.js",
+      "sha256": "yLlHP3pN9ltjgp727c67qmKIwoSFhy3AXINL84POlMQ="
+    },
+    {
+      "path": "prompt-store.js",
+      "sha256": "gI0tFrPNBCrPDepbP2fG5vaT862TjoYa3O4Y1w/PeuM="
     },
     {
       "path": "README.md",
-      "sha256": "Q6PQodZSSuF635UmgoOQ6g3Mua7tLXOGgmbVricIn8A="
+      "sha256": "2bTRF3yODBaVadPPoU0ee6x/gdqQSPSjzJ8smbfmbHg="
     },
     {
       "path": "static/icon.svg",
       "sha256": "W7l6fGgAWd7PgYxw9igsPqHq/KurzkpKKOHOudAmEJQ="
+    },
+    {
+      "path": "static/prompts-registry.json",
+      "sha256": "SHScB0u3I2qwUBFBGEG8K6j0ZY3+snKUBc9hk7RzOFU="
     },
     {
       "path": "ui-helpers.js",
@@ -31,12 +43,12 @@
     },
     {
       "path": "ui.css",
-      "sha256": "7m1r9176uPWE5R5WQi4wVR3jplHqZUSGENMun4SyHQ4="
+      "sha256": "kUODdiYth5dSlfgrzhDx6ERfCxviuRE9Cr3jrdW2jjU="
     },
     {
       "path": "ui.js",
-      "sha256": "dlT1jCcEQBYs1PbP/9MAFjk9/RjZTcUdx4yomuEAKzU="
+      "sha256": "dnUPRXwRoWsZEWn6Ezuu7qMm15hQ5RZSHQr6ZYmXir8="
     }
   ],
-  "signature": "Exw1riHNc89VyUCuDFG36JSWEbDwA/mMdw5MopMLP/T+nJfCknnibOiU08GCNhaPQ2/6EpIxnjCAdn4NBbw0DA=="
+  "signature": "FBltO7dxyjZoe93qnnhFBKJ60gQqXHvcNlS4VUtv177N2g074MOIuIDBExeviSTBi4k+kHqjVMdN0Kk0Sa6TAQ=="
 }

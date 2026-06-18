@@ -1,24 +1,39 @@
 // @ts-check
 /// <reference path="../msty-extension-api.d.ts" />
 
-// Msty Claw loads this module directly from the extension ZIP.
-// Prompt Library turns a simple list of saved prompts into a browsable view.
-// The full view (ui.js) owns prompt insertion; this entry only opens the view
-// with the latest prompts and a running open count.
+import { loadPromptLibrary, refreshStarterPrompts } from "./prompt-store.js";
 
-const COMMAND = "prompt-library.open";
+const OPEN_COMMAND = "prompt-library.open";
+const PICK_COMMAND = "prompt-library.pick";
+const REFRESH_STARTERS_COMMAND = "prompt-library.refreshStarters";
+const FULL_VIEW_ID = "prompt_library_view";
+const PICKER_ID = "prompt_library_picker";
 
 /** @param {Msty.ExtensionApi} msty */
 export async function activate(msty) {
-  /** @type {Msty.Disposable[]} */
+  /** @type {Array<Msty.Disposable | (() => void)>} */
   const disposables = [];
 
-  // Only the dynamic fields the runtime updates; manifest.json owns the rest.
   if (typeof msty.ui?.registerWorkspaceItem === "function") {
     disposables.push(
       msty.ui.registerWorkspaceItem({
         id: "prompt_library",
-        command: COMMAND,
+        command: OPEN_COMMAND,
+      }),
+    );
+  }
+
+  if (typeof msty.ui?.registerToolboxItem === "function") {
+    disposables.push(
+      msty.ui.registerToolboxItem({
+        id: "prompt_library_toolbox",
+        title: "Prompts",
+        label: "Prompts",
+        tooltip: "Insert a saved prompt",
+        icon: "static/icon.svg",
+        command: PICK_COMMAND,
+        priority: 38,
+        when: "composer.canEdit",
       }),
     );
   }
@@ -26,24 +41,10 @@ export async function activate(msty) {
   return {
     /** @param {string} command */
     async run(command) {
-      if (command !== COMMAND) return undefined;
-      const settings = await safeSettings(msty);
-      // Track how many times the library has been opened on this device so the
-      // view can show a small "opens" stat. Storage is best-effort.
-      const opens = Number((await safeLocalGet(msty, "open_count")) || 0) + 1;
-      await safeLocalSet(msty, "open_count", opens);
-      const snippets = parseSnippets(settings);
-      return msty.ui?.openFullView?.({
-        id: "prompt_library_view",
-        title: "Prompt Library",
-        width: "wide",
-        entry: "ui.js",
-        context: {
-          snippets,
-          activeTag: text(settings.activeTag, ""),
-          opens,
-        },
-      });
+      if (command === OPEN_COMMAND) return openLibrary(msty);
+      if (command === PICK_COMMAND) return openPicker(msty);
+      if (command === REFRESH_STARTERS_COMMAND) return refreshStarters(msty);
+      return undefined;
     },
     dispose() {
       disposeAll(disposables);
@@ -51,58 +52,92 @@ export async function activate(msty) {
   };
 }
 
-// Each non-empty settings line is "tag :: name :: prompt". The prompt may itself
-// contain "::", so anything after the second separator is rejoined. Empty fields
-// fall back to sensible defaults so a partial line still renders.
-function parseSnippets(settings) {
-  return text(settings.snippets, "")
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [tag, name, ...promptParts] = line.split("::").map((part) => part.trim());
-      return {
-        tag: tag || "general",
-        name: name || "Untitled",
-        prompt: promptParts.join(" :: ") || line,
-      };
-    });
+/** @param {Msty.ExtensionApi} msty */
+async function openLibrary(msty) {
+  const snapshot = await loadPromptLibrary(msty, { autoRefresh: true });
+  return openContribution(msty, {
+    id: FULL_VIEW_ID,
+    kind: "fullView",
+    title: "Prompt Library",
+    width: "wide",
+    context: {
+      prompts: snapshot.prompts,
+      meta: snapshot.meta,
+      refresh: snapshot.refresh,
+    },
+  });
 }
 
-async function safeSettings(msty) {
-  try {
-    return (await msty.settings?.get?.()) ?? {};
-  } catch {
-    return {};
+/** @param {Msty.ExtensionApi} msty */
+async function openPicker(msty) {
+  const snapshot = await loadPromptLibrary(msty, { autoRefresh: true });
+  return openContribution(msty, {
+    id: PICKER_ID,
+    kind: "popup",
+    title: "Prompts",
+    width: "medium",
+    context: {
+      prompts: snapshot.prompts,
+      meta: snapshot.meta,
+    },
+  });
+}
+
+/** @param {Msty.ExtensionApi} msty */
+async function refreshStarters(msty) {
+  const snapshot = await refreshStarterPrompts(msty);
+  const added = Number(snapshot.refresh.added || 0);
+  const updated = Number(snapshot.refresh.updated || 0);
+  const unavailable = snapshot.refresh.status === "unavailable";
+  const title = unavailable ? "Using saved prompts" : "Starter prompts updated";
+  const body = unavailable
+    ? "Using the saved prompts on this device. Try refreshing again later."
+    : added || updated
+      ? `${added + updated} prompt${added + updated === 1 ? "" : "s"} updated.`
+      : "Everything is already up to date.";
+
+  return {
+    message: body,
+    actions: [
+      {
+        type: "showNotification",
+        title,
+        body,
+        tone: unavailable ? "warning" : "success",
+      },
+    ],
+  };
+}
+
+/**
+ * @param {Msty.ExtensionApi} msty
+ * @param {Msty.UiOpenContributionRequest} request
+ */
+function openContribution(msty, request) {
+  if (typeof msty.ui?.openContribution === "function") {
+    return msty.ui.openContribution(request);
   }
+  const fallback = {
+    id: request.id,
+    title: request.title || "Prompt Library",
+    entry: request.kind === "popup" ? "picker.js" : "ui.js",
+    width: request.width,
+    context: request.context,
+  };
+  if (request.kind === "popup") return msty.ui?.openPopup?.(fallback);
+  if (request.kind === "fullView") return msty.ui?.openFullView?.(fallback);
+  return undefined;
 }
 
-async function safeLocalGet(msty, key) {
-  try {
-    return await msty.storage?.local?.get?.(key);
-  } catch {
-    return undefined;
-  }
-}
-
-async function safeLocalSet(msty, key, value) {
-  try {
-    await msty.storage?.local?.set?.(key, value);
-  } catch {
-    /* optional storage */
-  }
-}
-
-function text(value, fallback) {
-  return typeof value === "string" && value.trim() ? value.trim() : fallback;
-}
-
+/** @param {Array<Msty.Disposable | (() => void)>} disposables */
 function disposeAll(disposables) {
   while (disposables.length) {
     try {
-      disposables.pop()?.();
+      const disposable = disposables.pop();
+      if (typeof disposable === "function") disposable();
+      else disposable?.dispose?.();
     } catch {
-      /* ignore cleanup errors */
+      /* Best-effort cleanup. */
     }
   }
 }
