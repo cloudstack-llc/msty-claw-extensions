@@ -107,7 +107,7 @@ async function refreshStatus(msty, report = null) {
 function analyze(settings, now) {
   const configured = String(settings.zones ?? "").trim();
   const zones = (configured || DEFAULT_ZONES)
-    .split(",")
+    .split(/[\n,]+/)
     .map((zone) => zone.trim())
     .filter(Boolean);
 

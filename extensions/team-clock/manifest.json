@@ -3,7 +3,7 @@
   "manifestVersion": 1,
   "id": "ai.msty.official.team-clock",
   "name": "Team Clock",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "See the current time across your team's time zones and who is inside working hours right now.",
   "author": {
     "name": "Msty Team"
@@ -64,19 +64,25 @@
             "zones": {
               "type": "string",
               "title": "Time zones",
-              "description": "Comma-separated time zone names, e.g. America/New_York, Europe/London, Asia/Kolkata.",
-              "default": "America/Los_Angeles, America/New_York, Europe/London, Asia/Kolkata"
+              "description": "One time zone per line, using IANA names like America/New_York, Europe/London, or Asia/Kolkata.",
+              "format": "textarea",
+              "x-msty-rows": 6,
+              "default": "America/Los_Angeles\nAmerica/New_York\nEurope/London\nAsia/Kolkata"
             },
             "workStart": {
-              "type": "number",
+              "type": "integer",
               "title": "Work day starts (hour)",
-              "description": "Local hour working hours begin (0-23).",
+              "description": "Local hour working hours begin, from 0 (midnight) to 23 (11 PM).",
+              "minimum": 0,
+              "maximum": 23,
               "default": 9
             },
             "workEnd": {
-              "type": "number",
+              "type": "integer",
               "title": "Work day ends (hour)",
-              "description": "Local hour working hours end (0-23).",
+              "description": "Local hour working hours end, from 0 (midnight) to 23 (11 PM).",
+              "minimum": 0,
+              "maximum": 23,
               "default": 17
             }
           }

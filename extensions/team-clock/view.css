@@ -1,6 +1,8 @@
 /* Team Clock — live analog clocks in a popup.
-   Colors map onto the app theme tokens the host injects on :root, so the
-   clocks track the selected theme + light/dark. color-scheme is set by host. */
+   Every color maps onto the app theme tokens the host injects on :root, so the
+   clocks track the selected theme + light/dark. The dials borrow a Swiss-watch
+   vocabulary: bezel ring, radial dial depth, 12/3/6/9 numerals, a brand-color
+   second hand. color-scheme is set by the host. */
 
 :root {
   color-scheme: light dark;
@@ -8,23 +10,67 @@
   --tc-font: var(--font-sans, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   --tc-mono: var(--font-mono, "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace);
 
-  --tc-bg: var(--background, light-dark(oklch(0.98 0.005 60), oklch(0.18 0.03 25)));
+  --tc-bg: var(--background, light-dark(oklch(0.985 0.004 264), oklch(0.175 0.018 264)));
   --tc-fg: var(--foreground, light-dark(oklch(0.24 0.02 30), oklch(0.94 0.01 30)));
   --tc-surface: var(--card, light-dark(oklch(1 0 0), oklch(0.21 0.035 25)));
+  --tc-surface-2: var(--popover, var(--card, light-dark(oklch(1 0 0), oklch(0.21 0.035 25))));
   --tc-muted: var(--muted, light-dark(oklch(0.95 0.008 50), oklch(0.25 0.03 25)));
   --tc-muted-fg: var(--muted-foreground, light-dark(oklch(0.50 0.02 30), oklch(0.65 0.03 25)));
   --tc-border: var(--border, light-dark(oklch(0.90 0.01 40), oklch(0.30 0.04 25)));
+  --tc-border-strong: color-mix(in oklab, var(--tc-border), var(--tc-fg) 18%);
+  --tc-ring: var(--ring, var(--tc-primary));
   --tc-primary: var(--primary, oklch(0.62 0.22 25));
+  --tc-on-primary: var(--primary-foreground, oklch(0.99 0.004 25));
+  --tc-accent: var(--accent, var(--tc-muted));
 
   --tc-success: var(--extension-success, light-dark(oklch(0.58 0.16 150), oklch(0.68 0.16 150)));
-  --tc-success-fg: var(--extension-success-foreground, light-dark(oklch(0.38 0.13 150), oklch(0.88 0.08 150)));
+  --tc-warning: var(--extension-warning, light-dark(oklch(0.73 0.16 78), oklch(0.80 0.14 76)));
+  --tc-info: var(--extension-info, light-dark(oklch(0.58 0.14 240), oklch(0.74 0.12 240)));
 
-  /* Night dial: nudge the surface toward deep indigo in either theme. */
-  --tc-dial-night: color-mix(in oklab, var(--tc-surface), oklch(0.30 0.08 265) 42%);
-  --tc-ink-night: color-mix(in oklab, var(--tc-fg), oklch(0.95 0.03 265) 55%);
+  /* Readable "on-tint" text. The host's --extension-*-foreground tokens are
+     meant for text sitting on a solid tone fill (often near-white), so they
+     wash out on a pale tint — derive a legible tone-colored text instead,
+     mixing toward fg in light mode and white in dark. */
+  --tc-success-fg: light-dark(
+    color-mix(in oklab, var(--tc-success), var(--tc-fg) 62%),
+    color-mix(in oklab, var(--tc-success), white 30%)
+  );
+  --tc-warning-fg: light-dark(
+    color-mix(in oklab, var(--tc-warning), var(--tc-fg) 64%),
+    color-mix(in oklab, var(--tc-warning), white 32%)
+  );
+  --tc-info-fg: light-dark(
+    color-mix(in oklab, var(--tc-info), var(--tc-fg) 60%),
+    color-mix(in oklab, var(--tc-info), white 30%)
+  );
 
-  --tc-radius: var(--radius, 9px);
+  /* Dial vocabulary. The dials stay subtly achromatic (a la Apple's clock
+     widget) so they read clean and high-contrast instead of picking up a
+     muddy theme hue: day = near-white face with dark ink, night = near-black
+     face with near-white ink. Both still sit inside the themed card. */
+  --tc-dial-day: light-dark(oklch(0.985 0.003 264), oklch(0.305 0.006 264));
+  --tc-dial-day-hi: light-dark(oklch(1 0 0), oklch(0.36 0.006 264));
+  --tc-dial-night: light-dark(oklch(0.22 0.006 264), oklch(0.185 0.006 264));
+  --tc-ink-day: light-dark(oklch(0.26 0.01 264), oklch(0.95 0.004 264));
+  --tc-ink-night: light-dark(oklch(0.97 0.004 264), oklch(0.97 0.004 264));
+  --tc-bezel: light-dark(oklch(0.82 0.004 264), oklch(0.42 0.006 264));
+
+  /* Spacing (4/6/8/12/16). */
+  --tc-s1: 4px;
+  --tc-s2: 6px;
+  --tc-s3: 8px;
+  --tc-s4: 12px;
+  --tc-s5: 16px;
+
+  --tc-radius: var(--radius, 10px);
+  --tc-radius-sm: max(6px, calc(var(--tc-radius) - 3px));
+  --tc-radius-lg: max(12px, calc(var(--tc-radius) + 3px));
+
   --tc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --tc-dur: 160ms;
+  --tc-dur-slow: 240ms;
+  --tc-shadow-1: 0 1px 2px oklch(0 0 0 / 0.05);
+  --tc-shadow-2: 0 6px 18px oklch(0 0 0 / 0.10);
 }
 
 * {
@@ -37,64 +83,122 @@ body {
   color: var(--tc-fg);
   font-family: var(--tc-font);
   font-size: 13px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .tc {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 14px 16px 16px;
+  gap: var(--tc-s4);
+  padding: var(--tc-s4) var(--tc-s5) var(--tc-s5);
 }
+
+/* ---- Header (one compact row) ----------------------------------------- */
 
 .tc-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.tc-summary {
+.tc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--tc-muted-fg), transparent 60%);
+  background: var(--tc-muted);
   color: var(--tc-fg);
-  font-size: 13px;
-  font-weight: 560;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tc-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: var(--tc-muted-fg);
+  box-shadow: 0 0 0 0 transparent;
+  transition: background var(--tc-dur) var(--tc-ease), box-shadow var(--tc-dur) var(--tc-ease);
+}
+
+.tc-status--on {
+  background: color-mix(in oklab, var(--tc-success), var(--tc-surface) 78%);
+  border-color: color-mix(in oklab, var(--tc-success), transparent 55%);
+  color: var(--tc-success-fg);
+}
+
+.tc-status--on .tc-status__dot {
+  background: var(--tc-success);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--tc-success), transparent 82%);
 }
 
 .tc-local {
   color: var(--tc-muted-fg);
   font-size: 12px;
+  white-space: nowrap;
 }
 
 .tc-local b {
   color: var(--tc-fg);
   font-variant-numeric: tabular-nums;
   margin-left: 4px;
+  font-weight: 620;
 }
+
+/* ---- Grid + cards ----------------------------------------------------- */
 
 .tc-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--tc-s4);
 }
 
 .tc-clock {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 14px 12px;
+  gap: var(--tc-s3);
+  padding: var(--tc-s4) var(--tc-s3) var(--tc-s4);
   border: 1px solid var(--tc-border);
   border-radius: var(--tc-radius);
   background: var(--tc-surface);
+  box-shadow: var(--tc-shadow-1);
+  transition: transform var(--tc-dur) var(--tc-ease), border-color var(--tc-dur) var(--tc-ease),
+    box-shadow var(--tc-dur) var(--tc-ease);
+  animation: tc-rise var(--tc-dur-slow) var(--tc-ease) both;
+  animation-delay: calc(min(var(--tc-i, 0), 8) * 26ms);
 }
 
-/* ---- Clock face -------------------------------------------------------- */
+.tc-clock:hover {
+  transform: translateY(-1px);
+  border-color: var(--tc-border-strong);
+  box-shadow: var(--tc-shadow-2);
+}
+
+@keyframes tc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Clock face ------------------------------------------------------- */
 
 .tc-face {
   position: relative;
   width: 100%;
-  max-width: 124px;
+  max-width: 128px;
   aspect-ratio: 1;
 }
 
@@ -106,31 +210,50 @@ body {
 }
 
 .tc-dial {
-  fill: color-mix(in oklab, var(--tc-surface), var(--tc-bg) 30%);
   stroke: var(--tc-border);
-  stroke-width: 1.5;
-  transition: fill 600ms var(--tc-ease);
+  stroke-width: 1.4;
+  transition: fill 600ms var(--tc-ease), stroke 600ms var(--tc-ease);
+}
+
+.tc-bezel {
+  fill: none;
+  stroke: var(--tc-bezel);
+  stroke-width: 1;
+  opacity: 0.55;
+  transition: stroke 600ms var(--tc-ease);
 }
 
 .tc-tick {
-  stroke: var(--tc-fg);
-  stroke-width: 1.1;
+  stroke: color-mix(in oklab, var(--tc-ink-day), transparent 35%);
+  stroke-width: 0.8;
+  stroke-linecap: round;
   transition: stroke 600ms var(--tc-ease);
 }
 
 .tc-tick--hour {
-  stroke-width: 3.2;
+  stroke: var(--tc-ink-day);
+  stroke-width: 2.8;
+}
+
+.tc-numeral {
+  font-family: var(--tc-font);
+  font-size: 7.5px;
+  font-weight: 650;
+  fill: var(--tc-ink-day);
+  text-anchor: middle;
+  dominant-baseline: central;
+  transition: fill 600ms var(--tc-ease);
 }
 
 .tc-hand--hour rect,
 .tc-hand--min rect {
-  fill: var(--tc-fg);
+  fill: var(--tc-ink-day);
   transition: fill 600ms var(--tc-ease);
 }
 
 .tc-hand--sec line {
   stroke: var(--tc-primary);
-  stroke-width: 1.5;
+  stroke-width: 1.4;
   stroke-linecap: round;
 }
 
@@ -138,8 +261,14 @@ body {
   fill: var(--tc-primary);
 }
 
-.tc-cap {
-  fill: var(--tc-fg);
+.tc-cap-outer {
+  fill: var(--tc-ink-day);
+  transition: fill 600ms var(--tc-ease);
+}
+
+.tc-cap-inner {
+  fill: var(--tc-dial-day);
+  transition: fill 600ms var(--tc-ease);
 }
 
 /* Night: deep dial, lightened ink so the bold hands stay legible. */
@@ -148,32 +277,32 @@ body {
   stroke: color-mix(in oklab, var(--tc-dial-night), var(--tc-ink-night) 28%);
 }
 
+.tc-face.is-night .tc-bezel {
+  stroke: color-mix(in oklab, var(--tc-ink-night), transparent 40%);
+}
+
 .tc-face.is-night .tc-tick {
+  stroke: color-mix(in oklab, var(--tc-ink-night), transparent 24%);
+}
+
+.tc-face.is-night .tc-tick--hour,
+.tc-face.is-night .tc-numeral,
+.tc-face.is-night .tc-hand--hour rect,
+.tc-face.is-night .tc-hand--min rect,
+.tc-face.is-night .tc-cap-outer {
+  fill: var(--tc-ink-night);
   stroke: var(--tc-ink-night);
 }
 
-.tc-face.is-night .tc-hand--hour rect,
-.tc-face.is-night .tc-hand--min rect,
-.tc-face.is-night .tc-cap {
-  fill: var(--tc-ink-night);
+.tc-face.is-night .tc-tick--hour {
+  stroke: var(--tc-ink-night);
 }
 
-.tc-phase {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  font-size: 12px;
-  line-height: 1;
-  color: var(--tc-muted-fg);
-  opacity: 0.7;
+.tc-face.is-night .tc-cap-inner {
+  fill: var(--tc-dial-night);
 }
 
-.tc-face.is-night .tc-phase {
-  color: var(--tc-ink-night);
-  opacity: 0.85;
-}
-
-/* ---- Meta -------------------------------------------------------------- */
+/* ---- Meta ------------------------------------------------------------- */
 
 .tc-meta {
   display: flex;
@@ -186,30 +315,48 @@ body {
 }
 
 .tc-city {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 620;
+  letter-spacing: -0.005em;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.tc-offset {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--tc-muted);
+  color: var(--tc-muted-fg);
+  font-family: var(--tc-mono);
+  font-size: 10.5px;
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+  cursor: help;
+}
+
 .tc-digital {
   font-family: var(--tc-mono);
-  font-size: 12.5px;
-  color: var(--tc-muted-fg);
+  font-size: 13px;
+  font-weight: 540;
+  color: var(--tc-fg);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .tc-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  margin-top: 3px;
-  padding: 2px 9px;
+  margin-top: 2px;
+  padding: 2px 8px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
+  line-height: 1.5;
 }
 
 .tc-badge::before {
@@ -230,36 +377,89 @@ body {
   color: var(--tc-muted-fg);
 }
 
-/* ---- Notes ------------------------------------------------------------- */
+.tc-badge--weekend {
+  background: color-mix(in oklab, var(--tc-info), transparent 88%);
+  color: var(--tc-info-fg);
+}
 
-.tc-empty,
+/* ---- States ----------------------------------------------------------- */
+
 .tc-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   margin: 0;
-  color: var(--tc-muted-fg);
+  padding: 8px 10px;
+  border-radius: var(--tc-radius-sm);
+  background: color-mix(in oklab, var(--tc-warning), transparent 90%);
+  border: 1px solid color-mix(in oklab, var(--tc-warning), transparent 70%);
+  color: var(--tc-warning-fg);
   font-size: 12px;
   line-height: 1.5;
 }
 
-.tc-empty {
-  padding: 20px 4px;
-  text-align: center;
+.tc-note__icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--tc-warning);
 }
 
-.tc-note {
-  padding-top: 2px;
-}
-
-.tc-empty code,
-.tc-note code {
+.tc-note code,
+.tc-empty code {
   font-family: var(--tc-mono);
   font-size: 11.5px;
   color: var(--tc-fg);
 }
 
+.tc-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 28px 16px;
+  text-align: center;
+  border: 1.5px dashed color-mix(in oklab, var(--tc-border), transparent 25%);
+  border-radius: var(--tc-radius);
+  color: var(--tc-muted-fg);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.tc-empty__glyph {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--tc-muted);
+  color: var(--tc-muted-fg);
+}
+
+.tc-empty__title {
+  color: var(--tc-fg);
+  font-size: 13px;
+  font-weight: 620;
+}
+
+.tc-empty__hint {
+  color: var(--tc-muted-fg);
+}
+
+/* ---- Motion ----------------------------------------------------------- */
+
 @media (prefers-reduced-motion: reduce) {
   .tc-dial,
+  .tc-bezel,
   .tc-tick,
-  .tc-hand {
+  .tc-numeral,
+  .tc-hand,
+  .tc-cap-outer,
+  .tc-cap-inner {
+    transition: none;
+  }
+  .tc-clock {
+    animation: none;
     transition: none;
   }
 }
