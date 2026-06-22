@@ -3,7 +3,7 @@
   "manifestVersion": 1,
   "id": "ai.msty.official.workshop-prompt-library",
   "name": "Prompt Library",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Save reusable prompts, manage them in a focused library, and insert them from the toolbox without leaving your chat.",
   "author": {
     "name": "Msty Team"

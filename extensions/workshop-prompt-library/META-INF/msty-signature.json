@@ -3,9 +3,9 @@
   "signatureType": "msty-extension-package",
   "algorithm": "Ed25519",
   "hashAlgorithm": "SHA-256",
-  "signedAt": "2026-06-18T17:03:27.925Z",
+  "signedAt": "2026-06-22T17:00:50.763Z",
   "extensionId": "ai.msty.official.workshop-prompt-library",
-  "extensionVersion": "1.1.0",
+  "extensionVersion": "1.1.1",
   "authorName": "Msty Team",
   "certificateId": "msty-official-packages-v1",
   "files": [
@@ -15,11 +15,11 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "XuXRz6sfpHuNHjcAwk0+F/KqIb5HfqVrU1GQ1yUjIZo="
+      "sha256": "Jk3H40HtnxOW/bYInDKtnaloLED6wkulk5feXj7FkdQ="
     },
     {
       "path": "picker.js",
-      "sha256": "yLlHP3pN9ltjgp727c67qmKIwoSFhy3AXINL84POlMQ="
+      "sha256": "ZjSSTxt38syciFeXuzvNh9keToG69XLvuG+jYxX+sss="
     },
     {
       "path": "prompt-store.js",
@@ -43,12 +43,12 @@
     },
     {
       "path": "ui.css",
-      "sha256": "kUODdiYth5dSlfgrzhDx6ERfCxviuRE9Cr3jrdW2jjU="
+      "sha256": "/kBDAbWCxfOi4WmS4+IDQ5WCHvQjA4825qzgwITbKOg="
     },
     {
       "path": "ui.js",
-      "sha256": "dnUPRXwRoWsZEWn6Ezuu7qMm15hQ5RZSHQr6ZYmXir8="
+      "sha256": "XnG1lGWVi9+Oz4nFgdF2N1RIpyeyNfF9HBtO7eue4Jk="
     }
   ],
-  "signature": "FBltO7dxyjZoe93qnnhFBKJ60gQqXHvcNlS4VUtv177N2g074MOIuIDBExeviSTBi4k+kHqjVMdN0Kk0Sa6TAQ=="
+  "signature": "FHBWDJnwN/lNllfgqG1FgVrWnjKgKYfaBkzfvf38iCg7wT9D67bbRZV2rJ7BauE4Hm9xH4S3aw5y8JwSqr1XAw=="
 }

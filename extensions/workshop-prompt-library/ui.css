@@ -193,7 +193,7 @@ input {
   padding: 0 34px;
   border: 1px solid var(--pl-border);
   border-radius: var(--pl-radius-sm);
-  background: var(--pl-input);
+  background: var(--pl-bg);
   color: var(--pl-fg);
   font-size: 13.5px;
   transition:
@@ -607,7 +607,7 @@ input {
 .pl-toast-stack {
   position: fixed;
   right: var(--pl-space-5);
-  bottom: var(--pl-space-5);
+  top: var(--pl-space-5);
   display: flex;
   flex-direction: column;
   gap: var(--pl-space-2);
@@ -825,7 +825,7 @@ input {
 @keyframes pl-toast-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(-8px) scale(0.98);
   }
   to {
     opacity: 1;

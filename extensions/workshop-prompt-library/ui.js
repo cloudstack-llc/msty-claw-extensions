@@ -78,9 +78,10 @@ export async function mount({ root, msty, context }) {
   appEl.addEventListener("input", (event) => {
     const field = event.target instanceof Element ? event.target.closest('[data-action="search"]') : null;
     if (field instanceof HTMLInputElement) {
+      const selection = searchSelection(field);
       state.query = field.value;
       render();
-      refocusSearch();
+      refocusSearch(selection);
     }
   });
 
@@ -306,7 +307,7 @@ export async function mount({ root, msty, context }) {
   function clearSearch() {
     state.query = "";
     render();
-    refocusSearch();
+    refocusSearch({ start: 0, end: 0 });
   }
 
   function clearFilters() {
@@ -499,12 +500,14 @@ export async function mount({ root, msty, context }) {
     );
   }
 
-  function refocusSearch() {
+  function refocusSearch(selection) {
     const field = appEl.querySelector('[data-action="search"]');
     if (field instanceof HTMLInputElement) {
       field.focus();
-      const len = field.value.length;
-      field.setSelectionRange(len, len);
+      const fallback = field.value.length;
+      const start = selection?.start ?? fallback;
+      const end = selection?.end ?? start;
+      field.setSelectionRange(start, end);
     }
   }
 
@@ -539,6 +542,14 @@ export async function mount({ root, msty, context }) {
       );
     });
   }
+}
+
+function searchSelection(field) {
+  const fallback = field.value.length;
+  return {
+    start: field.selectionStart ?? fallback,
+    end: field.selectionEnd ?? field.selectionStart ?? fallback,
+  };
 }
 
 function readSurfaceResult(result) {

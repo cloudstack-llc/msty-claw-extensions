@@ -58,6 +58,8 @@ declare namespace Msty {
     | "messages.write"
     | "messages.hooks"
     | "messages.modify"
+    | "history.search"
+    | "semantic_search"
     | "composer.read"
     | "composer.write"
     | "models.infer"
@@ -123,6 +125,27 @@ declare namespace Msty {
 
   /** Host-managed overlay/view kind. */
   type OverlayKind = "dialog" | "drawer" | "popup" | "fullView";
+
+  /** Where an extension can appear when the user switches profiles. */
+  type RemoteProfileAvailability = "local_only" | "remote_only" | "local_helper";
+
+  /** Named keyboard shortcut exposed by the host. */
+  type KeyboardShortcutId = "composer.send";
+
+  /** Keyboard modifier names used by shortcut descriptors. */
+  type KeyboardShortcutModifier = "mod" | "ctrl" | "alt" | "shift";
+
+  /** Keyboard shortcut descriptor returned by `msty.platform.getKeyboardShortcut(...)`. */
+  interface KeyboardShortcut {
+    /** Stable host shortcut id, such as `composer.send`. */
+    id: KeyboardShortcutId;
+    /** Primary key. */
+    key: "Enter";
+    /** Required modifiers. `mod` means Command on macOS and Ctrl elsewhere. */
+    modifiers: KeyboardShortcutModifier[];
+    /** User-facing label for the current platform. */
+    label: string;
+  }
 
   /** Placement for inline items that render around messages or the composer. */
   type UiPlacement = "message.before" | "message.after" | "composer.before" | "composer.after";
@@ -213,7 +236,7 @@ declare namespace Msty {
     | { type: "setComposerText"; text: string; select?: boolean }
     | { type: "clearComposer" }
     | { type: "sendMessage"; text: string }
-    | { type: "showNotification"; title: string; body?: string; tone?: NotificationRequest["tone"] }
+    | { type: "showNotification"; title: string; body?: string; tone?: NotificationRequest["tone"]; durationMs?: number }
     | { type: "copyText"; text: string };
 
   /** Structured value a command's `run()` handler may return. */
@@ -268,6 +291,8 @@ declare namespace Msty {
     author?: { name: string; url?: string };
     /** Host compatibility range. Prefer `^1.0.0` unless using newer documented APIs. */
     compatibility: { extensionApi: string; mstyClaw?: string };
+    /** Omit for local-only. Use `local_helper` only for lightweight helpers that still make sense while a remote profile is active. */
+    remoteProfile?: { availability: RemoteProfileAvailability };
     /** Required or optional permissions requested by the extension. */
     permissions?: Array<PermissionId | PermissionDescriptor>;
     /** JavaScript runtime entry file relative to the extension root. */
@@ -413,6 +438,10 @@ declare namespace Msty {
     size?: "small" | "medium" | "wide" | "full";
     /** Inline placement around a message or composer. */
     placement?: UiPlacement;
+    /** Keyboard shortcut that activates this item, such as `mod+;` or `mod+shift+k`. */
+    shortcut?: string;
+    /** Display-only keyboard shortcut hint for host chrome rows, such as `mod+;`. */
+    shortcutHint?: string;
     /** Short status text for Pulse or inline cards. */
     summary?: string;
     /** Longer status text for cards or details. */
@@ -427,6 +456,8 @@ declare namespace Msty {
     badge?: string;
     /** Semantic tone for state. */
     tone?: UiTone;
+    /** Hide the item until runtime state makes it useful. */
+    hidden?: boolean;
     /** Hide interaction while still showing the item. */
     disabled?: boolean;
     /** User-facing explanation for disabled state. */
@@ -904,6 +935,12 @@ declare namespace Msty {
       imageInput: boolean;
       reason?: string;
     };
+    /** Local chat-history search and fetch tools. Runtime access is permission-gated. */
+    chatHistory: {
+      search: boolean;
+      fetch: boolean;
+      permission: "history.search";
+    };
     /** Data-protection state already decided by the host/user. */
     dataProtection: {
       promptWasProtected: boolean;
@@ -1154,6 +1191,8 @@ declare namespace Msty {
     platform: {
       /** Returns API version, available permissions, and feature flags visible to this extension. */
       getCapabilities(): Promise<PlatformCapabilities>;
+      /** Returns the current host keyboard shortcut for a known id, or null for unknown ids. */
+      getKeyboardShortcut(id: KeyboardShortcutId | string): Promise<KeyboardShortcut | null>;
     };
     /** Navigation helpers for opening first-party app settings and extension detail screens. */
     app: {
@@ -1207,6 +1246,8 @@ declare namespace Msty {
     };
     /** User-selected files/folders and safe package file reads/writes. */
     resources: ResourcesApi;
+    /** Search extension-owned saved items. Requires `semantic_search`. */
+    semanticSearch: SemanticSearchApi;
     /** Text extraction helpers for documents such as PDFs. */
     documents: DocumentsApi;
     /** Secret setting values. Prefer settings schema secret fields plus this API. */
@@ -1323,7 +1364,7 @@ declare namespace Msty {
     title: string;
   }
 
-  /** Current theme tokens exposed to a custom UI frame. */
+  /** Current theme tokens exposed to a custom UI frame, including user and assistant chat message appearance tokens. */
   interface SurfaceTheme {
     /** Host color scheme. */
     colorScheme: "light" | "dark";
@@ -1467,6 +1508,10 @@ declare namespace Msty {
     badge?: string | null;
     /** New disabled reason; use `null` to clear. */
     disabledReason?: string | null;
+    /** New keyboard shortcut; use `null` to clear. */
+    shortcut?: string | null;
+    /** New display-only shortcut hint; use `null` to clear. */
+    shortcutHint?: string | null;
     /** New summary text; use `null` to clear. */
     summary?: string | null;
     /** New detail text; use `null` to clear. */
@@ -1475,6 +1520,12 @@ declare namespace Msty {
     actionLabel?: string | null;
     /** New freshness timestamp; use `null` to clear. */
     updatedAt?: string | null;
+  }
+
+  /** Host context values to keep current while a custom UI surface is open. */
+  interface UiContextSync {
+    /** Merge the active chat context into the surface context on open and chat changes. */
+    activeChat?: boolean;
   }
 
   /** Request for opening a runtime-only host-managed view. */
@@ -1497,8 +1548,12 @@ declare namespace Msty {
     width?: "small" | "medium" | "wide";
     /** JSON context passed to a custom UI entry. */
     context?: JsonObject;
+    /** Host context values to keep current while the surface is open. */
+    contextSync?: UiContextSync;
     /** Label for the default close action. */
     closeLabel?: string;
+    /** Optional icon buttons shown in the host header. Custom entries receive `surface.headerAction`. */
+    headerActions?: UiSurfaceHeaderAction[];
     /** Optional action buttons shown by the host. */
     actions?: UiAction[];
   }
@@ -1519,8 +1574,12 @@ declare namespace Msty {
     width?: UiOpenRequest["width"];
     /** JSON context passed to a custom UI entry. */
     context?: JsonObject;
+    /** Host context values to keep current while the surface is open. */
+    contextSync?: UiContextSync;
     /** Label for the default close action. */
     closeLabel?: string;
+    /** Optional icon buttons shown in the host header. Custom entries receive `surface.headerAction`. */
+    headerActions?: UiSurfaceHeaderAction[];
     /** Optional action buttons shown by the host. */
     actions?: UiAction[];
   }
@@ -1537,8 +1596,12 @@ declare namespace Msty {
     body?: string | null;
     /** Replacement custom UI context; use `null` to clear. */
     context?: JsonObject | null;
+    /** Replacement context sync options; use `null` to stop syncing host context. */
+    contextSync?: UiContextSync | null;
     /** Replacement close label; use `null` to clear. */
     closeLabel?: string | null;
+    /** Replacement host header icon buttons; use `null` to clear. */
+    headerActions?: UiSurfaceHeaderAction[] | null;
     /** Replacement action buttons; use `null` to clear. */
     actions?: UiAction[] | null;
   }
@@ -1581,6 +1644,20 @@ declare namespace Msty {
     label: string;
     /** Visual treatment. */
     variant?: "primary" | "secondary" | "danger";
+  }
+
+  /** Icon button shown in a host surface header. */
+  interface UiSurfaceHeaderAction {
+    /** Action ID sent with the `surface.headerAction` event. */
+    id: string;
+    /** Accessible label for the icon button. */
+    label: string;
+    /** Host icon name. */
+    icon?: "trash";
+    /** Visual treatment. */
+    variant?: "default" | "danger";
+    /** Disables the header action without removing it. */
+    disabled?: boolean;
   }
 
   /** Confirmation dialog request. */
@@ -1757,6 +1834,9 @@ declare namespace Msty {
    * Use blocks when a simple drawer/dialog/popup should feel native without
    * owning custom UI. Use a custom `entry` only when you need local interaction,
    * complex layout, or streaming updates inside the frame.
+   *
+   * Host-managed `markdown` blocks use the host Markdown renderer. Custom UI
+   * frames do not currently expose that renderer as a mountable component.
    */
   type UiContentBlock =
     | { type: "text"; text: string; title?: string; tone?: UiTone }
@@ -1807,6 +1887,10 @@ declare namespace Msty {
     list(request?: MessageListRequest): Promise<Message[]>;
     /** Convenience wrapper for recent messages. */
     listRecent(request?: MessageListRequest): Promise<Message[]>;
+    /** Searches local chat history when `history.search` is granted. */
+    search(request: MessageSearchRequest): Promise<MessageSearchResult[]>;
+    /** Reads searchable messages around a history search hit when `history.search` is granted. */
+    fetchHistory(request: MessageHistoryRequest): Promise<MessageHistoryResult>;
     /** Sends text as a user-visible message in the active chat. */
     send(request: { text: string } | string): Promise<void>;
     /** Appends a message-like record when the host allows the target chat/write mode. */
@@ -1903,6 +1987,116 @@ declare namespace Msty {
     limit?: number;
     /** Include message content. Set false for metadata-only reads. */
     includeContent?: boolean;
+  }
+
+  /** Filters for searching local chat history. */
+  interface MessageSearchRequest {
+    /** Text query to search for. */
+    query: string;
+    /** Optional chat ID to limit the search. */
+    chatId?: string;
+    /** Single role filter. Tool messages are not searched. */
+    role?: "user" | "assistant";
+    /** Multiple role filters. Tool messages are not searched. */
+    roles?: Array<"user" | "assistant">;
+    /** Search all history, only normal messages, or only compact summaries. */
+    source?: "all" | "messages" | "summaries";
+    /** More explicit source-kind filter. Used when `source` is omitted or set to `all`. */
+    sourceKinds?: Array<"message" | "summary">;
+    /** Return messages created after this ISO timestamp. */
+    createdAfter?: string;
+    /** Return messages created before this ISO timestamp. */
+    createdBefore?: string;
+    /** Maximum number of matching messages. Capped at 500. */
+    limit?: number;
+    /** Include full matched message content. Defaults to snippets only. */
+    includeContent?: boolean;
+  }
+
+  /** Search hit from local chat history. */
+  interface MessageSearchResult {
+    /** Owning chat ID. */
+    chatId: string;
+    /** Chat title at the time of search. */
+    chatTitle?: string;
+    /** Matching message ID. */
+    messageId: string;
+    /** Matching message role. */
+    role: "user" | "assistant";
+    /** Whether the hit came from a normal message or compact summary. */
+    source: "message" | "summary";
+    /** Short matching preview. */
+    snippet: string;
+    /** Full content when requested. */
+    content?: string;
+    /** Full content length. */
+    contentLength?: number;
+    /** Higher means the host ranked this result as more relevant. */
+    score?: number;
+    /** Broad match source used by the host ranking pass. */
+    matchKind?: "fts" | "wildcard" | "title" | "semantic";
+    /** Ranking signals, such as title, summary, or content phrase matches. */
+    matchReasons?: string[];
+    /** Stable message sequence in its chat, when known. */
+    sequence?: number;
+    /** Zero-based message index in its chat, when known. Search results usually omit this. */
+    index?: number;
+    /** ISO message creation timestamp. */
+    createdAt?: string;
+    /** ISO chat update timestamp. */
+    updatedAt?: string;
+  }
+
+  /** Request for reading messages around a history search hit. */
+  interface MessageHistoryRequest {
+    /** Chat ID returned by `messages.search`. */
+    chatId: string;
+    /** Optional message ID returned by `messages.search`; omitted reads recent searchable history. */
+    messageId?: string;
+    /** Number of searchable messages before `messageId`. Defaults to 4. */
+    before?: number;
+    /** Number of searchable messages after `messageId`. Defaults to 4. */
+    after?: number;
+    /** Recent searchable message count when `messageId` is omitted. Capped at 50. */
+    limit?: number;
+    /** Include compact summaries. Defaults to true. */
+    includeSummaries?: boolean;
+    /** Maximum characters returned per message. Capped by the host. */
+    maxCharsPerMessage?: number;
+  }
+
+  /** Searchable message returned by `messages.fetchHistory`. */
+  interface MessageHistoryMessage {
+    /** Stable message ID. */
+    messageId: string;
+    /** Message role. */
+    role: "user" | "assistant";
+    /** Whether this is a normal message or compact summary. */
+    source: "message" | "summary";
+    /** Message text, possibly truncated. */
+    content: string;
+    /** Full content length before truncation. */
+    contentLength?: number;
+    /** True when `content` was shortened by the host. */
+    truncated?: boolean;
+    /** Stable message sequence in its chat, when known. */
+    sequence?: number;
+    /** ISO message creation timestamp. */
+    createdAt?: string;
+  }
+
+  /** Result of reading searchable history from one chat. */
+  interface MessageHistoryResult {
+    /** Owning chat ID. */
+    chatId: string;
+    /** Chat title at the time of fetch. */
+    chatTitle?: string;
+    /** Anchor message ID, when one was requested. */
+    anchorMessageId?: string | null;
+    /** ISO chat update timestamp. */
+    updatedAt?: string;
+    /** Searchable messages in ascending sequence order. */
+    messages: MessageHistoryMessage[];
   }
 
   /** Request for creating a new chat. */
@@ -2198,6 +2392,13 @@ declare namespace Msty {
     infer(request: ModelInferenceRequest): Promise<ModelInferenceResult>;
     /** Streams model output into a handler and returns a cancellable controller. */
     stream(request: ModelInferenceRequest, onEvent: (event: ModelStreamEvent) => MaybePromise<void>): ModelStreamController;
+    /**
+     * Streams a side reply using the host's current-chat context.
+     *
+     * Needs `models.infer` and `context.read`. Use this when a side-question
+     * UI should answer against the active chat without adding a main message.
+     */
+    streamSideReply(request: SideReplyRequest, onEvent: (event: ModelStreamEvent) => MaybePromise<void>): ModelStreamController;
     /** Checks whether a model assignment is ready before starting work. */
     getStatus(request?: ModelStatusRequest | string): Promise<ModelStatus>;
     /** Lists model assignments contributed by this extension. */
@@ -2242,6 +2443,25 @@ declare namespace Msty {
     responseFormat?: "text" | "json" | { type: "text" | "json"; name?: string; schema?: JsonObject; strict?: boolean };
     /** JSON metadata included in diagnostics. */
     metadata?: JsonObject;
+  }
+
+  /** Side-reply request run against host-owned current-chat context. */
+  interface SideReplyRequest {
+    /** Question to answer using the current chat as background. */
+    question: string;
+    /** Chat to answer against. Omit to use the active chat. */
+    conversationId?: string;
+    /** Prior side-reply messages for follow-up continuity. */
+    history?: SideReplyMessage[];
+    /** JSON metadata included in diagnostics. */
+    metadata?: JsonObject;
+  }
+
+  /** Prior side-reply message passed to `streamSideReply`. */
+  interface SideReplyMessage {
+    role: "user" | "assistant";
+    content: string;
+    createdAt?: string;
   }
 
   /** Completed model result. */
@@ -2412,6 +2632,95 @@ declare namespace Msty {
     migrated: boolean;
     /** Final stored object. */
     value: JsonObject;
+  }
+
+  /** Item an extension owns and wants to make searchable. */
+  interface SemanticSearchItem {
+    /** Stable item ID within the collection. */
+    id: string;
+    /** Text to search. */
+    text: string;
+    /** Optional user-facing title. */
+    title?: string;
+    /** Optional JSON metadata returned with search hits. */
+    metadata?: JsonObject;
+    /** Optional ISO creation timestamp. */
+    createdAt?: string;
+    /** Optional ISO update timestamp. */
+    updatedAt?: string;
+  }
+
+  /** Request to add or update searchable items. */
+  interface SemanticSearchUpsertRequest {
+    /** Extension-owned collection ID. Use letters, numbers, dots, dashes, and underscores. */
+    collection: string;
+    /** Items to add or update. */
+    items: SemanticSearchItem[];
+  }
+
+  /** Request to delete items from a searchable collection. */
+  interface SemanticSearchDeleteRequest {
+    /** Extension-owned collection ID. */
+    collection: string;
+    /** Item IDs to delete. */
+    ids: string[];
+  }
+
+  /** Request to clear one searchable collection. */
+  interface SemanticSearchClearRequest {
+    /** Extension-owned collection ID. */
+    collection: string;
+  }
+
+  /** Request to search one extension-owned collection. */
+  interface SemanticSearchQueryRequest {
+    /** Extension-owned collection ID. */
+    collection: string;
+    /** Search query. */
+    query: string;
+    /** Maximum number of hits. Defaults to 20 and clamps at 500. */
+    limit?: number;
+  }
+
+  /** Search hit from an extension-owned collection. */
+  interface SemanticSearchHit {
+    /** Item ID. */
+    id: string;
+    /** Collection ID. */
+    collection: string;
+    /** Optional title saved with the item. */
+    title?: string;
+    /** Higher means more relevant. */
+    score: number;
+    /** Lower means closer. Mostly useful for diagnostics. */
+    distance: number;
+    /** Optional metadata saved with the item. */
+    metadata?: JsonObject;
+  }
+
+  /** Result from adding or updating searchable items. */
+  interface SemanticSearchUpsertResult {
+    inserted: number;
+    updated: number;
+    skipped: number;
+    deleted: number;
+  }
+
+  /** Result from deleting searchable items. */
+  interface SemanticSearchDeleteResult {
+    deleted: number;
+  }
+
+  /** Extension-owned search collections. Requires `semantic_search`. */
+  interface SemanticSearchApi {
+    /** Adds or updates items in a collection. */
+    upsert(request: SemanticSearchUpsertRequest): Promise<SemanticSearchUpsertResult>;
+    /** Deletes items from a collection. */
+    delete(request: SemanticSearchDeleteRequest): Promise<SemanticSearchDeleteResult>;
+    /** Clears a collection. */
+    clear(request: SemanticSearchClearRequest | string): Promise<SemanticSearchDeleteResult>;
+    /** Searches a collection. */
+    search(request: SemanticSearchQueryRequest): Promise<SemanticSearchHit[]>;
   }
 
   /** User-mediated file/folder access plus safe reads and writes. */
@@ -2883,6 +3192,8 @@ declare namespace Msty {
     body?: string;
     /** Semantic tone. */
     tone?: "default" | "success" | "warning" | "error";
+    /** How long the toast should stay visible, in milliseconds. */
+    durationMs?: number;
   }
 
   /** Event subscription filter. */
@@ -3163,6 +3474,7 @@ declare namespace Msty {
     secretsWrite: boolean;
     resources: boolean;
     documents: boolean;
+    semanticSearch: boolean;
     events: boolean;
     jobs: boolean;
     jobRunner: boolean;
