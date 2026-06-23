@@ -1,0 +1,394 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.theme-bonsai",
+  "name": "Bonsai",
+  "version": "1.0.0",
+  "description": "A cultivated garden for your workspace — the premium sibling to Boreal. Same green heart, lifted to something quietly expensive: hand-folded origami bonsai, jade and moss surfaces, gilded leaf veins, and editorial Fraunces type. The dark mode is lacquered moss and obsidian; the light mode is sun-warm rice paper and porcelain. Choose the leaf metal, dial the lantern glow, and shape the type.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "theme",
+    "bonsai",
+    "origami",
+    "green",
+    "jade",
+    "moss",
+    "premium",
+    "editorial",
+    "garden",
+    "dark",
+    "light"
+  ],
+  "categories": [
+    "theme"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "themes.provide",
+      "required": true,
+      "reason": "Adds the Bonsai theme you can apply in Settings."
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "id": "bonsai",
+        "name": "Bonsai",
+        "description": "An origami garden in jade and moss — the premium sibling to Boreal, with editorial type and frosted porcelain surfaces.",
+        "previewImage": "static/bonsai-dark.jpg",
+        "tokens": {
+          "background.app": {
+            "light": "#eef3ea",
+            "dark": "#0f1411"
+          },
+          "surface.sidebar": {
+            "light": "rgba(232, 240, 226, 0.55)",
+            "dark": "rgba(15, 22, 18, 0.5)"
+          },
+          "surface.sidebar.backdrop": "blur(16px) saturate(1.25)",
+          "surface.sidebar.foreground": {
+            "light": "#243326",
+            "dark": "#d6e4d2"
+          },
+          "surface.sidebar.border": {
+            "light": "#c4d4c0",
+            "dark": "#233328"
+          },
+          "surface.sidebar.accent": {
+            "light": "#dce8d4",
+            "dark": "#1c2c20"
+          },
+          "surface.sidebar.accent.foreground": {
+            "light": "#2a5a3a",
+            "dark": "#d4e8cc"
+          },
+          "surface.card": {
+            "light": "#f7faf4",
+            "dark": "#18211c"
+          },
+          "surface.popover": {
+            "light": "#f9fcf6",
+            "dark": "#1b251f"
+          },
+          "surface.secondary": {
+            "light": "#e2ecdc",
+            "dark": "#1f2c24"
+          },
+          "surface.secondary.foreground": {
+            "light": "#243326",
+            "dark": "#d6e4d2"
+          },
+          "surface.muted": {
+            "light": "#e8efe2",
+            "dark": "#141d18"
+          },
+          "surface.accent": {
+            "light": "#dceadc",
+            "dark": "#1a271e"
+          },
+          "surface.accent.foreground": {
+            "light": "#2a5a3a",
+            "dark": "#d4e8cc"
+          },
+          "surface.input": {
+            "light": "#fafdf7",
+            "dark": "#1d271f"
+          },
+          "surface.border": {
+            "light": "#c2d2bd",
+            "dark": "#2c3a2f"
+          },
+          "color.text": {
+            "light": "#1f2a20",
+            "dark": "#e2ecdc"
+          },
+          "color.text.muted": {
+            "light": "#5e7560",
+            "dark": "#8aa48a"
+          },
+          "color.primary": {
+            "light": "#3a7a4a",
+            "dark": "#5fbf72"
+          },
+          "color.primary.foreground": {
+            "light": "#f9fcf6",
+            "dark": "#0a140c"
+          },
+          "color.ring": {
+            "light": "#3a7a4a",
+            "dark": "#5fbf72"
+          },
+          "color.destructive": {
+            "light": "#a8323a",
+            "dark": "#f04848"
+          },
+          "color.destructive.foreground": {
+            "light": "#fdf9f3",
+            "dark": "#180404"
+          },
+          "color.success": {
+            "light": "#3a7a4a",
+            "dark": "#5fc878"
+          },
+          "color.success.foreground": {
+            "light": "#f9fcf6",
+            "dark": "#06190a"
+          },
+          "color.warning": {
+            "light": "#9a7220",
+            "dark": "#e8b032"
+          },
+          "color.warning.foreground": {
+            "light": "#fdf9f3",
+            "dark": "#1c1404"
+          },
+          "color.info": {
+            "light": "#3a6f8a",
+            "dark": "#6fb0e0"
+          },
+          "color.info.foreground": {
+            "light": "#f9fcf6",
+            "dark": "#05141f"
+          },
+          "font.ui": "'Spline Sans', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "font.mono": "'Geist Mono', 'JetBrains Mono', ui-monospace, monospace",
+          "font.google": "Spline Sans:wght@300;400;500;600;700, Bricolage Grotesque:wght@400;500;600;700, DM Sans:wght@400;500;600;700, Newsreader:wght@400;500;600, Spectral:wght@300;400;500;600, Geist Mono:wght@400;500, JetBrains Mono:wght@400;500",
+          "radius.control": "7px",
+          "radius.bubble": "10px",
+          "radius.composer": "12px",
+          "radius.popover": "10px",
+          "radius.assistant": "14px",
+          "surface.assistant": "color-mix(in oklch, var(--card) 58%, transparent)",
+          "surface.assistant.border": "color-mix(in oklch, var(--border) 32%, transparent)",
+          "surface.assistant.backdrop": "blur(14px) saturate(1.25)",
+          "surface.composer": "color-mix(in oklch, var(--card) 64%, transparent)",
+          "surface.composer.backdrop": "blur(16px) saturate(1.3)"
+        },
+        "variables": {
+          "--composer-radius": "12px",
+          "--bubble-radius": "10px",
+          "--popover-radius": "10px",
+          "--assistant-radius": "14px",
+          "--pill-radius": "9999px",
+          "--app-bg-overlay": {
+            "light": "rgba(238, 243, 234, 0.72)",
+            "dark": "rgba(15, 20, 17, 0.66)"
+          },
+          "--selection": {
+            "light": "rgba(58, 122, 74, 0.20)",
+            "dark": "rgba(95, 191, 114, 0.28)"
+          },
+          "--composer-shadow": {
+            "light": "0 4px 22px rgba(42, 90, 58, 0.10)",
+            "dark": "0 8px 32px rgba(0, 0, 0, 0.55)"
+          },
+          "--composer-shadow-focus": {
+            "light": "0 6px 28px rgba(58, 122, 74, 0.18)",
+            "dark": "0 10px 36px rgba(95, 191, 114, 0.30)"
+          },
+          "--button-shadow": {
+            "light": "0 2px 8px rgba(42, 90, 58, 0.12)",
+            "dark": "0 3px 12px rgba(0, 0, 0, 0.42)"
+          },
+          "--assistant-shadow": {
+            "light": "0 6px 26px rgba(42, 90, 58, 0.10)",
+            "dark": "0 10px 34px rgba(0, 0, 0, 0.55)"
+          },
+          "--bubble-shadow": {
+            "light": "0 3px 14px rgba(42, 90, 58, 0.08)",
+            "dark": "0 4px 18px rgba(0, 0, 0, 0.45)"
+          }
+        },
+        "assets": {
+          "backgroundImageLight": "static/bonsai-light.jpg",
+          "backgroundImageDark": "static/bonsai-dark.jpg"
+        },
+        "settings": {
+          "title": "Bonsai options",
+          "description": "Shape the garden: the backdrop, the leaf metal, the lantern glow, and the type.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "showBackground": {
+                "type": "boolean",
+                "title": "Garden",
+                "description": "Hand-folded origami bonsai behind the workspace — sunlit rice paper in light mode, lacquered moss at night.",
+                "default": true,
+                "x-msty-order": 1,
+                "x-msty-theme": [
+                  {
+                    "variable": "--app-background-image",
+                    "values": {
+                      "true": "{{backgroundImage}}",
+                      "false": "none"
+                    }
+                  },
+                  {
+                    "variable": "--app-bg-overlay",
+                    "values": {
+                      "false": "transparent"
+                    }
+                  }
+                ]
+              },
+              "gardenDepth": {
+                "type": "number",
+                "title": "Garden depth",
+                "description": "How strongly the origami backdrop shows through the workspace.",
+                "default": 30,
+                "minimum": 0,
+                "maximum": 100,
+                "multipleOf": 5,
+                "x-msty-control": "slider",
+                "x-msty-order": 2,
+                "x-msty-visibleWhen": "showBackground",
+                "x-msty-theme": {
+                  "variable": "--app-background-opacity",
+                  "value": "calc({{value}} / 100)"
+                }
+              },
+              "leafMetal": {
+                "type": "string",
+                "title": "Leaf metal",
+                "description": "The metal cast gilding the app's primary accent — the vein running through every leaf.",
+                "default": "jade",
+                "enum": [
+                  "jade",
+                  "gold",
+                  "moss"
+                ],
+                "x-msty-enum-labels": [
+                  "Jade",
+                  "Gold",
+                  "Moss"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 3,
+                "x-msty-theme": [
+                  {
+                    "variable": "--primary",
+                    "values": {
+                      "jade": "#3a7a4a",
+                      "gold": "#a8881e",
+                      "moss": "#5a7a3a"
+                    }
+                  },
+                  {
+                    "variable": "--ring",
+                    "values": {
+                      "jade": "#3a7a4a",
+                      "gold": "#a8881e",
+                      "moss": "#5a7a3a"
+                    }
+                  },
+                  {
+                    "variable": "--selection",
+                    "values": {
+                      "jade": "rgba(58, 122, 74, 0.20)",
+                      "gold": "rgba(168, 136, 30, 0.20)",
+                      "moss": "rgba(90, 122, 58, 0.22)"
+                    }
+                  }
+                ]
+              },
+              "lantern": {
+                "type": "integer",
+                "title": "Lantern glow",
+                "description": "Warmth and weight of the lantern light on surfaces — the composer, buttons, and message bubbles. Higher values glow warmer and cast a deeper shadow.",
+                "default": 5,
+                "minimum": 0,
+                "maximum": 10,
+                "multipleOf": 1,
+                "x-msty-control": "slider",
+                "x-msty-order": 4,
+                "x-msty-theme": [
+                  {
+                    "variable": "--composer-shadow",
+                    "value": "0 6px 26px color-mix(in srgb, var(--primary) calc({{value}} * 3%), transparent)"
+                  },
+                  {
+                    "variable": "--composer-shadow-focus",
+                    "value": "0 9px 34px color-mix(in srgb, var(--primary) calc({{value}} * 4.5%), transparent)"
+                  },
+                  {
+                    "variable": "--button-shadow",
+                    "value": "0 3px 12px color-mix(in srgb, var(--primary) calc({{value}} * 2.5%), transparent)"
+                  },
+                  {
+                    "variable": "--assistant-shadow",
+                    "value": "0 6px 26px color-mix(in srgb, var(--primary) calc({{value}} * 2.5%), transparent)"
+                  },
+                  {
+                    "variable": "--bubble-shadow",
+                    "value": "0 4px 18px color-mix(in srgb, var(--primary) calc({{value}} * 2%), transparent)"
+                  }
+                ]
+              },
+              "uiFont": {
+                "type": "string",
+                "title": "Typeface",
+                "description": "Typeface for the whole interface. Spline Sans is the signature calm face; Bricolage Grotesque and DM Sans are characterful alternates; Newsreader and Spectral are quiet serif accents. All options load automatically.",
+                "default": "splineSans",
+                "enum": [
+                  "splineSans",
+                  "bricolage",
+                  "dmSans",
+                  "newsreader",
+                  "spectral"
+                ],
+                "x-msty-enum-labels": [
+                  "Spline Sans",
+                  "Bricolage Grotesque",
+                  "DM Sans",
+                  "Newsreader",
+                  "Spectral"
+                ],
+                "x-msty-order": 5,
+                "x-msty-theme": {
+                  "variable": "--font-sans",
+                  "values": {
+                    "splineSans": "'Spline Sans', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "bricolage": "'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "dmSans": "'DM Sans', ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                    "newsreader": "'Newsreader', Georgia, 'Times New Roman', serif",
+                    "spectral": "'Spectral', Georgia, 'Times New Roman', serif"
+                  }
+                }
+              },
+              "monoFont": {
+                "type": "string",
+                "title": "Code typeface",
+                "description": "Monospace face for code and preformatted text.",
+                "default": "geistMono",
+                "enum": [
+                  "geistMono",
+                  "jetbrainsMono"
+                ],
+                "x-msty-enum-labels": [
+                  "Geist Mono",
+                  "JetBrains Mono"
+                ],
+                "x-msty-control": "segmented",
+                "x-msty-order": 6,
+                "x-msty-theme": {
+                  "variable": "--font-mono",
+                  "values": {
+                    "geistMono": "'Geist Mono', ui-monospace, monospace",
+                    "jetbrainsMono": "'JetBrains Mono', ui-monospace, monospace"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
