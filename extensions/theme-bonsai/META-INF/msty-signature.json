@@ -3,15 +3,15 @@
   "signatureType": "msty-extension-package",
   "algorithm": "Ed25519",
   "hashAlgorithm": "SHA-256",
-  "signedAt": "2026-06-23T18:47:40.800Z",
+  "signedAt": "2026-06-24T01:54:55.791Z",
   "extensionId": "ai.msty.official.theme-bonsai",
-  "extensionVersion": "1.0.0",
+  "extensionVersion": "1.0.1",
   "authorName": "Msty Team",
   "certificateId": "msty-official-packages-v1",
   "files": [
     {
       "path": "manifest.json",
-      "sha256": "NLNhIbRm7PM9X5VQ/IL9KsvNBTAAsMJBXyKuGt98gMM="
+      "sha256": "v14IiYgkrmksIPSPiBYh98X3FCnu2T60wVwYIChltGU="
     },
     {
       "path": "README.md",
@@ -19,7 +19,7 @@
     },
     {
       "path": "static/bonsai-dark.jpg",
-      "sha256": "42vxzVQOp4RQJdsPa5ElGFAfLLm2fxHyzHITsojDW9w="
+      "sha256": "Oe/VKlNFojw0DzVhx91hcHa8Vz/fIYonDpsWzg2jlIU="
     },
     {
       "path": "static/bonsai-light.jpg",
@@ -30,5 +30,5 @@
       "sha256": "cyTO6ZEhHKkj9Ld4zX0Gdx7NxMa8baLH/vKl4rLChKg="
     }
   ],
-  "signature": "FhEQp00TMBZF++SW30uP7wv2+vZeqF6R9DhYXeZyDeD+pvFRTpl4ZIqqE0v8ujskRRrpnzRKa/FUJit9KD2cBg=="
+  "signature": "lHSXuPRZvuR6jIzYaLvsEtbqQ8Gl9Q8t7vN0U19p8rJrQInVi++nrfflNS4QFc5HLjJDX6eYX3Ae4pwMycyaAQ=="
 }
