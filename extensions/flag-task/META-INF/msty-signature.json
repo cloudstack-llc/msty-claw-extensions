@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "signatureType": "msty-extension-package",
+  "algorithm": "Ed25519",
+  "hashAlgorithm": "SHA-256",
+  "signedAt": "2026-06-27T00:35:40.960Z",
+  "extensionId": "ai.msty.official.flag-task",
+  "extensionVersion": "1.0.0",
+  "authorName": "Msty Team",
+  "certificateId": "msty-official-packages-v1",
+  "files": [
+    {
+      "path": "core.js",
+      "sha256": "iNDk9LTnsJKNUgF9w1A/rFoLt3cggTF5enHoqMgB4f8="
+    },
+    {
+      "path": "diagnostics.js",
+      "sha256": "iL4r/0vzf42Ub47vxwcHjk8o4PEqSoIYRU81SpneEOA="
+    },
+    {
+      "path": "extension.js",
+      "sha256": "sSC4FvNI9Y97c2QwJtBnL/DuT8RSyuQr/DOnx0cAXY8="
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "c/Oo4WJosarJwzeazmFUrtfDCYO7PHQriQdBqzUEu6w="
+    },
+    {
+      "path": "static/icon.svg",
+      "sha256": "xyua8jSiQdjMaux0UnyN2qG2eEwxy5yq9+lXOgb6HSc="
+    },
+    {
+      "path": "view.css",
+      "sha256": "j0XvbjGGJj50eniUgA8BBHFxdJEDXJ0LiRf2HOn/Jg4="
+    },
+    {
+      "path": "view.js",
+      "sha256": "Ftald8N1ZeZiHTJoeIv0LvbgrHbz1znEcNXUP3Daq8c="
+    }
+  ],
+  "signature": "CDe8iDobXUR2rwb3p9k82KCUfwg7O1wJPW84owhp6O1wap5JN/0iQklG+SUGqAxgJoSBZ6NkENyUW9SGDdRwCQ=="
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "certificateId": "msty-official-packages-v1",
+  "subjectType": "official",
+  "subjectId": "msty-team",
+  "subjectNamespace": "ai.msty.official",
+  "displayName": "Msty Team",
+  "publicKeyAlgorithm": "Ed25519",
+  "publicKey": "BUTt/1Xi8dPGR4Cc48ib5K7zFQ8yIptr/ATLM/pTTu8=",
+  "issuedAt": "2026-06-27T00:35:40.960Z",
+  "expiresAt": "2036-06-08T00:00:00.000Z",
+  "issuer": "msty-official-v1",
+  "signature": "DkGQxuddCIkxS6mx7weDXM6QHeyxrcF3+3Cc8Z40fa0JVwUCCYCmYB9fe8rYLs8Ex6cbsUY5clnd5QO0WF85BA=="
+}

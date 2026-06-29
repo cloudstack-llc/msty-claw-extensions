@@ -1,0 +1,190 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.flag-task",
+  "name": "Flag Task",
+  "version": "1.0.0",
+  "description": "Lets the assistant flag useful follow-up work, then start each item in a new chat when you choose.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "tasks",
+    "follow-up",
+    "tools"
+  ],
+  "categories": [
+    "productivity",
+    "developer"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "tools.provide",
+      "required": true,
+      "reason": "Adds the flag_task tool the assistant can call."
+    },
+    {
+      "id": "rules.provide",
+      "required": true,
+      "reason": "Adds guidance for when the assistant should flag a follow-up."
+    },
+    {
+      "id": "commands.provide",
+      "required": true,
+      "reason": "Adds a command to review flagged follow-ups."
+    },
+    {
+      "id": "context.read",
+      "required": true,
+      "reason": "Attaches the current chat and workspace to each flagged task."
+    },
+    {
+      "id": "storage.workspace",
+      "required": true,
+      "reason": "Keeps flagged tasks with this workspace."
+    },
+    {
+      "id": "chats.write",
+      "required": true,
+      "reason": "Starts flagged tasks in new chats and opens started chats."
+    },
+    {
+      "id": "messages.write",
+      "required": true,
+      "reason": "Sends the flagged task prompt into the new chat."
+    },
+    {
+      "id": "ui.statusBar",
+      "required": true,
+      "reason": "Shows how many follow-ups are waiting."
+    },
+    {
+      "id": "ui.popup",
+      "required": true,
+      "reason": "Shows the follow-up stack."
+    },
+    {
+      "id": "notifications.show",
+      "required": true,
+      "reason": "Confirms when a follow-up has been flagged."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "rules": [
+      {
+        "id": "flag_task_followups",
+        "name": "Flag useful follow-ups",
+        "description": "Adds guidance to flag concrete follow-up work discovered during a chat.",
+        "enabled": true,
+        "event": "user_prompt_submit",
+        "action": {
+          "type": "add_guidance",
+          "guidance": "Follow-up hint: if you notice a concrete task that is useful but outside the user's current request, flag it with flag_task. If flag_task is not loaded, use search_tools to find the Flag Task extension tool first. Good cases include an unrelated bug, failing test, risky TODO, missing edge-case test, or docs drift. Skip vague ideas, already-requested work, and anything without evidence. After flagging, continue the current task."
+        }
+      }
+    ],
+    "tools": [
+      {
+        "id": "flag_task",
+        "name": "flag_task",
+        "description": "Flag a concrete follow-up task discovered while working, so the user can start it later in a new chat.",
+        "command": "flag-task.create",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "A concise task title."
+            },
+            "summary": {
+              "type": "string",
+              "description": "What needs follow-up and why it matters."
+            },
+            "reason": {
+              "type": "string",
+              "description": "Why this should be handled separately from the current task."
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "urgent"
+              ],
+              "description": "How important the follow-up appears to be."
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "bug",
+                "test",
+                "cleanup",
+                "docs",
+                "security",
+                "follow_up",
+                "other"
+              ],
+              "description": "The kind of follow-up."
+            },
+            "evidence": {
+              "type": "string",
+              "description": "Specific evidence, such as an error, test name, file, or observation."
+            },
+            "suggested_prompt": {
+              "type": "string",
+              "description": "The prompt to use when starting the follow-up in a new chat."
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Relevant files or paths, if known."
+            }
+          },
+          "required": [
+            "title",
+            "summary"
+          ]
+        }
+      }
+    ],
+    "commands": [
+      {
+        "id": "flag_task_open",
+        "name": "follow-ups",
+        "label": "Review follow-ups",
+        "description": "Open flagged follow-ups.",
+        "command": "flag-task.open"
+      }
+    ],
+    "statusBarPills": [
+      {
+        "id": "flag_task_status",
+        "title": "Follow-ups",
+        "label": "Follow-ups",
+        "description": "Review flagged follow-ups.",
+        "hidden": true,
+        "entry": "extension.js",
+        "command": "flag-task.open",
+        "size": "small"
+      }
+    ],
+    "popups": [
+      {
+        "id": "flag_task_stack",
+        "title": "Follow-ups",
+        "entry": "view.js",
+        "command": "flag-task.open",
+        "size": "medium"
+      }
+    ]
+  }
+}
