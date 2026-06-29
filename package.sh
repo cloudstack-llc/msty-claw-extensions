@@ -35,6 +35,20 @@ fi
 
 mkdir -p "$OUT"
 
+read_manifest_id() {
+  node -e '
+const fs = require("fs");
+const manifestPath = process.argv[1];
+try {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  console.log(typeof manifest.id === "string" ? manifest.id : "");
+} catch (error) {
+  console.error(`error: could not read ${manifestPath}: ${error.message}`);
+  process.exit(1);
+}
+' "$1/manifest.json"
+}
+
 names=()
 if [ "$#" -gt 0 ]; then
   names=("$@")
@@ -58,6 +72,13 @@ for name in "${names[@]}"; do
   fi
   zip_path="$OUT/$name.zip"
   rm -f "$zip_path"
+  manifest_id="$(read_manifest_id "$dir")"
+  if [[ "$manifest_id" == "ai.msty.official" || "$manifest_id" == ai.msty.official.* ]]; then
+    if [ ! -f "$dir/META-INF/msty-author-certificate.json" ] || [ ! -f "$dir/META-INF/msty-signature.json" ]; then
+      echo "error: official extension $name must include META-INF signature files before public packaging" >&2
+      exit 1
+    fi
+  fi
   ( cd "$dir" && zip -rX "$zip_path" . \
       -x '.DS_Store' '*/.DS_Store' '__MACOSX*' '*.zip' 'node_modules/*' '.git/*' >/dev/null )
   echo "packaged $name -> extension-zips/$name.zip"
