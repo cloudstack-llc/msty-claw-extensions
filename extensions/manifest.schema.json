@@ -502,6 +502,34 @@
             },
             "priority": {
               "type": "number"
+            },
+            "scopesCommand": {
+              "type": "string"
+            },
+            "scopeSelection": {
+              "type": "object",
+              "properties": {
+                "required": {
+                  "type": "boolean"
+                },
+                "allowOnce": {
+                  "type": "boolean"
+                },
+                "allowChat": {
+                  "type": "boolean"
+                },
+                "allowAgent": {
+                  "type": "boolean"
+                },
+                "defaultGrant": {
+                  "enum": [
+                    "once",
+                    "chat",
+                    "agent"
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
           }
         }
