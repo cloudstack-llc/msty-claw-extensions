@@ -1,0 +1,85 @@
+{
+  "$schema": "../manifest.schema.json",
+  "manifestVersion": 1,
+  "id": "ai.msty.official.side-chat",
+  "name": "Side Chat",
+  "version": "1.0.0",
+  "description": "Ask side questions against the current chat without changing the main conversation.",
+  "author": {
+    "name": "Msty Team"
+  },
+  "license": "MIT",
+  "icon": "static/icon.svg",
+  "keywords": [
+    "side chat",
+    "questions",
+    "chat",
+    "context"
+  ],
+  "categories": [
+    "productivity",
+    "chat"
+  ],
+  "compatibility": {
+    "extensionApi": "^1.0.0"
+  },
+  "permissions": [
+    {
+      "id": "context.read",
+      "required": true,
+      "reason": "Uses the current chat as background for side questions."
+    },
+    {
+      "id": "models.infer",
+      "required": true,
+      "reason": "Answers side questions with your selected model."
+    },
+    {
+      "id": "storage.chat",
+      "required": true,
+      "reason": "Keeps Side Chat history with the current chat."
+    },
+    {
+      "id": "clipboard.write",
+      "required": true,
+      "reason": "Copies Side Chat messages."
+    },
+    {
+      "id": "ui.titleBar",
+      "required": true,
+      "reason": "Adds Side Chat near the top of the app."
+    },
+    {
+      "id": "ui.popup",
+      "required": true,
+      "reason": "Shows Side Chat in a popup."
+    }
+  ],
+  "entry": "extension.js",
+  "contributes": {
+    "titleBarItems": [
+      {
+        "id": "side_chat_open",
+        "title": "Side Chat",
+        "label": "Side",
+        "description": "Open or close Side Chat.",
+        "icon": "static/icon.svg",
+        "entry": "extension.js",
+        "command": "side-chat.open",
+        "when": "chat.hasMessages",
+        "shortcut": "mod+;",
+        "shortcutHint": "mod+;",
+        "size": "small"
+      }
+    ],
+    "popups": [
+      {
+        "id": "side_chat",
+        "title": "Side Chat",
+        "entry": "view.js",
+        "command": "side-chat.open",
+        "size": "medium"
+      }
+    ]
+  }
+}
